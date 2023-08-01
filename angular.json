@@ -3,15 +3,13 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-tour-of-heroes": {
+    "eCommerceApp": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
+          "path": "/components",
           "style": "scss",
           "changeDetection": "OnPush"
-        },
-        "@schematics/angular:service": {
-          "path": "/services"
         }
       },
       "root": "",
@@ -19,9 +17,9 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser-esbuild",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-tour-of-heroes",
+            "outputPath": "dist/e-commerce-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -60,15 +58,12 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "forceEsbuild": true
-          },
           "configurations": {
             "production": {
-              "browserTarget": "angular-tour-of-heroes:build:production"
+              "browserTarget": "eCommerceApp:build:production"
             },
             "development": {
-              "browserTarget": "angular-tour-of-heroes:build:development"
+              "browserTarget": "eCommerceApp:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-tour-of-heroes:build"
+            "browserTarget": "eCommerceApp:build"
           }
         },
         "test": {

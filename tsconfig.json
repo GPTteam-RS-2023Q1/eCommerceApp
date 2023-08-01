@@ -3,10 +3,8 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@components/*": ["./src/app/components/*"],
-      "@services/*": ["./src/app/services/*"],
-      "@models/*": ["./src/app/models/*"],
-      "@consts/*": ["./src/app/consts/*"]
+      "@app/*": ["./src/app/*"],
+      "@assets/*": ["./src/assets/*"]
     },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
