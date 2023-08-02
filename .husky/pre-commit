@@ -19,7 +19,7 @@ run_linter () {
 }
 
 check_branch () {
-  if test "$(git branch --show-current)" == "master" || test "$(git branch --show-current)" == "main" || test "$(git branch --show-current)" == "development"
+  if test "$(git branch --show-current)" == "master" || test "$(git branch --show-current)" == "main" || test "$(git branch --show-current)" == "develop"
   then
     printf "You are on ${LRED}$(git branch --show-current)${NC}.\n"
     exit 1
