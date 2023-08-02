@@ -7,7 +7,6 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "path": "/components",
           "style": "scss",
           "changeDetection": "OnPush"
         }

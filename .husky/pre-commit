@@ -1,0 +1,55 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+LRED='\033[1;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+
+
+run_linter () {
+  echo -e "${PURPLE}Linting the src folder ==> ${NC}${CYAN}Ext: .js, .ts, .scss${NC}"
+  npx lint-staged
+  if [[ $? -ne 0 ]]
+  then
+    exit 1
+  fi
+}
+
+check_branch () {
+  if test "$(git branch --show-current)" == "master" || test "$(git branch --show-current)" == "main" || test "$(git branch --show-current)" == "development"
+  then
+    printf "You are on ${LRED}$(git branch --show-current)${NC}.\n"
+    exit 1
+  fi
+}
+
+no_console () {
+  echo -e "\n${YELLOW}Executing pre-commit hook...${YELLOW}\n"
+
+FILES_PATTERN='\.(js)(\..+)?$'
+FORBIDDEN='console\.[clear|dir|log|info|warn|error]'
+
+#check for console. references in your code
+
+if git diff --cached --name-only | \
+    grep -E $FILES_PATTERN | \
+    xargs grep --with-filename -n $FORBIDDEN | \
+    grep -v '//';
+then
+    echo -e "\n${LRED}COMMIT REJECTED!  Found console. references. Please remove them before committing.\n${PURPLE}"
+    exit 1;
+fi
+echo -e "${GREEN}No console. references found!${PURPLE}\n"
+echo -e "${GREEN}Git pre-commit hook was successful!${PURPLE}\n"
+exit 0;
+}
+
+### RUN THROUGH CHECKS AND STOP IF THERE IS A PROBLEM
+run_linter
+check_branch
+no_console
+
+printf "${GREEN}Proceeding with commit...${NC}\n"
