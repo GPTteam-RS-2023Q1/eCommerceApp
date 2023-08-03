@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "style": "npx stylelint --fix \"src/**/*.scss\"",
-    "prettier": "prettier --list-different --write",
+    "prettier": "prettier . --write",
     "prepare": "husky install"
   },
   "private": true,
