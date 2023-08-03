@@ -8,8 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "style": "npx stylelint --fix \"src/**/*.scss\"",
-    "prettier": "prettier \"src/**/*.{ts,scss,html,json}\" --write",
+    "style": "npx stylelint --fix \"./src/**/*.scss\"",
+    "prettier": "prettier \"./src/**/*.{ts,scss,html,json}\" --write",
     "prepare": "husky install"
   },
   "private": true,
