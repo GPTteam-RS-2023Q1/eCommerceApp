@@ -25,7 +25,6 @@
         {
           "regex": "^[a-z]",
           "orderLevel": 30,
-          "numberOfEmptyLinesAfterGroup": 1,
           "type": "path"
         },
         {
