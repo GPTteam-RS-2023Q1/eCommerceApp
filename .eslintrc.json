@@ -21,7 +21,8 @@
         "airbnb-typescript/base",
         "prettier",
         "plugin:import/recommended",
-        "plugin:import/typescript"
+        "plugin:import/typescript",
+        "plugin:@ngrx/recommended-requiring-type-checking"
       ],
       "rules": {
         "@typescript-eslint/array-type": [
@@ -139,13 +140,6 @@
           }
         ]
       }
-    },
-    {
-      "files": ["*.ts"]
-    },
-    {
-      "files": ["*.ts"],
-      "extends": ["plugin:@ngrx/recommended-requiring-type-checking"]
     }
   ]
 }
