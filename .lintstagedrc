@@ -1,5 +1,5 @@
 {
-  "*.{js,ts}": "eslint ./src --fix",
+  "*.{js,ts}": "eslint --fix",
   "*.scss": "npx stylelint --fix",
-  "*": "prettier ./src --write"
+  "*": "prettier \"src/**/*.{ts,scss,html,json}\" --write"
 }
