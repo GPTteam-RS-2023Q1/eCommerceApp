@@ -122,3 +122,6 @@ typings/
 
 # TernJS port file
 .tern-port
+
+# Angular
+.angular
