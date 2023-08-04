@@ -40,5 +40,5 @@ Technology Stack :
 2. Clone this repository
 3. Open integrated terminal
 4. To install all dependencies use [`npm install`](https://docs.npmjs.com/cli/install)
-5. Run `npm prepare` n command line to install husky.
-6. Run `npm run start` in command line to run dev server.
+5. Run `npm start prepare` in command line to install husky.
+6. Run `npm start` in command line to run dev server.
