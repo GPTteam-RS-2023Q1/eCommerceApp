@@ -103,7 +103,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "app",
+            "prefix": "ec",
             "style": "camelCase"
           }
         ],
@@ -111,7 +111,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "app",
+            "prefix": "ec",
             "style": "kebab-case"
           }
         ]
