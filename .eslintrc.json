@@ -59,6 +59,7 @@
             "default": ["field", "signature", "constructor", "method"]
           }
         ],
+        "arrow-body-style": "off",
         "block-spacing": ["warn", "always"],
         "class-methods-use-this": "off",
         "curly": ["warn", "all"],
