@@ -6,13 +6,10 @@ import { Observable } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { authAction } from '@app/ngrx/actions/auth.actions';
-import {
-  Customer,
-  GetAccessTokenResponse,
-  GetUSerTokens,
-  LocalStorageAuthData,
-  SignInResult,
-} from '../models/auth.models';
+import { GetAccessTokenResponse, GetUSerTokens } from '../models/getTokens.model';
+import { SignInResult } from '../models/signInResult.model';
+import { Customer } from '../models/customer.modet';
+import { LocalStorageAuthData } from '../models/authLocalStorage.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
