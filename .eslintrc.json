@@ -110,6 +110,7 @@
       "settings": {
         "import/resolver": {
           "alias": {
+            "typescript": {},
             "map": [
               ["@app", "./src/app"],
               ["@assets", "./src/assets"]

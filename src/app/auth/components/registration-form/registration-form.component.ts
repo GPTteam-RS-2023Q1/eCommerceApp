@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { NonNullableFormBuilder } from '@angular/forms';
+
+import { emailValidator } from '@app/auth/validators/email-validator';
+import { passwordValidator } from '@app/auth/validators/password-validator';
 
 @Component({
   selector: 'ec-registration-form',
@@ -9,8 +12,8 @@ import { NonNullableFormBuilder, Validators } from '@angular/forms';
 })
 export class RegistrationFormComponent {
   public registerForm = this.fb.group({
-    email: ['', Validators.email],
-    password: ['', Validators.minLength(8)],
+    email: ['', emailValidator],
+    password: ['', passwordValidator],
   });
 
   constructor(private readonly fb: NonNullableFormBuilder) {}
