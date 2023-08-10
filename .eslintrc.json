@@ -110,6 +110,7 @@
       },
       "settings": {
         "import/resolver": {
+          "typescript": {},
           "alias": {
             "map": [
               ["@app", "./src/app"],
