@@ -16,24 +16,9 @@ export class AuthEffects {
               accessToken: response.access_token,
             });
           }),
-          catchError((err) => of(authAction.authFail(err.error.message)))
-        )
-      )
-    );
-  });
-
-  public l$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(authAction.loginStart),
-      exhaustMap((action) =>
-        this.authService.GetUserTokens(action.email, action.password).pipe(
-          map((response) => {
-            return authAction.loginSuccess({
-              accessToken: response.access_token,
-              refreshToken: response.refresh_token,
-            });
-          }),
-          catchError((err) => of(authAction.authFail(err.error.message)))
+          catchError((err) =>
+            of(authAction.authFail({ errorMessage: err.error.message }))
+          )
         )
       )
     );
@@ -47,9 +32,30 @@ export class AuthEffects {
           map((response) => {
             return authAction.getCustomerId({
               customerId: response.customer.id,
+              email: action.email,
+              password: action.password,
             });
           }),
-          catchError((err) => of(authAction.authFail(err.error.message)))
+          catchError((err) =>
+            of(authAction.authFail({ errorMessage: err.error.message }))
+          )
+        )
+      )
+    );
+  });
+
+  public login$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(authAction.getCustomerId),
+      exhaustMap((action) =>
+        this.authService.GetUserTokens(action.email, action.password).pipe(
+          map((response) => {
+            return authAction.loginSuccess({
+              accessToken: response.access_token,
+              refreshToken: response.refresh_token,
+            });
+          }),
+          catchError(() => of())
         )
       )
     );
