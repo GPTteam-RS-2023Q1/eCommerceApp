@@ -1,19 +1,28 @@
 <ng-container [formGroup]="form">
   <div class="tui-form__row">
-    <tui-input formControlName="country" class="address-form-country">Country</tui-input>
+    <tui-input formControlName="country" class="address-form-country"
+      >Country<input tuiTextfield autocomplete="new-password"
+    /></tui-input>
     <tui-error formControlName="country" [error]="[] | tuiFieldError | async"></tui-error>
   </div>
   <div class="tui-form__row">
-    <tui-input formControlName="city" class="address-form-city">City</tui-input>
+    <tui-input formControlName="city" class="address-form-city"
+      >City<input tuiTextfield autocomplete="new-password"
+    /></tui-input>
     <tui-error formControlName="city" [error]="[] | tuiFieldError | async"></tui-error>
   </div>
   <div class="tui-form__row">
-    <tui-input formControlName="street" class="address-form-street">Street</tui-input>
+    <tui-input formControlName="street" class="address-form-street"
+      >Street<input tuiTextfield autocomplete="new-password"
+    /></tui-input>
     <tui-error formControlName="street" [error]="[] | tuiFieldError | async"></tui-error>
   </div>
   <div class="tui-form__row">
-    <tui-input formControlName="postalCode" class="address-form-postal-code"
-      >Postal code
+    <tui-input
+      ecControlDependency="country"
+      formControlName="postalCode"
+      class="address-form-postal-code"
+      >Postal code<input tuiTextfield autocomplete="new-password" />
     </tui-input>
     <tui-error
       formControlName="postalCode"
