@@ -115,8 +115,7 @@ export class AuthService {
     );
   }
 
-  public autoLogin(): void {
-    const localStorageAuthStr = localStorage.getItem('authData');
+  public autoLogin(localStorageAuthStr: string | null): void {
     if (localStorageAuthStr) {
       const localStorageAuthData: LocalStorageAuthData = JSON.parse(localStorageAuthStr);
       const currentTime = new Date().getTime();

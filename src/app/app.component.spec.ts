@@ -1,10 +1,14 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TuiRootModule } from '@taiga-ui/core';
 import { AppComponent } from './app.component';
+import { AppStoreModule } from './ngrx/store.module';
 
 describe('AppComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
       declarations: [AppComponent],
+      imports: [HttpClientTestingModule, AppStoreModule, TuiRootModule],
     })
   );
 
@@ -18,14 +22,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('eCommerceApp');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain(
-      'eCommerceApp app is running!'
-    );
   });
 });
