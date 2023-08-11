@@ -1,6 +1,13 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+
+import { SharedModule } from '@app/shared/shared.module';
+import { TuiButtonModule, TuiErrorModule } from '@taiga-ui/core';
+import {
+  TuiFieldErrorPipeModule,
+  TuiInputDateModule,
+  TuiInputModule,
+  TuiInputPasswordModule,
+} from '@taiga-ui/kit';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
@@ -9,6 +16,15 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [RegistrationFormComponent, SignUpComponent, SignInComponent],
-  imports: [CommonModule, AuthRoutingModule, ReactiveFormsModule],
+  imports: [
+    SharedModule,
+    AuthRoutingModule,
+    TuiInputModule,
+    TuiFieldErrorPipeModule,
+    TuiErrorModule,
+    TuiInputPasswordModule,
+    TuiInputDateModule,
+    TuiButtonModule,
+  ],
 })
 export class AuthModule {}

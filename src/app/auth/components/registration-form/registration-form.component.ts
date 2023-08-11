@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NonNullableFormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { dateValidator } from '@app/auth/validators/date-validator';
 import { emailValidator } from '@app/auth/validators/email-validator';
 import { passwordValidator } from '@app/auth/validators/password-validator';
 
@@ -11,10 +12,13 @@ import { passwordValidator } from '@app/auth/validators/password-validator';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationFormComponent {
-  public registerForm = this.fb.group({
-    email: ['', emailValidator],
-    password: ['', passwordValidator],
+  public signUpForm = new FormGroup({
+    email: new FormControl('', emailValidator),
+    password: new FormControl('', passwordValidator),
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
+    age: new FormControl(null, dateValidator),
   });
 
-  constructor(private readonly fb: NonNullableFormBuilder) {}
+  public onSubmit(): void {}
 }

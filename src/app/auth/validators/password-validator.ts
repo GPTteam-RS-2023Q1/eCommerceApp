@@ -1,12 +1,14 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
-export function passwordValidator(control: AbstractControl): ValidationErrors | null {
+export function passwordValidator(
+  control: AbstractControl<string>
+): ValidationErrors | null {
   const { value } = control;
-  const uppercase = /[A-Z]+/;
-  const lowercase = /[a-z]+/;
-  const numbers = /[0-9]+/;
-  const specialSymbols = /[!@#$%^&*]+/;
-  const spaces = /\s+/;
+  const uppercase = /[A-Z]/;
+  const lowercase = /[a-z]/;
+  const numbers = /[0-9]/;
+  const specialSymbols = /[!@#$%^&*]/;
+  const spaces = /\s/;
 
   if (value.length < 8) {
     return { other: 'Minimum length - 8' };
