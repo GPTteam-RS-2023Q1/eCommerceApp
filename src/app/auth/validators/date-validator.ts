@@ -11,7 +11,6 @@ export function dateValidator(control: AbstractControl<TuiDay>): ValidationError
   const difference = new Date(
     Date.now() - new Date(control.value.toLocalNativeDate()).getTime()
   );
-  console.log(control.value);
   return Math.abs(difference.getFullYear() - 1970) >= minYear
     ? null
     : { other: 'minimum age 13' };

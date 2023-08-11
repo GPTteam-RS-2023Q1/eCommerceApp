@@ -37,7 +37,14 @@
     </tui-input-date>
     <tui-error formControlName="age" [error]="[] | tuiFieldError | async"></tui-error>
   </div>
+  <h2 class="tui-form__header">Address</h2>
+  <ec-address-form formGroupName="address"></ec-address-form>
   <div class="tui-form__buttons">
     <button tuiButton type="submit" [disabled]="!signUpForm.valid">Submit</button>
   </div>
 </form>
+
+<!-- <form [formGroup]="myForm">
+  <input type="text" formControlName="name">
+  <input type="text" formControlName="target" appFormPropertyChanges="name">
+</form> -->
