@@ -1,9 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { selectAuthState } from '@app/ngrx/selectors/auth.selector';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { authAction } from '@app/ngrx/actions/auth.actions';
 import { GetAccessTokenResponse, GetUSerTokens } from '../models/getTokens.model';
@@ -64,30 +62,20 @@ export class AuthService {
   }
 
   public login(email: string, password: string): Observable<SignInResult> {
-    return this.store.select(selectAuthState).pipe(
-      switchMap((state) => {
-        return this.http.post<SignInResult>(
-          `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/login`,
-          { email, password },
-          {
-            headers: new HttpHeaders({
-              Authorization: `Bearer ${state.accessToken}`,
-              'Content-Type': 'application/json',
-            }),
-          }
-        );
-      })
+    return this.http.post<SignInResult>(
+      `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/login`,
+      { email, password },
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+      }
     );
   }
 
-  public getCustomer(customerId: string, accessToken: string): Observable<Customer> {
+  public getCustomer(customerId: string): Observable<Customer> {
     return this.http.get<Customer>(
-      `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/customers/${customerId}`,
-      {
-        headers: new HttpHeaders({
-          Authorization: `Bearer ${accessToken}`,
-        }),
-      }
+      `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/customers/${customerId}`
     );
   }
 
@@ -135,7 +123,7 @@ export class AuthService {
 
       if (localStorageAuthData.accessTokenExp > currentTime) {
         this.store.dispatch(
-          authAction.loginSuccess({
+          authAction.autoLoginSuccess({
             customerId: localStorageAuthData.customerId,
             accessToken: localStorageAuthData.accessToken,
             refreshToken: localStorageAuthData.refreshToken,
@@ -156,7 +144,7 @@ export class AuthService {
             );
 
             this.store.dispatch(
-              authAction.loginSuccess({
+              authAction.autoLoginSuccess({
                 customerId: localStorageAuthData.customerId,
                 accessToken: response.access_token,
                 refreshToken: localStorageAuthData.refreshToken,

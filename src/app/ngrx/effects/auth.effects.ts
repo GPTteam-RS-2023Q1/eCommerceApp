@@ -1,5 +1,5 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { switchMap, map, catchError, of } from 'rxjs';
+import { map, catchError, of, exhaustMap } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AuthService } from '@app/auth/services/auth.service';
 import { authAction } from '../actions/auth.actions';
@@ -9,7 +9,7 @@ export class AuthEffects {
   public getToken$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(authAction.getToken),
-      switchMap(() =>
+      exhaustMap(() =>
         this.authService.getAccessToken().pipe(
           map((response) => {
             return authAction.tokenSuccess({
@@ -22,23 +22,34 @@ export class AuthEffects {
     );
   });
 
-  public loginStart$ = createEffect(() => {
+  public l$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(authAction.loginStart),
-      switchMap((action) =>
+      exhaustMap((action) =>
+        this.authService.GetUserTokens(action.email, action.password).pipe(
+          map((response) => {
+            return authAction.loginSuccess({
+              accessToken: response.access_token,
+              refreshToken: response.refresh_token,
+            });
+          }),
+          catchError((err) => of(authAction.authFail(err.error.message)))
+        )
+      )
+    );
+  });
+
+  public getCustomer$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(authAction.loginStart),
+      exhaustMap((action) =>
         this.authService.login(action.email, action.password).pipe(
-          switchMap((user) =>
-            this.authService.GetUserTokens(action.email, action.password).pipe(
-              map((response) => {
-                return authAction.loginSuccess({
-                  customerId: user.customer.id,
-                  accessToken: response.access_token,
-                  refreshToken: response.refresh_token,
-                });
-              }),
-              catchError((err) => of(authAction.authFail(err.error.message)))
-            )
-          )
+          map((response) => {
+            return authAction.getCustomerId({
+              customerId: response.customer.id,
+            });
+          }),
+          catchError((err) => of(authAction.authFail(err.error.message)))
         )
       )
     );

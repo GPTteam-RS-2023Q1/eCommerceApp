@@ -12,10 +12,18 @@ const initialState: AuthState = {
 export const authReducer = createReducer(
   initialState,
   on(
-    authAction.loginSuccess,
+    authAction.autoLoginSuccess,
     (state, { customerId, accessToken, refreshToken }): AuthState => ({
       ...state,
       customerId,
+      accessToken,
+      refreshToken,
+    })
+  ),
+  on(
+    authAction.loginSuccess,
+    (state, { accessToken, refreshToken }): AuthState => ({
+      ...state,
       accessToken,
       refreshToken,
     })
@@ -25,6 +33,13 @@ export const authReducer = createReducer(
     (state, { accessToken }): AuthState => ({
       ...state,
       accessToken,
+    })
+  ),
+  on(
+    authAction.getCustomerId,
+    (state, { customerId }): AuthState => ({
+      ...state,
+      customerId,
     })
   ),
   on(
