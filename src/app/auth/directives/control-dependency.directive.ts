@@ -1,4 +1,4 @@
-import { Directive, Host, Input, OnDestroy, OnInit, Optional } from '@angular/core';
+import { Directive, Host, Input, OnDestroy, OnInit, Optional, Self } from '@angular/core';
 import { FormControlName, FormGroupDirective } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
@@ -9,11 +9,11 @@ import { Subscription } from 'rxjs';
 export class ControlDependencyDirective implements OnInit, OnDestroy {
   @Input('ecControlDependency') public controlName?: string;
 
-  private subscription?: Subscription;
+  private subscription = new Subscription();
 
   constructor(
     @Host() @Optional() private readonly parentForm: FormGroupDirective,
-    @Host() @Optional() private readonly control: FormControlName
+    @Self() @Optional() private readonly control: FormControlName
   ) {}
 
   public ngOnInit(): void {
@@ -23,21 +23,21 @@ export class ControlDependencyDirective implements OnInit, OnDestroy {
 
       element?.disable();
 
-      this.subscription = targetControl?.valueChanges.subscribe(() => {
-        if (targetControl.valid) {
-          element?.enable();
+      this.subscription.add(
+        targetControl?.valueChanges.subscribe(() => {
+          if (targetControl.valid) {
+            element?.enable();
 
-          return;
-        }
+            return;
+          }
 
-        element?.disable();
-      });
+          element?.disable();
+        })
+      );
     }
   }
 
   public ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.subscription.unsubscribe();
   }
 }
