@@ -1,0 +1,31 @@
+<div class="block-header">
+  <div>
+    <p class="header">last days</p>
+    <p class="header">of the sale</p>
+  </div>
+  <button
+    tuiButton
+    type="button"
+    appearance="whiteblock"
+    class="btn-buy"
+    (click)="toCatalog()"
+  >
+    buy online
+  </button>
+</div>
+<tui-carousel [duration]="3000" [(index)]="index">
+  <ng-container *ngFor="let item of items">
+    <tui-island *tuiItem>
+      <div class="banner-container">
+        <div class="banner" [style.background-image]="'url(' + item[0] + ')'"></div>
+        <div class="banner" [style.background-image]="'url(' + item[1] + ')'"></div>
+      </div>
+    </tui-island>
+  </ng-container>
+</tui-carousel>
+<tui-pagination
+  size="s"
+  class="pagination"
+  [length]="items.length"
+  [(index)]="index"
+></tui-pagination>
