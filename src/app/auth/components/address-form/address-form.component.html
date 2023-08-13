@@ -5,18 +5,8 @@
     /></tui-input>
     <tui-error formControlName="country" [error]="[] | tuiFieldError | async"></tui-error>
   </div>
-  <div class="tui-form__row">
-    <tui-input formControlName="city"
-      >City<input tuiTextfield autocomplete="new-password"
-    /></tui-input>
-    <tui-error formControlName="city" [error]="[] | tuiFieldError | async"></tui-error>
-  </div>
-  <div class="tui-form__row">
-    <tui-input formControlName="street" class="address-form-street"
-      >Street<input tuiTextfield autocomplete="new-password"
-    /></tui-input>
-    <tui-error formControlName="street" [error]="[] | tuiFieldError | async"></tui-error>
-  </div>
+  <ec-input placeholder="City" formControlName="city"></ec-input>
+  <ec-input placeholder="Street" formControlName="street"></ec-input>
   <div class="tui-form__row">
     <tui-input
       ecControlDependency="country"

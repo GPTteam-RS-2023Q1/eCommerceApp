@@ -1,13 +1,6 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '@app/shared/shared.module';
-import { TuiButtonModule, TuiErrorModule } from '@taiga-ui/core';
-import {
-  TuiFieldErrorPipeModule,
-  TuiInputDateModule,
-  TuiInputModule,
-  TuiInputPasswordModule,
-} from '@taiga-ui/kit';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { AddressFormComponent } from './components/address-form/address-form.component';
@@ -24,15 +17,6 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
     ControlDependencyDirective,
     AddressFormComponent,
   ],
-  imports: [
-    SharedModule,
-    AuthRoutingModule,
-    TuiInputModule,
-    TuiFieldErrorPipeModule,
-    TuiErrorModule,
-    TuiInputPasswordModule,
-    TuiInputDateModule,
-    TuiButtonModule,
-  ],
+  imports: [SharedModule, AuthRoutingModule],
 })
 export class AuthModule {}

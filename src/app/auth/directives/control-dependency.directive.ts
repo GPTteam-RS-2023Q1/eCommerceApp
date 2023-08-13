@@ -1,4 +1,4 @@
-import { Directive, Host, Input, OnDestroy, OnInit, Optional, Self } from '@angular/core';
+import { Directive, Host, Input, OnDestroy, OnInit, Self } from '@angular/core';
 import { FormControlName, FormGroupDirective } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
@@ -12,8 +12,8 @@ export class ControlDependencyDirective implements OnInit, OnDestroy {
   private subscription = new Subscription();
 
   constructor(
-    @Host() @Optional() private readonly parentForm: FormGroupDirective,
-    @Self() @Optional() private readonly control: FormControlName
+    @Host() private readonly parentForm: FormGroupDirective,
+    @Self() private readonly control: FormControlName
   ) {}
 
   public ngOnInit(): void {

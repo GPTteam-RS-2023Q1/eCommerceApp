@@ -27,4 +27,8 @@ export class SignUpFormComponent {
   });
 
   public onSubmit(): void {}
+
+  public log(): void {
+    console.log(this.signUpForm.value);
+  }
 }
