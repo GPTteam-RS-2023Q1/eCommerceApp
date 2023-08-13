@@ -1,0 +1,19 @@
+<tui-hosted-dropdown tuiDropdownLimitWidth="min" [content]="dropdown" [(open)]="open">
+  <button
+    tuiButton
+    type="button"
+    appearance="outline"
+    size="m"
+    icon="tuiIconUserLarge"
+    [iconRight]="open ? 'tuiIconChevronUp' : 'tuiIconChevronDown'"
+    [pseudoActive]="open || null"
+  ></button>
+</tui-hosted-dropdown>
+<ng-template #dropdown let-close="close">
+  <tui-data-list>
+    <tui-opt-group>
+      <button tuiOption (click)="toSignIn()">log in</button>
+      <button tuiOption (click)="toSignUp()">sign up</button>
+    </tui-opt-group>
+  </tui-data-list>
+</ng-template>

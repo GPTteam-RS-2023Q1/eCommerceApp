@@ -1,4 +1,54 @@
-header {
+:host {
+  display: block;
   height: 80px;
-  background-color: rgb(35 110 110);
+
+  .header {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    max-width: 1440px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  .logo {
+    cursor: pointer;
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    filter: drop-shadow(4px 4px 0 #726c6c);
+  }
+
+  .logo.animate {
+    animation: fadeIn 500ms ease-in-out;
+  }
+
+  .container-user {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+
+  @media (width <= 768px) {
+    & {
+      height: 120px;
+    }
+
+    .logo {
+      position: static;
+      transform: none;
+    }
+
+    .header {
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+    }
+  }
 }
