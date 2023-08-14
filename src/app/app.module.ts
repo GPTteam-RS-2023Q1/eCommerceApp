@@ -11,7 +11,9 @@ import {
 } from '@taiga-ui/core';
 import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
 import { AppStoreModule } from './ngrx/store.module';
 import { AuthInterceptorService } from './auth/auth.interceptor';
 
@@ -19,6 +21,8 @@ import { AuthInterceptorService } from './auth/auth.interceptor';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    AppRoutingModule,
+    CoreModule,
     AppStoreModule,
     BrowserAnimationsModule,
     TuiRootModule,
