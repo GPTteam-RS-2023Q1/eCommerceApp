@@ -1,0 +1,8 @@
+<form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h1 class="tui-form__header">Sign in</h1>
+  <ec-email-input formControlName="email" placeholder="Email"></ec-email-input>
+  <ec-password-input formControlName="password"></ec-password-input>
+  <div class="tui-form__buttons">
+    <button tuiButton type="submit" [disabled]="!form.valid">Sign in</button>
+  </div>
+</form>
