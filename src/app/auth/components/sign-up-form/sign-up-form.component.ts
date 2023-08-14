@@ -2,8 +2,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { dateValidator } from '@app/auth/validators/date-validator';
-import { emailValidator } from '@app/auth/validators/email-validator';
-import { passwordValidator } from '@app/auth/validators/password-validator';
 
 @Component({
   selector: 'ec-sign-up-form',
@@ -13,8 +11,8 @@ import { passwordValidator } from '@app/auth/validators/password-validator';
 })
 export class SignUpFormComponent {
   public signUpForm = new FormGroup({
-    email: new FormControl('', emailValidator),
-    password: new FormControl('', passwordValidator),
+    email: new FormControl(''),
+    password: new FormControl(''),
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
     age: new FormControl(null, dateValidator),
@@ -27,8 +25,4 @@ export class SignUpFormComponent {
   });
 
   public onSubmit(): void {}
-
-  public log(): void {
-    console.log(this.signUpForm.value);
-  }
 }
