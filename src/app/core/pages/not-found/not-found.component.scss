@@ -4,7 +4,7 @@
   justify-content: center;
 
   width: 100vw;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 230px);
 
   .wrapper {
     display: flex;
@@ -30,5 +30,11 @@
   .redirection:hover {
     cursor: pointer;
     text-decoration: underline;
+  }
+
+  @media (width <= 768px) {
+    & {
+      min-height: calc(100vh - 270px);
+    }
   }
 }
