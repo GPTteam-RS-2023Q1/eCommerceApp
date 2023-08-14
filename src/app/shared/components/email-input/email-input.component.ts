@@ -7,7 +7,7 @@ import {
   Validator,
 } from '@angular/forms';
 
-import { AbstractRajiControl } from '@app/shared/models/abstractRajiControl';
+import { AbstractRajiControl } from '@app/shared/models/abstract-raji-control';
 
 @Component({
   selector: 'ec-email-input',

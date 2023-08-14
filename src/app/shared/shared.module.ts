@@ -12,9 +12,10 @@ import {
 
 import { EmailInputComponent } from './components/email-input/email-input.component';
 import { InputComponent } from './components/input/input.component';
+import { PasswordInputComponent } from './components/password-input/password-input.component';
 
 @NgModule({
-  declarations: [InputComponent, EmailInputComponent],
+  declarations: [InputComponent, EmailInputComponent, PasswordInputComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -36,6 +37,7 @@ import { InputComponent } from './components/input/input.component';
     TuiButtonModule,
     InputComponent,
     EmailInputComponent,
+    PasswordInputComponent,
   ],
 })
 export class SharedModule {}
