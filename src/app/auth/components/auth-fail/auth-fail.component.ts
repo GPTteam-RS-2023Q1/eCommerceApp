@@ -20,16 +20,18 @@ import { Subscription } from 'rxjs';
 export class AuthFailComponent implements OnInit, OnDestroy {
   @Input() public parentForm!: FormGroup | undefined;
 
-  private sub!: Subscription | undefined;
+  private sub = new Subscription();
 
   public error$ = this.store.select(selectAuthError);
 
   constructor(private store: Store) {}
 
   public ngOnInit(): void {
-    this.sub = this.parentForm?.valueChanges.subscribe(() => {
-      this.onClose();
-    });
+    this.sub.add(
+      this.parentForm?.valueChanges.subscribe(() => {
+        this.onClose();
+      })
+    );
   }
 
   public onClose(): void {
@@ -37,6 +39,6 @@ export class AuthFailComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.sub?.unsubscribe();
+    this.sub.unsubscribe();
   }
 }
