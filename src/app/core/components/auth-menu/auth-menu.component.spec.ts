@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { CoreModule } from '@app/core/core.module';
 import { AuthMenuComponent } from './auth-menu.component';
 
 describe('AuthMenuComponent', () => {
@@ -8,7 +9,7 @@ describe('AuthMenuComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AuthMenuComponent],
+      imports: [CoreModule],
     });
     fixture = TestBed.createComponent(AuthMenuComponent);
     component = fixture.componentInstance;

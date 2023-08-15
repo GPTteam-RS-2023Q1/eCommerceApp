@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SignInComponent } from './sign-in.component';
+import { SignInComponent } from '@app/auth/pages/sign-in/sign-in.component';
+import { AuthModule } from '@app/auth/auth.module';
 
 describe('SignInComponent', () => {
   let component: SignInComponent;
@@ -8,7 +9,7 @@ describe('SignInComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SignInComponent],
+      imports: [AuthModule],
     });
     fixture = TestBed.createComponent(SignInComponent);
     component = fixture.componentInstance;

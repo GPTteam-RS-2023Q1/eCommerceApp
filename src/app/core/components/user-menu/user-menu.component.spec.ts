@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { CoreModule } from '@app/core/core.module';
 import { UserMenuComponent } from './user-menu.component';
 
 describe('UserMenuComponent', () => {
@@ -8,7 +9,7 @@ describe('UserMenuComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [UserMenuComponent],
+      imports: [CoreModule],
     });
     fixture = TestBed.createComponent(UserMenuComponent);
     component = fixture.componentInstance;
