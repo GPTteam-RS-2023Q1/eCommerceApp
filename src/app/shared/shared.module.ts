@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { TuiButtonModule, TuiErrorModule } from '@taiga-ui/core';
+import { TuiButtonModule, TuiErrorModule, TuiNotificationModule } from '@taiga-ui/core';
 import {
   TuiFieldErrorPipeModule,
   TuiInputDateModule,
@@ -18,6 +18,7 @@ import { PasswordInputComponent } from './components/password-input/password-inp
   declarations: [InputComponent, EmailInputComponent, PasswordInputComponent],
   imports: [
     CommonModule,
+    TuiNotificationModule,
     ReactiveFormsModule,
     TuiInputModule,
     TuiFieldErrorPipeModule,
@@ -28,6 +29,7 @@ import { PasswordInputComponent } from './components/password-input/password-inp
   ],
   exports: [
     CommonModule,
+    TuiNotificationModule,
     ReactiveFormsModule,
     TuiInputModule,
     TuiFieldErrorPipeModule,

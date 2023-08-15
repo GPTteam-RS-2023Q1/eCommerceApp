@@ -9,6 +9,7 @@ import { SignUpFormComponent } from './components/sign-up-form/sign-up-form.comp
 import { ControlDependencyDirective } from './directives/control-dependency.directive';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { AuthFailComponent } from './components/auth-fail/auth-fail.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
     SignInFormComponent,
     ControlDependencyDirective,
     AddressFormComponent,
+    AuthFailComponent,
   ],
   imports: [SharedModule, AuthRoutingModule],
 })

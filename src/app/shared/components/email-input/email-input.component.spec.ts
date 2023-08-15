@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { SharedModule } from '@app/shared/shared.module';
 import { EmailInputComponent } from './email-input.component';
 
 describe('EmailInputComponent', () => {
@@ -8,7 +9,7 @@ describe('EmailInputComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [EmailInputComponent],
+      imports: [SharedModule],
     });
     fixture = TestBed.createComponent(EmailInputComponent);
     component = fixture.componentInstance;

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { StoreModule } from '@ngrx/store';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import {
   TUI_SANITIZER,
@@ -14,6 +14,8 @@ import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { AppStoreModule } from './ngrx/store.module';
+import { AuthInterceptorService } from './auth/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,13 +23,24 @@ import { CoreModule } from './core/core.module';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
-    StoreModule.forRoot({}, {}),
+    AppStoreModule,
     BrowserAnimationsModule,
     TuiRootModule,
     TuiDialogModule,
     TuiAlertModule,
+    HttpClientModule,
   ],
-  providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }],
+  providers: [
+    {
+      provide: TUI_SANITIZER,
+      useClass: NgDompurifySanitizer,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

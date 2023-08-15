@@ -1,5 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { CommonModule } from '@angular/common';
+import { MaimRoutingModule } from '@app/main/main-routing.module';
+import { TuiCarouselModule, TuiIslandModule, TuiPaginationModule } from '@taiga-ui/kit';
+import { TuiButtonModule } from '@taiga-ui/core';
+import { CatalogComponent } from '../catalog/catalog.component';
 import { MainComponent } from './main.component';
 
 describe('MainComponent', () => {
@@ -8,7 +13,15 @@ describe('MainComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MainComponent],
+      declarations: [MainComponent, CatalogComponent],
+      imports: [
+        CommonModule,
+        MaimRoutingModule,
+        TuiCarouselModule,
+        TuiIslandModule,
+        TuiPaginationModule,
+        TuiButtonModule,
+      ],
     });
     fixture = TestBed.createComponent(MainComponent);
     component = fixture.componentInstance;

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { SharedModule } from '@app/shared/shared.module';
 import { PasswordInputComponent } from './password-input.component';
 
 describe('PasswordInputComponent', () => {
@@ -8,7 +9,7 @@ describe('PasswordInputComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PasswordInputComponent],
+      imports: [SharedModule],
     });
     fixture = TestBed.createComponent(PasswordInputComponent);
     component = fixture.componentInstance;
