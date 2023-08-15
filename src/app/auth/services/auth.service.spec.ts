@@ -3,14 +3,57 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { authAction } from '@app/ngrx/actions/auth.actions';
 import { AuthState } from '@app/ngrx/state.model';
-import { EMPTY } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { AppComponent } from '@app/app.component';
 import { AuthService } from './auth.service';
+import { GetAccessTokenResponse } from '../models/getTokens.model';
 
 describe('AuthService', () => {
   let service: AuthService;
+  let store: MockStore;
+  const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post']);
+
+  const initialState = {
+    accessToken: null,
+    refreshToken: null,
+    errorMessage: null,
+    customerId: null,
+  };
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [provideMockStore({ initialState })],
+    });
+
+    service = TestBed.inject(AuthService);
+    store = TestBed.inject(MockStore);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+
+  it('should return an Observable with a GetAccessTokenResponse object', () => {
+    const authService = new AuthService(httpClientSpy, store);
+    const expectedResponse: GetAccessTokenResponse = {
+      access_token: 'access_token',
+      token_type: 'token_type',
+      expires_in: 123,
+      scope: 'scope',
+    };
+    httpClientSpy.post.and.returnValue(of(expectedResponse));
+    authService.getAccessToken().subscribe((response) => {
+      expect(response).toEqual(expectedResponse);
+    });
+    expect(httpClientSpy.post.calls.count()).toBe(1);
+  });
+});
+
+describe('AuthService autologin', () => {
   let store: MockStore<AuthState>;
   let component: AppComponent;
+  let service: AuthService;
 
   const initialState = {
     accessToken: null,
@@ -28,10 +71,6 @@ describe('AuthService', () => {
     service = TestBed.inject(AuthService);
     store = TestBed.inject(MockStore);
     component = new AppComponent(service);
-  });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
   });
 
   it('should call autoLogin when ngOnInit', () => {
