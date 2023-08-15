@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AuthModule } from '@app/auth/auth.module';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { SignInFormComponent } from './sign-in-form.component';
+import { TuiNotificationModule } from '@taiga-ui/core';
+import { AuthFailComponent } from './auth-fail.component';
 
-describe('SignInFormComponent', () => {
-  let component: SignInFormComponent;
-  let fixture: ComponentFixture<SignInFormComponent>;
+describe('AuthFailComponent', () => {
+  let component: AuthFailComponent;
+  let fixture: ComponentFixture<AuthFailComponent>;
 
   const initialState = {
     accessToken: null,
@@ -17,12 +17,12 @@ describe('SignInFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AuthModule],
+      declarations: [AuthFailComponent],
+      imports: [TuiNotificationModule],
       providers: [provideMockStore({ initialState })],
     });
-
     TestBed.inject(MockStore);
-    fixture = TestBed.createComponent(SignInFormComponent);
+    fixture = TestBed.createComponent(AuthFailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

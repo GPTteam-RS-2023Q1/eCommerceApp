@@ -24,6 +24,7 @@ export const authReducer = createReducer(
     authAction.loginSuccess,
     (state, { accessToken, refreshToken }): AuthState => ({
       ...state,
+      errorMessage: null,
       accessToken,
       refreshToken,
     })
@@ -32,6 +33,7 @@ export const authReducer = createReducer(
     authAction.tokenSuccess,
     (state, { accessToken }): AuthState => ({
       ...state,
+      errorMessage: null,
       accessToken,
     })
   ),
@@ -39,14 +41,22 @@ export const authReducer = createReducer(
     authAction.getCustomerId,
     (state, { customerId }): AuthState => ({
       ...state,
+      errorMessage: null,
       customerId,
     })
   ),
-  on(
-    authAction.authFail,
-    (state, { errorMessage }): AuthState => ({
+  on(authAction.authFail, (state, { errorMessage }): AuthState => {
+    let message: string | null;
+    switch (errorMessage) {
+      case 'Account with the given credentials not found.':
+        message = `${errorMessage} Please check your credentials and try again`;
+        break;
+      default:
+        message = errorMessage;
+    }
+    return {
       ...state,
-      errorMessage,
-    })
-  )
+      errorMessage: message,
+    };
+  })
 );

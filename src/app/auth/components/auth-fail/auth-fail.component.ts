@@ -1,0 +1,42 @@
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { authAction } from '@app/ngrx/actions/auth.actions';
+import { selectAuthError } from '@app/ngrx/selectors/auth.selector';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+
+@Component({
+  selector: 'ec-auth-fail',
+  templateUrl: './auth-fail.component.html',
+  styleUrls: ['./auth-fail.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class AuthFailComponent implements OnInit, OnDestroy {
+  @Input() public parentForm!: FormGroup | undefined;
+
+  private sub!: Subscription | undefined;
+
+  public error$ = this.store.select(selectAuthError);
+
+  constructor(private store: Store) {}
+
+  public ngOnInit(): void {
+    this.sub = this.parentForm?.valueChanges.subscribe(() => {
+      this.onClose();
+    });
+  }
+
+  public onClose(): void {
+    this.store.dispatch(authAction.authFail({ errorMessage: null }));
+  }
+
+  public ngOnDestroy(): void {
+    this.sub?.unsubscribe();
+  }
+}

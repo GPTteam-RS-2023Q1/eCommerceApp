@@ -6,3 +6,7 @@ export const selectAccessToken = createSelector(
   selectAuthState,
   (authState) => authState.accessToken
 );
+export const selectAuthError = createSelector(
+  selectAuthState,
+  (authState) => authState.errorMessage
+);

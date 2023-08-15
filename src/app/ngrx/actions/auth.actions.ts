@@ -9,7 +9,7 @@ export const authAction = createActionGroup({
       accessToken: string;
       refreshToken: string;
     }>(),
-    'Auth Fail': props<{ errorMessage: string }>(),
+    'Auth Fail': props<{ errorMessage: string | null }>(),
     'Get Token': emptyProps(),
     'Token Success': props<{ accessToken: string }>(),
     'Auto Login Success': props<{
