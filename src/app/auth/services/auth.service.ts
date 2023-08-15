@@ -128,7 +128,11 @@ export class AuthService {
             refreshToken: localStorageAuthData.refreshToken,
           })
         );
-      } else if (
+
+        return;
+      }
+
+      if (
         localStorageAuthData.accessTokenExp < currentTime &&
         localStorageAuthData.refreshTokenExp > currentTime
       ) {
@@ -152,9 +156,13 @@ export class AuthService {
           },
           error: () => this.store.dispatch(authAction.getToken()),
         });
+
+        return;
       }
-    } else {
-      this.store.dispatch(authAction.getToken());
+
+      return;
     }
+
+    this.store.dispatch(authAction.getToken());
   }
 }
