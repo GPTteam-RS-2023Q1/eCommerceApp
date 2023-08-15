@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { AbstractRajiControl } from '@app/shared/models/abstract-raji-control';
+import { AbstractRajiControl } from '@app/shared/models/classes/abstract-raji-control';
 
 @Component({
   selector: 'ec-input',

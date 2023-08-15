@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 
-import { dateValidator } from '@app/auth/validators/date-validator';
+import { birthdayValidator } from '@app/auth/validators/birthday-validator';
 
 @Component({
   selector: 'ec-sign-up-form',
@@ -9,20 +9,29 @@ import { dateValidator } from '@app/auth/validators/date-validator';
   styleUrls: ['./sign-up-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignUpFormComponent {
-  public signUpForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    age: new FormControl(null, dateValidator),
-    address: new FormGroup({
-      country: new FormControl('', Validators.required),
-      city: new FormControl('', Validators.required),
-      street: new FormControl('', Validators.required),
-      postalCode: new FormControl('', Validators.required),
-    }),
-  });
+export class SignUpFormComponent implements OnInit {
+  public form!: FormGroup;
+
+  constructor(private readonly fb: NonNullableFormBuilder) {}
+
+  public ngOnInit(): void {
+    this.form = this.fb.group({
+      email: [''],
+      password: [''],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      age: [null, birthdayValidator],
+      address: {
+        country: '',
+        city: '',
+        street: '',
+        postalCode: '',
+      },
+    });
+    this.form.valueChanges.subscribe(() => {
+      console.log();
+    });
+  }
 
   public onSubmit(): void {}
 }

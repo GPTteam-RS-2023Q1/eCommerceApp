@@ -2,7 +2,9 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 import { TuiDay } from '@taiga-ui/cdk';
 
-export function dateValidator(control: AbstractControl<TuiDay>): ValidationErrors | null {
+export function birthdayValidator(
+  control: AbstractControl<TuiDay>
+): ValidationErrors | null {
   const { value } = control;
   if (!value) {
     return { other: 'enter valid date' };
