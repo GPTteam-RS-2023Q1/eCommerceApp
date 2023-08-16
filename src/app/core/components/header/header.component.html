@@ -2,7 +2,7 @@
   <img class="logo" src="../../../../assets/logo.svg" alt="logo" (click)="toMain()" />
   <div class="container-user">
     <ec-auth-menu></ec-auth-menu>
-    <ec-user-menu></ec-user-menu>
+    <ec-user-menu *ngIf="isAuth | async"></ec-user-menu>
     <button
       tuiButton
       type="button"
