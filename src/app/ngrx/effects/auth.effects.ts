@@ -1,7 +1,8 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, catchError, of, exhaustMap } from 'rxjs';
+import { map, catchError, of, exhaustMap, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AuthService } from '@app/auth/services/auth.service';
+import { Router } from '@angular/router';
 import { authAction } from '../actions/auth.actions';
 
 @Injectable()
@@ -61,5 +62,21 @@ export class AuthEffects {
     );
   });
 
-  constructor(private actions$: Actions, private authService: AuthService) {}
+  public redirectOnLogin$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(authAction.loginSuccess),
+        tap(() => {
+          this.router.navigate(['store']);
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  constructor(
+    private actions$: Actions,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 }
