@@ -28,9 +28,6 @@ export class SignUpFormComponent implements OnInit {
         postalCode: '',
       },
     });
-    this.form.valueChanges.subscribe(() => {
-      console.log();
-    });
   }
 
   public onSubmit(): void {}

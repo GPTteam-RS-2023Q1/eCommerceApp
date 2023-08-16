@@ -23,7 +23,11 @@
       formControlName="postalCode"
       [maskito]="selectedCountry.mask"
       class="address-form-postal-code"
-      >Postal code<input tuiTextfield autocomplete="new-password" />
+      >Postal code<input
+        tuiTextfield
+        [placeholder]="selectedCountry.hint"
+        autocomplete="new-password"
+      />
     </tui-input>
     <tui-error
       formControlName="postalCode"
