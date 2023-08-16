@@ -46,7 +46,9 @@ export class AddressFormComponent
 {
   @Input() public legend = '';
 
-  public items = Object.values(COUNTRIES).map((country) => country.name);
+  public items = Object.values(COUNTRIES)
+    .map((country) => country.name)
+    .sort();
 
   public form!: FormGroup;
 
@@ -112,7 +114,7 @@ export class AddressFormComponent
 
     return this.items.includes(value)
       ? null
-      : { address: 'Select the value from the list' };
+      : { address: 'Select a value from the list' };
   };
 
   private postalCodeValidator = (
@@ -122,7 +124,9 @@ export class AddressFormComponent
       const country = this.selectedCountry.regExp;
       return country.test(control.value)
         ? null
-        : { postalCode: 'Postal code dont match country postal code pattern' };
+        : {
+            postalCode: `Postal code dont match ${this.selectedCountry.name} postal code pattern`,
+          };
     }
 
     return null;
