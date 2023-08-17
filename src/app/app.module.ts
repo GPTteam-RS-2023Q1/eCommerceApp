@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { isDevMode, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import {
   TUI_SANITIZER,
@@ -13,9 +14,9 @@ import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthInterceptorService } from './auth/auth.interceptor';
 import { CoreModule } from './core/core.module';
 import { AppStoreModule } from './ngrx/store.module';
-import { AuthInterceptorService } from './auth/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { AuthInterceptorService } from './auth/auth.interceptor';
     TuiDialogModule,
     TuiAlertModule,
     HttpClientModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [
     {
