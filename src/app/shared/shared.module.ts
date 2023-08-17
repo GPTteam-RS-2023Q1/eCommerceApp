@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaskitoModule } from '@maskito/angular';
 import { TuiButtonModule, TuiDataListModule, TuiErrorModule } from '@taiga-ui/core';
 import {
+  TuiCheckboxLabeledModule,
   TuiComboBoxModule,
   TuiDataListWrapperModule,
   TuiFieldErrorPipeModule,
@@ -12,6 +13,7 @@ import {
   TuiInputDateModule,
   TuiInputModule,
   TuiInputPasswordModule,
+  TuiToggleModule,
 } from '@taiga-ui/kit';
 
 import { EmailInputComponent } from './components/email-input/email-input.component';
@@ -33,6 +35,8 @@ import { PasswordInputComponent } from './components/password-input/password-inp
     TuiDataListModule,
     TuiDataListWrapperModule,
     TuiFilterByInputPipeModule,
+    TuiCheckboxLabeledModule,
+    TuiToggleModule,
     MaskitoModule,
   ],
   exports: [
@@ -51,6 +55,8 @@ import { PasswordInputComponent } from './components/password-input/password-inp
     EmailInputComponent,
     PasswordInputComponent,
     TuiFilterByInputPipeModule,
+    TuiCheckboxLabeledModule,
+    TuiToggleModule,
     MaskitoModule,
   ],
 })

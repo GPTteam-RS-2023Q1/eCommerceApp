@@ -18,7 +18,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { Subscription } from 'rxjs';
+import { map, Subscription } from 'rxjs';
 
 import { COUNTRIES, CountryData, defaultCountryData } from '@app/consts/country-data';
 import { AddressForm } from '@app/shared/models/interfaces/address-from';
@@ -44,7 +44,7 @@ import { AddressForm } from '@app/shared/models/interfaces/address-from';
 export class AddressFormComponent
   implements ControlValueAccessor, OnInit, Validator, OnDestroy
 {
-  @Input() public legend = '';
+  @Input() public legend?: string;
 
   public items = Object.values(COUNTRIES)
     .map((country) => country.name)
@@ -60,12 +60,20 @@ export class AddressFormComponent
 
   constructor(private readonly fb: NonNullableFormBuilder) {}
 
-  public writeValue(value: AddressForm): void {
-    this.form.setValue(value, { emitEvent: false });
+  public writeValue(
+    value: AddressForm,
+    options: { onlySelf?: boolean; emitEvent?: boolean } = {
+      onlySelf: false,
+      emitEvent: false,
+    }
+  ): void {
+    this.form.patchValue(value, options);
   }
 
   public registerOnChange(fn: (value: AddressForm) => void): void {
-    this.subscription.add(this.form.valueChanges.subscribe(fn));
+    this.subscription.add(
+      this.form.valueChanges.pipe(map(() => this.form.getRawValue())).subscribe(fn)
+    );
   }
 
   public registerOnTouched(fn: () => void): void {
@@ -114,7 +122,7 @@ export class AddressFormComponent
 
     return this.items.includes(value)
       ? null
-      : { address: 'Select a value from the list' };
+      : { address: 'Select a country from the list' };
   };
 
   private postalCodeValidator = (
