@@ -34,9 +34,8 @@ export class AuthEffects {
       exhaustMap((action) =>
         this.authService.login(action.email, action.password).pipe(
           map((response) => {
-            console.log(response);
-            return authAction.getCustomerId({
-              customerId: response.customer.id,
+            return authAction.getCustomer({
+              customer: response.customer,
               email: action.email,
               password: action.password,
             });
@@ -51,10 +50,11 @@ export class AuthEffects {
 
   public login$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(authAction.getCustomerId),
+      ofType(authAction.getCustomer),
       exhaustMap((action) =>
         this.authService.GetUserTokens(action.email, action.password).pipe(
           map((response) => {
+            this.authService.setAuthDataToLocalStorage(response, action.customer);
             return authAction.loginSuccess({
               accessToken: response.access_token,
               refreshToken: response.refresh_token,

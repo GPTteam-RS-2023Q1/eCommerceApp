@@ -7,16 +7,16 @@ const initialState: AuthState = {
   accessToken: null,
   refreshToken: null,
   errorMessage: null,
-  customerId: null,
+  customer: null,
 };
 
 export const authReducer = createReducer(
   initialState,
   on(
     authAction.autoLoginSuccess,
-    (state, { customerId, accessToken, refreshToken }): AuthState => ({
+    (state, { customer, accessToken, refreshToken }): AuthState => ({
       ...state,
-      customerId,
+      customer,
       accessToken,
       refreshToken,
     })
@@ -39,11 +39,11 @@ export const authReducer = createReducer(
     })
   ),
   on(
-    authAction.getCustomerId,
-    (state, { customerId }): AuthState => ({
+    authAction.getCustomer,
+    (state, { customer }): AuthState => ({
       ...state,
       errorMessage: null,
-      customerId,
+      customer,
     })
   ),
   on(authAction.authFail, (state, { errorMessage }): AuthState => {
@@ -67,7 +67,7 @@ export const authReducer = createReducer(
       accessToken: null,
       refreshToken: null,
       errorMessage: null,
-      customerId: null,
+      customer: null,
     })
   )
 );
