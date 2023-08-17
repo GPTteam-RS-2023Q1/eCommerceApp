@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
+import { authAction } from '@app/ngrx/actions/auth.actions';
+import { LocalKey } from '@app/shared/models/localStorage.enun';
 import { TuiHostedDropdownComponent } from '@taiga-ui/core';
 
 @Component({
@@ -17,7 +20,7 @@ export class UserMenuComponent {
 
   public userName = 'user';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private store: Store) {}
 
   public onClick(): void {
     this.open = false;
@@ -27,5 +30,12 @@ export class UserMenuComponent {
   public toProfile(): void {
     this.onClick();
     this.router.navigate(['user/profile']);
+  }
+
+  public logOut(): void {
+    this.onClick();
+    localStorage.removeItem(LocalKey.AuthData);
+    this.store.dispatch(authAction.logOut());
+    this.router.navigate(['store']);
   }
 }

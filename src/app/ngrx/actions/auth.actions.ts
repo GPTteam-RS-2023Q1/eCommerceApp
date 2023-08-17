@@ -17,5 +17,6 @@ export const authAction = createActionGroup({
       accessToken: string;
       refreshToken: string;
     }>(),
+    'Log out': emptyProps(),
   },
 });

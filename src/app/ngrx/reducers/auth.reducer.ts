@@ -1,4 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
+
 import { authAction } from '../actions/auth.actions';
 import { AuthState } from '../state.model';
 
@@ -58,5 +59,15 @@ export const authReducer = createReducer(
       ...state,
       errorMessage: message,
     };
-  })
+  }),
+  on(
+    authAction.logOut,
+    (state): AuthState => ({
+      ...state,
+      accessToken: null,
+      refreshToken: null,
+      errorMessage: null,
+      customerId: null,
+    })
+  )
 );

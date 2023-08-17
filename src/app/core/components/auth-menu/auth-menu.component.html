@@ -4,7 +4,7 @@
     type="button"
     appearance="outline"
     size="m"
-    icon="tuiIconUserLarge"
+    icon="tuiIconLogInLarge"
     [iconRight]="open ? 'tuiIconChevronUp' : 'tuiIconChevronDown'"
     [pseudoActive]="open || null"
   ></button>
@@ -12,8 +12,14 @@
 <ng-template #dropdown let-close="close">
   <tui-data-list>
     <tui-opt-group>
-      <button tuiOption (click)="toSignIn()">log in</button>
-      <button tuiOption (click)="toSignUp()">sign up</button>
+      <button tuiOption (click)="toSignIn()" class="auth-option">
+        <tui-svg src="tuiIconUserCheckLarge"></tui-svg>
+        <span>log in</span>
+      </button>
+      <button tuiOption (click)="toSignUp()" class="auth-option">
+        <tui-svg src="tuiIconUserPlusLarge"></tui-svg>
+        <span>sign up</span>
+      </button>
     </tui-opt-group>
   </tui-data-list>
 </ng-template>
