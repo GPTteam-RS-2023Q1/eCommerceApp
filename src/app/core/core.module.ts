@@ -5,6 +5,7 @@ import {
   TuiButtonModule,
   TuiDataListModule,
   TuiHostedDropdownModule,
+  TuiSvgModule,
 } from '@taiga-ui/core';
 
 import { AuthMenuComponent } from './components/auth-menu/auth-menu.component';
@@ -23,7 +24,13 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     FooterComponent,
     AboutComponent,
   ],
-  imports: [CommonModule, TuiHostedDropdownModule, TuiDataListModule, TuiButtonModule],
+  imports: [
+    CommonModule,
+    TuiHostedDropdownModule,
+    TuiDataListModule,
+    TuiButtonModule,
+    TuiSvgModule,
+  ],
   exports: [HeaderComponent, FooterComponent],
 })
 export class CoreModule {}

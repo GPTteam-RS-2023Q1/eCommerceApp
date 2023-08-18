@@ -1,0 +1,9 @@
+.auth-option {
+  display: flex;
+  gap: 15px;
+  justify-content: space-between;
+}
+
+.auth-option:hover span {
+  text-decoration: underline;
+}

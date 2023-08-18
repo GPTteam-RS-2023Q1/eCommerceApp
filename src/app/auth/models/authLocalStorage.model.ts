@@ -1,5 +1,7 @@
+import { Customer } from './customer.model';
+
 export interface LocalStorageAuthData {
-  customerId: string;
+  customer: Customer;
   accessToken: string;
   refreshToken: string;
   accessTokenExp: number;

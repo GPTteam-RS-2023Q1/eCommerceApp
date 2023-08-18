@@ -14,5 +14,10 @@ export const selectAuthError = createSelector(
 
 export const selectIsAuth = createSelector(
   selectAuthState,
-  (authState) => !!authState.customerId
+  (authState) => !!authState.customer?.id
+);
+
+export const selectUserName = createSelector(
+  selectAuthState,
+  (authState) => authState.customer?.firstName ?? 'user'
 );

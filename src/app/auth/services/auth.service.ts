@@ -1,13 +1,16 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, tap } from 'rxjs';
+
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+
+import { Customer } from '@app/auth/models/customer.model';
 import { authAction } from '@app/ngrx/actions/auth.actions';
+
+import { LocalStorageAuthData } from '../models/authLocalStorage.model';
 import { GetAccessTokenResponse, GetUSerTokens } from '../models/getTokens.model';
 import { SignInResult } from '../models/signInResult.model';
-import { Customer } from '../models/customer.modet';
-import { LocalStorageAuthData } from '../models/authLocalStorage.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -39,26 +42,19 @@ export class AuthService {
       .append('password', password)
       .append('scope', environment.CTP_SCOPES);
 
-    return this.http
-      .post<GetUSerTokens>(
-        `${environment.CTP_AUTH_URL}/oauth/${environment.CTP_PROJECT_KEY}/customers/token`,
-        {},
-        {
-          headers: new HttpHeaders({
-            Authorization: `Basic ${window.btoa(
-              `${environment.CTP_CLIENT_ID}:${environment.CTP_CLIENT_SECRET}`
-            )}`,
-            'Content-Type': 'application/x-www-form-urlencoded',
-          }),
-          params: httpParams,
-        }
-      )
-      .pipe(
-        tap((response) => {
-          const customerId = response.scope.slice(response.scope.lastIndexOf(':') + 1);
-          this.setAuthDataToLocalStorage(response, customerId);
-        })
-      );
+    return this.http.post<GetUSerTokens>(
+      `${environment.CTP_AUTH_URL}/oauth/${environment.CTP_PROJECT_KEY}/customers/token`,
+      {},
+      {
+        headers: new HttpHeaders({
+          Authorization: `Basic ${window.btoa(
+            `${environment.CTP_CLIENT_ID}:${environment.CTP_CLIENT_SECRET}`
+          )}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }),
+        params: httpParams,
+      }
+    );
   }
 
   public login(email: string, password: string): Observable<SignInResult> {
@@ -98,7 +94,7 @@ export class AuthService {
     );
   }
 
-  private setAuthDataToLocalStorage(response: GetUSerTokens, customerId: string): void {
+  public setAuthDataToLocalStorage(response: GetUSerTokens, customer: Customer): void {
     const accessExpiresIn = new Date().getTime() + response.expires_in * 1000;
     const twoHundreedDaysInMs = 200 * 86400 * 1000;
     const refreshExpiresIn = new Date().getTime() + twoHundreedDaysInMs;
@@ -106,7 +102,7 @@ export class AuthService {
     localStorage.setItem(
       'authData',
       JSON.stringify({
-        customerId,
+        customer,
         accessToken: response.access_token,
         refreshToken: response.refresh_token,
         accessTokenExp: accessExpiresIn,
@@ -123,7 +119,7 @@ export class AuthService {
       if (localStorageAuthData.accessTokenExp > currentTime) {
         this.store.dispatch(
           authAction.autoLoginSuccess({
-            customerId: localStorageAuthData.customerId,
+            customer: localStorageAuthData.customer,
             accessToken: localStorageAuthData.accessToken,
             refreshToken: localStorageAuthData.refreshToken,
           })
@@ -143,12 +139,12 @@ export class AuthService {
                 ...response,
                 refresh_token: localStorageAuthData.refreshToken,
               },
-              localStorageAuthData.customerId
+              localStorageAuthData.customer
             );
 
             this.store.dispatch(
               authAction.autoLoginSuccess({
-                customerId: localStorageAuthData.customerId,
+                customer: localStorageAuthData.customer,
                 accessToken: response.access_token,
                 refreshToken: localStorageAuthData.refreshToken,
               })

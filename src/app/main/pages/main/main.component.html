@@ -13,12 +13,12 @@
     buy online
   </button>
 </div>
-<tui-carousel [duration]="3000" [(index)]="index">
-  <ng-container *ngFor="let item of items">
+<tui-carousel [duration]="3000" [(index)]="startIndex">
+  <ng-container *ngFor="let item of items; let index = index">
     <tui-island *tuiItem>
       <div class="banner-container">
-        <div class="banner" [style.background-image]="'url(' + item[0] + ')'"></div>
-        <div class="banner" [style.background-image]="'url(' + item[1] + ')'"></div>
+        <div class="banner" [style.background-image]="getBannerUrl(index, 1)"></div>
+        <div class="banner" [style.background-image]="getBannerUrl(index, 2)"></div>
       </div>
     </tui-island>
   </ng-container>
@@ -27,5 +27,5 @@
   size="s"
   class="pagination"
   [length]="items.length"
-  [(index)]="index"
+  [(index)]="startIndex"
 ></tui-pagination>
