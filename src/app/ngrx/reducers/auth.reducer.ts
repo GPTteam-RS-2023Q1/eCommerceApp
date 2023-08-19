@@ -54,7 +54,14 @@ export const authReducer = createReducer(
     })
   ),
   on(authAction.authFail, (state, { errorMessage }): AuthState => {
-    let message: string | null;
+    if (!errorMessage) {
+      return {
+        ...state,
+        errorMessage,
+      };
+    }
+
+    let message: string;
     switch (errorMessage) {
       case 'Account with the given credentials not found.':
         message = `${errorMessage} Please check your credentials and try again`;
