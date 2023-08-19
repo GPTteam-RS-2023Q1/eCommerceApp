@@ -1,18 +1,33 @@
 <ng-container [formGroup]="form">
-  <div class="tui-form__row">
-    <tui-input formControlName="country" class="address-form-country"
-      >Country<input tuiTextfield autocomplete="new-password"
-    /></tui-input>
+  <h3 *ngIf="legend" class="header">{{ legend }}</h3>
+
+  <div class="form-row">
+    <tui-combo-box class="b-form" formControlName="country">
+      Country
+      <input tuiTextfield autocomplete="new-password" />
+      <tui-data-list-wrapper
+        *tuiDataList
+        [items]="items | tuiFilterByInput"
+      ></tui-data-list-wrapper>
+    </tui-combo-box>
     <tui-error formControlName="country" [error]="[] | tuiFieldError | async"></tui-error>
   </div>
+
   <ec-input placeholder="City" formControlName="city"></ec-input>
+
   <ec-input placeholder="Street" formControlName="street"></ec-input>
+
   <div class="tui-form__row">
     <tui-input
       ecControlDependency="country"
       formControlName="postalCode"
+      [maskito]="selectedCountry.mask"
       class="address-form-postal-code"
-      >Postal code<input tuiTextfield autocomplete="new-password" />
+      >Postal code<input
+        tuiTextfield
+        [placeholder]="selectedCountry.hint"
+        autocomplete="new-password"
+      />
     </tui-input>
     <tui-error
       formControlName="postalCode"

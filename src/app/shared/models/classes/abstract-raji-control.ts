@@ -7,8 +7,6 @@ export abstract class AbstractRajiControl<T> implements ControlValueAccessor {
 
   public onTouch!: () => void;
 
-  public isDisabled!: boolean;
-
   public writeValue(value: T): void {
     this.control.patchValue(value);
   }

@@ -1,5 +1,35 @@
 :host {
+  .base-information-wrapper {
+    margin-bottom: 60px;
+  }
+
   .sign-up-form {
     padding: 100px 0;
+  }
+
+  .form-row {
+    margin-bottom: 20px;
+  }
+
+  .header {
+    margin-bottom: 40px;
+  }
+
+  .address-wrapper {
+    display: flex;
+    gap: 40px;
+  }
+
+  .address-form-wrapper {
+    flex: 1 1 50%;
+  }
+
+  .default-label {
+    margin-top: 20px;
+  }
+
+  label {
+    margin-left: 10px;
+    font-size: 14px;
   }
 }

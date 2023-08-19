@@ -2,12 +2,23 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { TuiButtonModule, TuiErrorModule, TuiNotificationModule } from '@taiga-ui/core';
+import { MaskitoModule } from '@maskito/angular';
 import {
+  TuiButtonModule,
+  TuiDataListModule,
+  TuiErrorModule,
+  TuiNotificationModule,
+} from '@taiga-ui/core';
+import {
+  TuiCheckboxLabeledModule,
+  TuiComboBoxModule,
+  TuiDataListWrapperModule,
   TuiFieldErrorPipeModule,
+  TuiFilterByInputPipeModule,
   TuiInputDateModule,
   TuiInputModule,
   TuiInputPasswordModule,
+  TuiToggleModule,
 } from '@taiga-ui/kit';
 
 import { EmailInputComponent } from './components/email-input/email-input.component';
@@ -26,6 +37,13 @@ import { PasswordInputComponent } from './components/password-input/password-inp
     TuiInputPasswordModule,
     TuiInputDateModule,
     TuiButtonModule,
+    TuiComboBoxModule,
+    TuiDataListModule,
+    TuiDataListWrapperModule,
+    TuiFilterByInputPipeModule,
+    TuiCheckboxLabeledModule,
+    TuiToggleModule,
+    MaskitoModule,
   ],
   exports: [
     CommonModule,
@@ -37,9 +55,16 @@ import { PasswordInputComponent } from './components/password-input/password-inp
     TuiInputPasswordModule,
     TuiInputDateModule,
     TuiButtonModule,
+    TuiComboBoxModule,
+    TuiDataListModule,
+    TuiDataListWrapperModule,
     InputComponent,
     EmailInputComponent,
     PasswordInputComponent,
+    TuiFilterByInputPipeModule,
+    TuiCheckboxLabeledModule,
+    TuiToggleModule,
+    MaskitoModule,
   ],
 })
 export class SharedModule {}
