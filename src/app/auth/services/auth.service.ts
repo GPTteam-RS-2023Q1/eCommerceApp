@@ -11,6 +11,7 @@ import { authAction } from '@app/ngrx/actions/auth.actions';
 import { LocalStorageAuthData } from '../models/authLocalStorage.model';
 import { GetAccessTokenResponse, GetUSerTokens } from '../models/getTokens.model';
 import { SignInResult } from '../models/signInResult.model';
+import { CustomerDraft } from '../models/customer-draft.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -69,6 +70,18 @@ export class AuthService {
     );
   }
 
+  public signUp(body: CustomerDraft): Observable<SignInResult> {
+    return this.http.post<SignInResult>(
+      `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/customers`,
+      body,
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+      }
+    );
+  }
+
   public getCustomer(customerId: string): Observable<Customer> {
     return this.http.get<Customer>(
       `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/customers/${customerId}`
@@ -94,18 +107,14 @@ export class AuthService {
     );
   }
 
-  public setAuthDataToLocalStorage(response: GetUSerTokens, customer: Customer): void {
-    const accessExpiresIn = new Date().getTime() + response.expires_in * 1000;
+  public setAuthDataToLocalStorage(refreshToken: string): void {
     const twoHundreedDaysInMs = 200 * 86400 * 1000;
     const refreshExpiresIn = new Date().getTime() + twoHundreedDaysInMs;
 
     localStorage.setItem(
       'authData',
       JSON.stringify({
-        customer,
-        accessToken: response.access_token,
-        refreshToken: response.refresh_token,
-        accessTokenExp: accessExpiresIn,
+        refreshToken,
         refreshTokenExp: refreshExpiresIn,
       })
     );
@@ -116,45 +125,13 @@ export class AuthService {
       const localStorageAuthData: LocalStorageAuthData = JSON.parse(localStorageAuthStr);
       const currentTime = new Date().getTime();
 
-      if (localStorageAuthData.accessTokenExp > currentTime) {
-        this.store.dispatch(
-          authAction.autoLoginSuccess({
-            customer: localStorageAuthData.customer,
-            accessToken: localStorageAuthData.accessToken,
-            refreshToken: localStorageAuthData.refreshToken,
-          })
-        );
+      if (localStorageAuthData.refreshTokenExp > currentTime) {
+        this.store.dispatch(authAction.autoLoginStart(localStorageAuthData));
 
         return;
       }
 
-      if (
-        localStorageAuthData.accessTokenExp < currentTime &&
-        localStorageAuthData.refreshTokenExp > currentTime
-      ) {
-        this.refreshToken(localStorageAuthData.refreshToken).subscribe({
-          next: (response) => {
-            this.setAuthDataToLocalStorage(
-              {
-                ...response,
-                refresh_token: localStorageAuthData.refreshToken,
-              },
-              localStorageAuthData.customer
-            );
-
-            this.store.dispatch(
-              authAction.autoLoginSuccess({
-                customer: localStorageAuthData.customer,
-                accessToken: response.access_token,
-                refreshToken: localStorageAuthData.refreshToken,
-              })
-            );
-          },
-          error: () => this.store.dispatch(authAction.getToken()),
-        });
-
-        return;
-      }
+      this.store.dispatch(authAction.getToken());
 
       return;
     }

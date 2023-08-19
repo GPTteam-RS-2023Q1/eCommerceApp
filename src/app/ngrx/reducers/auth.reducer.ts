@@ -14,9 +14,8 @@ export const authReducer = createReducer(
   initialState,
   on(
     authAction.autoLoginSuccess,
-    (state, { customer, accessToken, refreshToken }): AuthState => ({
+    (state, { accessToken, refreshToken }): AuthState => ({
       ...state,
-      customer,
       accessToken,
       refreshToken,
     })
@@ -39,6 +38,14 @@ export const authReducer = createReducer(
     })
   ),
   on(
+    authAction.loginCustomer,
+    (state, { customer }): AuthState => ({
+      ...state,
+      errorMessage: null,
+      customer,
+    })
+  ),
+  on(
     authAction.getCustomer,
     (state, { customer }): AuthState => ({
       ...state,
@@ -52,8 +59,11 @@ export const authReducer = createReducer(
       case 'Account with the given credentials not found.':
         message = `${errorMessage} Please check your credentials and try again`;
         break;
+      case 'There is already an existing customer with the provided email.':
+        message = `${errorMessage} Please try different email.`;
+        break;
       default:
-        message = errorMessage;
+        message = 'Something went wrong. Please reload the page and try again.';
     }
     return {
       ...state,
