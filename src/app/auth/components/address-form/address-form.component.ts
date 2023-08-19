@@ -20,6 +20,8 @@ import {
 
 import { map, Subscription } from 'rxjs';
 
+import { numbersValidator } from '@app/auth/validators/numbers-validator';
+import { specialCharactersValidator } from '@app/auth/validators/special-characters-validator';
 import { COUNTRIES, CountryData, defaultCountryData } from '@app/consts/country-data';
 import { AddressForm } from '@app/shared/models/interfaces/address-from';
 
@@ -101,7 +103,14 @@ export class AddressFormComponent
   public ngOnInit(): void {
     this.form = this.fb.group({
       country: ['', this.countryValidator],
-      city: ['', Validators.required],
+      city: [
+        '',
+        [
+          Validators.required,
+          numbersValidator('City'),
+          specialCharactersValidator('City'),
+        ],
+      ],
       street: ['', Validators.required],
       postalCode: ['', this.postalCodeValidator],
     });
