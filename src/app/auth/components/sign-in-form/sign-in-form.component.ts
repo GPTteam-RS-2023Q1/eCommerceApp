@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
-import { authAction } from '@app/ngrx/actions/auth.actions';
 import { Store } from '@ngrx/store';
+
+import { Subscription } from 'rxjs';
+
+import { authAction } from '@app/ngrx/actions/auth.actions';
 
 @Component({
   selector: 'ec-sign-in-form',
@@ -9,8 +12,10 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./sign-in-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignInFormComponent implements OnInit {
+export class SignInFormComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
+
+  private valueChangesSub = new Subscription();
 
   constructor(private readonly fb: NonNullableFormBuilder, private store: Store) {}
 
@@ -20,9 +25,11 @@ export class SignInFormComponent implements OnInit {
       password: [''],
     });
 
-    this.form.valueChanges.subscribe(() => {
-      this.store.dispatch(authAction.authFail({ errorMessage: null }));
-    });
+    this.valueChangesSub.add(
+      this.form.valueChanges.subscribe(() => {
+        this.store.dispatch(authAction.authFail({ errorMessage: null }));
+      })
+    );
   }
 
   public onSubmit(): void {
@@ -32,5 +39,9 @@ export class SignInFormComponent implements OnInit {
         password: this.form.controls['password'].value,
       })
     );
+  }
+
+  public ngOnDestroy(): void {
+    this.valueChangesSub.unsubscribe();
   }
 }

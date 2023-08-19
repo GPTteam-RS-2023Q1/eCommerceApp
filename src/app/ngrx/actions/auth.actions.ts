@@ -1,9 +1,11 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
+import { Customer } from '@app/auth/models/customer.model';
+
 export const authAction = createActionGroup({
   source: 'Auth',
   events: {
-    'Get Customer Id': props<{ customerId: string; email: string; password: string }>(),
+    'Get Customer': props<{ customer: Customer; email: string; password: string }>(),
     'Login Start': props<{ email: string; password: string }>(),
     'Login Success': props<{
       accessToken: string;
@@ -13,9 +15,10 @@ export const authAction = createActionGroup({
     'Get Token': emptyProps(),
     'Token Success': props<{ accessToken: string }>(),
     'Auto Login Success': props<{
-      customerId: string;
+      customer: Customer;
       accessToken: string;
       refreshToken: string;
     }>(),
+    'Log out': emptyProps(),
   },
 });

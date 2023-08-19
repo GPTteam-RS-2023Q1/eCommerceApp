@@ -8,14 +8,20 @@
     [iconRight]="open ? 'tuiIconChevronUp' : 'tuiIconChevronDown'"
     [pseudoActive]="open || null"
   >
-    {{ userName }}
+    {{ userName | async }}
   </button>
 </tui-hosted-dropdown>
 <ng-template #dropdown let-close="close">
   <tui-data-list>
     <tui-opt-group>
-      <button tuiOption (click)="toProfile()">profile</button>
-      <button tuiOption class="exit" (click)="onClick()">log out</button>
+      <button tuiOption (click)="toProfile()" class="auth-option">
+        <tui-svg src="tuiIconSettingsLarge"></tui-svg>
+        <span>profile</span>
+      </button>
+      <button tuiOption class="exit auth-option" (click)="logOut()">
+        <tui-svg src="tuiIconLogOutLarge"></tui-svg>
+        <span>log out</span>
+      </button>
     </tui-opt-group>
   </tui-data-list>
 </ng-template>

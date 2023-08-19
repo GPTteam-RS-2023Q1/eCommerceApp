@@ -1,5 +1,5 @@
 import { Address } from './address.model';
-import { Customer } from './customer.modet';
+import { Customer } from './customer.model';
 
 export interface CustomerDraft
   extends Pick<
