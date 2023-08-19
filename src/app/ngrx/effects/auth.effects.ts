@@ -72,6 +72,7 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(authAction.autoLoginStart),
       exhaustMap((action) => {
+        this.router.navigate(['store']);
         return this.authService.refreshToken(action.refreshToken).pipe(
           map((response) => {
             const responseScope = response.scope.split(' ');
