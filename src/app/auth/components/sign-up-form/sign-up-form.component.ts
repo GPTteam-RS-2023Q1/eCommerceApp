@@ -4,34 +4,74 @@ import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { birthdayValidator } from '@app/auth/validators/birthday-validator';
+import { numbersValidator } from '@app/auth/validators/numbers-validator';
+import { specialCharactersValidator } from '@app/auth/validators/special-characters-validator';
+import { whiteSpaceValidator } from '@app/auth/validators/white-space-validator';
+import { CustomerBuilderService } from '@app/core/services/customer-builder.service';
+import { compareObjects } from '@app/utils/compareObjects';
 
 @Component({
   selector: 'ec-sign-up-form',
   templateUrl: './sign-up-form.component.html',
   styleUrls: ['./sign-up-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [CustomerBuilderService],
 })
 export class SignUpFormComponent implements OnInit {
   public form!: FormGroup;
 
   private addressSubscriptions: Subscription[] = [];
 
-  constructor(private readonly fb: NonNullableFormBuilder) {}
+  constructor(
+    private readonly fb: NonNullableFormBuilder,
+    private readonly customerBuilder: CustomerBuilderService
+  ) {}
 
   public ngOnInit(): void {
     this.createForm();
     this.matchLogic();
   }
 
-  public onSubmit(): void {}
+  public onSubmit(): void {
+    const { value } = this.form;
+
+    const builder = this.customerBuilder.createCustomer({
+      ...value,
+      dateOfBirth: value.dateOfBirth.toLocalNativeDate(),
+    });
+
+    if (value.defaultBillingAddress) {
+      builder.withDefaultBillingAddress();
+    }
+
+    if (value.defaultShippingAddress) {
+      builder.withDefaultShippingAddress();
+    }
+  }
 
   private createForm(): void {
     this.form = this.fb.group({
       email: [''],
       password: [''],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      age: [null, birthdayValidator],
+      firstName: [
+        '',
+        [
+          Validators.required,
+          whiteSpaceValidator('Name'),
+          numbersValidator('Name'),
+          specialCharactersValidator('Name'),
+        ],
+      ],
+      lastName: [
+        '',
+        [
+          Validators.required,
+          whiteSpaceValidator('Last name'),
+          numbersValidator('Last name'),
+          specialCharactersValidator('Last name'),
+        ],
+      ],
+      dateOfBirth: [null, birthdayValidator],
       matchForms: [true],
       shippingAddress: {
         country: '',
@@ -65,10 +105,7 @@ export class SignUpFormComponent implements OnInit {
           address.valueChanges.subscribe(() => {
             const addressValue = address.value;
 
-            if (
-              JSON.stringify(addressValue) ===
-              JSON.stringify(anotherAddress?.getRawValue())
-            ) {
+            if (compareObjects(addressValue, anotherAddress.getRawValue())) {
               return;
             }
 

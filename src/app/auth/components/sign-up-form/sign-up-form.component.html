@@ -11,11 +11,14 @@
     <ec-input formControlName="lastName" placeholder="Last name"></ec-input>
 
     <div class="form-row">
-      <tui-input-date class="sign-up-form-age" formControlName="age">
+      <tui-input-date class="sign-up-form-age" formControlName="dateOfBirth">
         Choose a date
         <input tuiTextfield autocomplete="off" />
       </tui-input-date>
-      <tui-error formControlName="age" [error]="[] | tuiFieldError | async"></tui-error>
+      <tui-error
+        formControlName="dateOfBirth"
+        [error]="[] | tuiFieldError | async"
+      ></tui-error>
     </div>
   </div>
 
