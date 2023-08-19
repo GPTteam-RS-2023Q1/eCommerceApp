@@ -32,6 +32,14 @@ export class AuthFailComponent implements OnInit, OnDestroy {
         this.onClose();
       })
     );
+
+    this.sub.add(
+      this.error$.subscribe((message) => {
+        if (message) {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      })
+    );
   }
 
   public onClose(): void {
