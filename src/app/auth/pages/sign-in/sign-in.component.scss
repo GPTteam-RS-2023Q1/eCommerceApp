@@ -1,7 +1,20 @@
 :host {
   .wrapper {
+    display: flex;
+    flex-direction: column;
+
     width: 580px;
     margin: 0 auto;
     padding: 0 40px;
+  }
+
+  ::ng-deep form {
+    margin-bottom: 100px;
+  }
+
+  .sign-up-button {
+    align-self: center;
+    max-width: fit-content;
+    padding: 5px 36px;
   }
 }
