@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule, inject } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -11,11 +11,29 @@ import {
 } from '@taiga-ui/core';
 import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 
+import { Actions, ofType } from '@ngrx/effects';
+import { firstValueFrom } from 'rxjs';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptorService } from './auth/auth.interceptor';
 import { CoreModule } from './core/core.module';
 import { AppStoreModule } from './ngrx/store.module';
+import { AuthService } from './auth/services/auth.service';
+import { authAction } from './ngrx/actions/auth.actions';
+
+function initAutoLogin(): () => Promise<void> {
+  const actions$ = inject(Actions);
+  const authService = inject(AuthService);
+
+  return () => {
+    authService.autoLogin(localStorage.getItem('authData'));
+    return firstValueFrom(
+      actions$.pipe(
+        ofType(authAction.tokenSuccess, authAction.getCustomer, authAction.authFail)
+      )
+    );
+  };
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,6 +56,12 @@ import { AppStoreModule } from './ngrx/store.module';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
+      multi: true,
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initAutoLogin,
+      deps: [Actions, AuthService],
       multi: true,
     },
   ],
