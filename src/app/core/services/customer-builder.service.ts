@@ -22,7 +22,9 @@ export class CustomerBuilderService {
   private customer: CustomerDraft = {} as CustomerDraft;
 
   public createCustomer(params: CreateCustomerParams): CustomerBuilderService {
-    const addresses = this.setAddresses(params.billingAddress, params.shippingAddress);
+    const billingAddress = this.createAddress(params.billingAddress);
+    const shippingAddress = this.createAddress(params.shippingAddress);
+    const addresses = this.setAddresses(billingAddress, shippingAddress);
 
     const customer = {
       email: params.email,
@@ -31,8 +33,8 @@ export class CustomerBuilderService {
       lastName: params.lastName,
       dateOfBirth: this.createDate(params.dateOfBirth),
       addresses,
-      billingAddresses: [this.getAddressIndex(params.billingAddress, addresses)],
-      shippingAddresses: [this.getAddressIndex(params.shippingAddress, addresses)],
+      billingAddresses: [this.getAddressIndex(billingAddress, addresses)],
+      shippingAddresses: [this.getAddressIndex(shippingAddress, addresses)],
     };
 
     this.customer = customer;
@@ -79,10 +81,10 @@ export class CustomerBuilderService {
     billingAddress: AddressForm,
     shippingAddress: AddressForm
   ): AddressForm[] {
-    const addresses = [this.createAddress(shippingAddress)];
+    const addresses = [shippingAddress];
 
     if (!compareObjects(shippingAddress, billingAddress)) {
-      addresses.push(this.createAddress(billingAddress));
+      addresses.push(billingAddress);
     }
 
     return addresses;
