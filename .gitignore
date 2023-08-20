@@ -125,3 +125,6 @@ typings/
 
 # Angular
 .angular
+
+# Firebase
+.firebase
