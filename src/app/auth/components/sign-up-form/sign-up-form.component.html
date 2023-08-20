@@ -1,6 +1,8 @@
 <form class="sign-up-form" [formGroup]="form" (ngSubmit)="onSubmit()">
   <h1 class="header">Sign In</h1>
 
+  <ec-auth-fail [parentForm]="form"></ec-auth-fail>
+
   <div class="base-information-wrapper">
     <ec-email-input formControlName="email" placeholder="Email"></ec-email-input>
 
@@ -50,6 +52,6 @@
   </div>
 
   <div class="tui-form__buttons">
-    <button tuiButton type="submit" [disabled]="!form.valid">Submit</button>
+    <button href="#" tuiButton type="submit" [disabled]="!form.valid">Submit</button>
   </div>
 </form>

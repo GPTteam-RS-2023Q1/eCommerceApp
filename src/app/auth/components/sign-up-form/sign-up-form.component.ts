@@ -9,6 +9,8 @@ import { specialCharactersValidator } from '@app/auth/validators/special-charact
 import { whiteSpaceValidator } from '@app/auth/validators/white-space-validator';
 import { CustomerBuilderService } from '@app/core/services/customer-builder.service';
 import { compareObjects } from '@app/utils/compareObjects';
+import { Store } from '@ngrx/store';
+import { authAction } from '@app/ngrx/actions/auth.actions';
 
 @Component({
   selector: 'ec-sign-up-form',
@@ -24,7 +26,8 @@ export class SignUpFormComponent implements OnInit {
 
   constructor(
     private readonly fb: NonNullableFormBuilder,
-    private readonly customerBuilder: CustomerBuilderService
+    private readonly customerBuilder: CustomerBuilderService,
+    private store: Store
   ) {}
 
   public ngOnInit(): void {
@@ -47,6 +50,10 @@ export class SignUpFormComponent implements OnInit {
     if (value.defaultShippingAddress) {
       builder.withDefaultShippingAddress();
     }
+
+    const customerDraft = builder.getCustomer();
+
+    this.store.dispatch(authAction.signUpStart({ body: customerDraft }));
   }
 
   private createForm(): void {

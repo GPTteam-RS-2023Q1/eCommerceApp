@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthFailComponent implements OnInit, OnDestroy {
-  @Input() public parentForm!: FormGroup | undefined;
+  @Input() public parentForm!: FormGroup;
 
   private sub = new Subscription();
 
@@ -28,8 +28,16 @@ export class AuthFailComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.sub.add(
-      this.parentForm?.valueChanges.subscribe(() => {
+      this.parentForm.valueChanges.subscribe(() => {
         this.onClose();
+      })
+    );
+
+    this.sub.add(
+      this.error$.subscribe((message) => {
+        if (message) {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
       })
     );
   }

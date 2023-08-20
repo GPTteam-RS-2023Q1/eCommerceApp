@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { AddressForm } from '@app/auth/models/address-from.model';
 import { CustomerDraft } from '@app/auth/models/customer-draft.model';
+import { COUNTRIES } from '@app/consts/country-data';
 import { compareObjects } from '@app/utils/compareObjects';
 
 interface CreateCustomerParams {
@@ -69,19 +70,29 @@ export class CustomerBuilderService {
   }
 
   private createDate(date: Date): string {
-    return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+    return `${date.getFullYear()}-${(date.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
   }
 
   private setAddresses(
     billingAddress: AddressForm,
     shippingAddress: AddressForm
   ): AddressForm[] {
-    const addresses = [shippingAddress];
+    const addresses = [this.createAddress(shippingAddress)];
 
     if (!compareObjects(shippingAddress, billingAddress)) {
-      addresses.push(billingAddress);
+      addresses.push(this.createAddress(billingAddress));
     }
 
     return addresses;
+  }
+
+  private setCountry(country: string): string {
+    return COUNTRIES[country].tag;
+  }
+
+  private createAddress(address: AddressForm): AddressForm {
+    return { ...address, country: this.setCountry(address.country) };
   }
 }

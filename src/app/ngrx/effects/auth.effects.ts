@@ -28,13 +28,33 @@ export class AuthEffects {
     );
   });
 
-  public getCustomer$ = createEffect(() => {
+  public signUp$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(authAction.signUpStart),
+      exhaustMap((action) => {
+        return this.authService.signUp(action.body).pipe(
+          map((response) => {
+            return authAction.loginCustomer({
+              customer: response.customer,
+              email: action.body.email,
+              password: action.body.password,
+            });
+          }),
+          catchError((err) =>
+            of(authAction.authFail({ errorMessage: err.error.message }))
+          )
+        );
+      })
+    );
+  });
+
+  public login$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(authAction.loginStart),
       exhaustMap((action) =>
         this.authService.login(action.email, action.password).pipe(
           map((response) => {
-            return authAction.getCustomer({
+            return authAction.loginCustomer({
               customer: response.customer,
               email: action.email,
               password: action.password,
@@ -48,21 +68,66 @@ export class AuthEffects {
     );
   });
 
-  public login$ = createEffect(() => {
+  public autoLogin$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(authAction.getCustomer),
-      exhaustMap((action) =>
-        this.authService.GetUserTokens(action.email, action.password).pipe(
+      ofType(authAction.autoLoginStart),
+      exhaustMap((action) => {
+        return this.authService.refreshToken(action.refreshToken).pipe(
           map((response) => {
-            this.authService.setAuthDataToLocalStorage(response, action.customer);
+            const responseScope = response.scope.split(' ');
+            const strWithCustomerId = responseScope.find((element) =>
+              element.includes('customer_id')
+            );
+
+            if (!strWithCustomerId) {
+              throw Error("Can't find customer id");
+            }
+
+            const customerId = strWithCustomerId.split(':')[1];
+            this.authService.setAuthDataToLocalStorage(action.refreshToken);
+            return authAction.autoLoginSuccess({
+              customerId,
+              accessToken: response.access_token,
+              refreshToken: action.refreshToken,
+            });
+          }),
+          catchError(() => {
+            return of(authAction.getToken());
+          })
+        );
+      })
+    );
+  });
+
+  public getCustomer$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(authAction.autoLoginSuccess),
+      exhaustMap((action) => {
+        return this.authService.getCustomer(action.customerId).pipe(
+          map((response) => {
+            return authAction.getCustomer({ customer: response });
+          }),
+          catchError(() => of())
+        );
+      })
+    );
+  });
+
+  public getUserTokens$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(authAction.loginCustomer),
+      exhaustMap((action) => {
+        return this.authService.GetUserTokens(action.email, action.password).pipe(
+          map((response) => {
+            this.authService.setAuthDataToLocalStorage(response.refresh_token);
             return authAction.loginSuccess({
               accessToken: response.access_token,
               refreshToken: response.refresh_token,
             });
           }),
           catchError(() => of())
-        )
-      )
+        );
+      })
     );
   });
 

@@ -111,7 +111,7 @@ export class AddressFormComponent
           specialCharactersValidator('City'),
         ],
       ],
-      street: ['', Validators.required],
+      streetName: ['', Validators.required],
       postalCode: ['', this.postalCodeValidator],
     });
 

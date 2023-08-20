@@ -3,6 +3,7 @@ import { MaskitoOptions } from '@maskito/core';
 export const defaultCountryData: CountryData = {
   regExp: /.+/,
   hint: '',
+  tag: '',
   mask: {
     mask: /.+/,
   },
@@ -12,6 +13,7 @@ export const defaultCountryData: CountryData = {
 export const COUNTRIES: Record<string, CountryData> = {
   Poland: {
     name: 'Poland',
+    tag: 'PL',
     regExp: /^\d{2}-\d{3}$/,
     hint: '12-345',
     mask: {
@@ -20,6 +22,7 @@ export const COUNTRIES: Record<string, CountryData> = {
   },
   USA: {
     name: 'USA',
+    tag: 'US',
     regExp: /^\d{5}(-\d{4})?$/,
     hint: '12345-6789',
     mask: {
@@ -28,6 +31,7 @@ export const COUNTRIES: Record<string, CountryData> = {
   },
   Canada: {
     name: 'Canada',
+    tag: 'CA',
     regExp: /^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$/,
     hint: 'K1A 0B1',
     mask: {
@@ -36,6 +40,7 @@ export const COUNTRIES: Record<string, CountryData> = {
   },
   Belarus: {
     name: 'Belarus',
+    tag: 'BY',
     regExp: /^\d{6}$/,
     hint: '220000',
     mask: {
@@ -44,6 +49,7 @@ export const COUNTRIES: Record<string, CountryData> = {
   },
   Ukraine: {
     name: 'Ukraine',
+    tag: 'UA',
     regExp: /^\d{5}$/,
     hint: '12345',
     mask: {
@@ -54,6 +60,7 @@ export const COUNTRIES: Record<string, CountryData> = {
 
 export interface CountryData {
   name: string;
+  tag: string;
   regExp: RegExp;
   hint: string;
   mask: MaskitoOptions;
