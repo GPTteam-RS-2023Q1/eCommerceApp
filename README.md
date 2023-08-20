@@ -33,6 +33,7 @@ Technology Stack :
 - `npm run style` Fix the issues for all scss files in src folder
 - `npm run prettier` This script formats ts, scss, html, json files in the src directory and its subdirectories.
 - `npm run prepare` This script enables Git hooks.
+- `npm run deploy` This script initiates the process of deploying the project to the assigned hosting.
 
 #### Project setup
 
