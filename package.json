@@ -10,7 +10,8 @@
     "lint": "ng lint",
     "style": "npx stylelint --fix \"./src/**/*.scss\"",
     "prettier": "prettier \"./src/**/*.{ts,scss,html,json}\" --write",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "deploy": "ng build && firebase deploy"
   },
   "private": true,
   "dependencies": {
