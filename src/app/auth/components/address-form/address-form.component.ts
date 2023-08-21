@@ -70,6 +70,7 @@ export class AddressFormComponent
     }
   ): void {
     this.form.patchValue(value, options);
+    this.selectedCountry = this.getCountryData(value.country);
 
     const country = this.form.get('country');
     const postalCode = this.form.get('postalCode');
