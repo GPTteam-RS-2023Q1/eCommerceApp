@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 
 import { Subscription } from 'rxjs';
 
@@ -8,9 +9,8 @@ import { numbersValidator } from '@app/auth/validators/numbers-validator';
 import { specialCharactersValidator } from '@app/auth/validators/special-characters-validator';
 import { whiteSpaceValidator } from '@app/auth/validators/white-space-validator';
 import { CustomerBuilderService } from '@app/core/services/customer-builder.service';
-import { compareObjects } from '@app/utils/compareObjects';
-import { Store } from '@ngrx/store';
 import { authAction } from '@app/ngrx/actions/auth.actions';
+import { compareObjects } from '@app/utils/compareObjects';
 
 @Component({
   selector: 'ec-sign-up-form',
@@ -117,7 +117,6 @@ export class SignUpFormComponent implements OnInit {
             }
 
             anotherAddress?.patchValue(addressValue, { emitEvent: false });
-            anotherAddress?.enable();
           })
         );
       });

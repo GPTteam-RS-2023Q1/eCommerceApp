@@ -35,7 +35,7 @@ export class EmailInputComponent
 
   public validate(control: AbstractControl<string>): ValidationErrors | null {
     const { value } = control;
-    const emailPattern = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
+    const emailPattern = /^(?=\S)[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
     return emailPattern.test(value) ? null : { other: 'Email is invalid' };
   }
 }

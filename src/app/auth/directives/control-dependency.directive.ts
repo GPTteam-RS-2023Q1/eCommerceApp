@@ -24,7 +24,7 @@ export class ControlDependencyDirective implements OnInit, OnDestroy {
       element?.disable();
 
       this.subscription.add(
-        targetControl?.valueChanges.subscribe(() => {
+        targetControl?.statusChanges.subscribe(() => {
           if (targetControl.valid) {
             element?.enable();
 
