@@ -1,12 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import {
-  TuiButtonModule,
-  TuiDataListModule,
-  TuiHostedDropdownModule,
-  TuiSvgModule,
-} from '@taiga-ui/core';
+import { SharedModule } from '@app/shared/shared.module';
 
 import { AuthMenuComponent } from './components/auth-menu/auth-menu.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -24,13 +19,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     FooterComponent,
     AboutComponent,
   ],
-  imports: [
-    CommonModule,
-    TuiHostedDropdownModule,
-    TuiDataListModule,
-    TuiButtonModule,
-    TuiSvgModule,
-  ],
+  imports: [CommonModule, SharedModule],
   exports: [HeaderComponent, FooterComponent],
 })
 export class CoreModule {}

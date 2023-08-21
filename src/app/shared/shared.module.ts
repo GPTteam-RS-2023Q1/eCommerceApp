@@ -7,10 +7,13 @@ import {
   TuiButtonModule,
   TuiDataListModule,
   TuiErrorModule,
+  TuiHostedDropdownModule,
   TuiLinkModule,
   TuiNotificationModule,
+  TuiSvgModule,
 } from '@taiga-ui/core';
 import {
+  TuiCarouselModule,
   TuiCheckboxLabeledModule,
   TuiComboBoxModule,
   TuiDataListWrapperModule,
@@ -19,6 +22,8 @@ import {
   TuiInputDateModule,
   TuiInputModule,
   TuiInputPasswordModule,
+  TuiIslandModule,
+  TuiPaginationModule,
   TuiToggleModule,
 } from '@taiga-ui/kit';
 
@@ -46,6 +51,11 @@ import { PasswordInputComponent } from './components/password-input/password-inp
     TuiLinkModule,
     TuiToggleModule,
     MaskitoModule,
+    TuiHostedDropdownModule,
+    TuiSvgModule,
+    TuiCarouselModule,
+    TuiIslandModule,
+    TuiPaginationModule,
   ],
   exports: [
     CommonModule,
@@ -68,6 +78,11 @@ import { PasswordInputComponent } from './components/password-input/password-inp
     TuiToggleModule,
     TuiLinkModule,
     MaskitoModule,
+    TuiHostedDropdownModule,
+    TuiSvgModule,
+    TuiCarouselModule,
+    TuiIslandModule,
+    TuiPaginationModule,
   ],
 })
 export class SharedModule {}
