@@ -16,13 +16,12 @@
         "plugin:@typescript-eslint/recommended",
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
-        "plugin:prettier/recommended",
         "airbnb-base",
         "airbnb-typescript/base",
-        "prettier",
         "plugin:import/recommended",
         "plugin:import/typescript",
-        "plugin:@ngrx/recommended-requiring-type-checking"
+        "plugin:@ngrx/recommended-requiring-type-checking",
+        "prettier"
       ],
       "rules": {
         "@typescript-eslint/array-type": [
@@ -60,19 +59,12 @@
             "default": ["field", "signature", "constructor", "method"]
           }
         ],
+        "arrow-body-style": "off",
         "block-spacing": ["warn", "always"],
         "class-methods-use-this": "off",
         "curly": ["warn", "all"],
         "eol-last": 2,
         "import/prefer-default-export": "off",
-        "max-len": [
-          "error",
-          {
-            "code": 90,
-            "ignoreComments": true,
-            "tabWidth": 2
-          }
-        ],
         "max-lines-per-function": ["error", 75],
         "no-console": "off",
         "no-debugger": "off",
@@ -118,6 +110,7 @@
       },
       "settings": {
         "import/resolver": {
+          "typescript": {},
           "alias": {
             "map": [
               ["@app", "./src/app"],
@@ -131,15 +124,7 @@
     {
       "files": ["*.html"],
       "extends": ["plugin:@angular-eslint/template/recommended"],
-      "excludedFiles": ["*inline-template-*.component.html"],
-      "rules": {
-        "prettier/prettier": [
-          "error",
-          {
-            "parser": "angular"
-          }
-        ]
-      }
+      "excludedFiles": ["*inline-template-*.component.html"]
     }
   ]
 }

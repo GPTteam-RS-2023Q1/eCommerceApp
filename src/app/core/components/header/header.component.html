@@ -1,0 +1,15 @@
+<header class="header">
+  <img class="logo" src="../../../../assets/logo.svg" alt="logo" (click)="toMain()" />
+  <div class="container-user">
+    <ec-auth-menu *ngIf="(isAuth | async) === false" [sizeInput]="size"></ec-auth-menu>
+    <ec-user-menu *ngIf="isAuth | async" [sizeInput]="size"></ec-user-menu>
+    <button
+      tuiButton
+      type="button"
+      appearance="outline"
+      [size]="size"
+      [icon]="size === 's' ? 'tuiIconShoppingCart' : 'tuiIconShoppingCartLarge'"
+      (click)="toCart()"
+    ></button>
+  </div>
+</header>

@@ -1,0 +1,8 @@
+<tui-notification
+  [ngClass]="{ visible: error$ | async }"
+  status="error"
+  [hasIcon]="false"
+  (close)="onClose()"
+>
+  {{ error$ | async }}
+</tui-notification>

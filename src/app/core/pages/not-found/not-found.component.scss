@@ -1,0 +1,40 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100vw;
+  height: calc(100vh - 230px);
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+
+    color: #384886;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+
+  .img {
+    width: 250px;
+  }
+
+  .redirection {
+    font-size: 18px;
+  }
+
+  .redirection:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  @media (width <= 768px) {
+    & {
+      min-height: calc(100vh - 270px);
+    }
+  }
+}
