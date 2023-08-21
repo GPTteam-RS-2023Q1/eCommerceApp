@@ -70,6 +70,17 @@ export class AddressFormComponent
     }
   ): void {
     this.form.patchValue(value, options);
+
+    const country = this.form.get('country');
+    const postalCode = this.form.get('postalCode');
+
+    if (country?.valid) {
+      postalCode?.enable();
+
+      return;
+    }
+
+    postalCode?.disable();
   }
 
   public registerOnChange(fn: (value: AddressForm) => void): void {
