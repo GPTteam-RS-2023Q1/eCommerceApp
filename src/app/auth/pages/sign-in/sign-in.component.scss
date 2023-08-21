@@ -12,21 +12,7 @@
     margin-bottom: 100px;
   }
 
-  .sign-up-button {
-    align-self: center;
-    max-width: fit-content;
-    padding: 5px 36px;
-  }
-
-  @media (width <= 768px) {
-    .sign-up-button {
-      font-size: 14px;
-    }
-
-    ::ng-deep {
-      .t-wrapper {
-        padding: 0 5px !important;
-      }
-    }
+  .link {
+    text-align: center;
   }
 }
