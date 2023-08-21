@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { AuthModule } from '@app/auth/auth.module';
 import { AddressFormComponent } from './address-form.component';
 
 describe('AdressFormComponent', () => {
@@ -8,7 +9,7 @@ describe('AdressFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AddressFormComponent],
+      imports: [AuthModule],
     });
     fixture = TestBed.createComponent(AddressFormComponent);
     component = fixture.componentInstance;

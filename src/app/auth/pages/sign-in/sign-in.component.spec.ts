@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SignInComponent } from '@app/auth/pages/sign-in/sign-in.component';
 import { AuthModule } from '@app/auth/auth.module';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SignInComponent', () => {
   let component: SignInComponent;
@@ -17,7 +18,7 @@ describe('SignInComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AuthModule],
+      imports: [AuthModule, RouterTestingModule],
       providers: [provideMockStore({ initialState })],
     });
     TestBed.inject(MockStore);

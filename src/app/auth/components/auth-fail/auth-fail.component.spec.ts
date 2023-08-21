@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { TuiNotificationModule } from '@taiga-ui/core';
+import { FormGroup } from '@angular/forms';
 import { AuthFailComponent } from './auth-fail.component';
 
 describe('AuthFailComponent', () => {
@@ -24,6 +25,7 @@ describe('AuthFailComponent', () => {
     TestBed.inject(MockStore);
     fixture = TestBed.createComponent(AuthFailComponent);
     component = fixture.componentInstance;
+    component.parentForm = new FormGroup({});
     fixture.detectChanges();
   });
 
