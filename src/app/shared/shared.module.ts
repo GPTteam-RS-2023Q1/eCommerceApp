@@ -7,6 +7,7 @@ import {
   TuiButtonModule,
   TuiDataListModule,
   TuiErrorModule,
+  TuiLinkModule,
   TuiNotificationModule,
 } from '@taiga-ui/core';
 import {
@@ -42,6 +43,7 @@ import { PasswordInputComponent } from './components/password-input/password-inp
     TuiDataListWrapperModule,
     TuiFilterByInputPipeModule,
     TuiCheckboxLabeledModule,
+    TuiLinkModule,
     TuiToggleModule,
     MaskitoModule,
   ],
@@ -64,6 +66,7 @@ import { PasswordInputComponent } from './components/password-input/password-inp
     TuiFilterByInputPipeModule,
     TuiCheckboxLabeledModule,
     TuiToggleModule,
+    TuiLinkModule,
     MaskitoModule,
   ],
 })
