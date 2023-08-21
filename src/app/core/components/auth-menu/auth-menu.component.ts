@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { TuiHostedDropdownComponent } from '@taiga-ui/core';
@@ -12,6 +12,8 @@ import { TuiHostedDropdownComponent } from '@taiga-ui/core';
 export class AuthMenuComponent {
   @ViewChild(TuiHostedDropdownComponent)
   public component?: TuiHostedDropdownComponent;
+
+  @Input() public sizeInput!: 's' | 'm';
 
   public open = false;
 

@@ -3,8 +3,8 @@
     tuiButton
     type="button"
     appearance="outline"
-    size="m"
-    icon="tuiIconLogInLarge"
+    [size]="sizeInput"
+    [icon]="sizeInput === 's' ? 'tuiIconLogIn' : 'tuiIconLogInLarge'"
     [iconRight]="open ? 'tuiIconChevronUp' : 'tuiIconChevronDown'"
     [pseudoActive]="open || null"
   ></button>
@@ -13,11 +13,15 @@
   <tui-data-list>
     <tui-opt-group>
       <button tuiOption (click)="toSignIn()" class="auth-option">
-        <tui-svg src="tuiIconUserCheckLarge"></tui-svg>
+        <tui-svg
+          [src]="sizeInput === 's' ? 'tuiIconUserCheck' : 'tuiIconUserCheckLarge'"
+        ></tui-svg>
         <span>log in</span>
       </button>
       <button tuiOption (click)="toSignUp()" class="auth-option">
-        <tui-svg src="tuiIconUserPlusLarge"></tui-svg>
+        <tui-svg
+          [src]="sizeInput === 's' ? 'tuiIconUserPlus' : 'tuiIconUserPlusLarge'"
+        ></tui-svg>
         <span>sign up</span>
       </button>
     </tui-opt-group>

@@ -32,4 +32,10 @@
     margin-left: 10px;
     font-size: 14px;
   }
+
+  @media (width <= 768px) {
+    .address-wrapper {
+      flex-direction: column;
+    }
+  }
 }

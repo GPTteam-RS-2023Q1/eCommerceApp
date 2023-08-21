@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'ec-sign-in',
@@ -7,10 +6,4 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./sign-in.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignInComponent {
-  constructor(private readonly route: ActivatedRoute, private readonly router: Router) {}
-
-  public toSignUp(): void {
-    this.router.navigate(['sign-up'], { relativeTo: this.route.parent });
-  }
-}
+export class SignInComponent {}

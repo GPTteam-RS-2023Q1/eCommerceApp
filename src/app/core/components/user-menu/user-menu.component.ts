@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
@@ -18,6 +24,8 @@ import { TuiHostedDropdownComponent } from '@taiga-ui/core';
 export class UserMenuComponent implements OnInit {
   @ViewChild(TuiHostedDropdownComponent)
   public component?: TuiHostedDropdownComponent;
+
+  @Input() public sizeInput!: 's' | 'm';
 
   public open = false;
 

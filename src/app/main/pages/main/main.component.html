@@ -1,3 +1,10 @@
+<p class="link">
+  <span
+    >Click here to <a tuiLink routerLink="../../auth/sign-in">sign in </a>or
+    <a tuiLink routerLink="../../auth/sign-up">sign up</a></span
+  >
+</p>
+
 <div class="block-header">
   <div>
     <p class="header">last days</p>
@@ -13,6 +20,7 @@
     buy online
   </button>
 </div>
+
 <tui-carousel [duration]="3000" [(index)]="startIndex">
   <ng-container *ngFor="let item of items; let index = index">
     <tui-island *tuiItem>
