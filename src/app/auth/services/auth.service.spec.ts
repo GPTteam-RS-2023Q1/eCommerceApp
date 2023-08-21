@@ -3,10 +3,10 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { authAction } from '@app/ngrx/actions/auth.actions';
 import { AuthState } from '@app/ngrx/state.model';
-import { EMPTY, of } from 'rxjs';
-import { AppComponent } from '@app/app.component';
+import { of } from 'rxjs';
 import { AuthService } from './auth.service';
 import { GetAccessTokenResponse } from '../models/getTokens.model';
+import { LocalStorageAuthData } from '../models/authLocalStorage.model';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -52,7 +52,6 @@ describe('AuthService', () => {
 
 describe('AuthService autologin', () => {
   let store: MockStore<AuthState>;
-  let component: AppComponent;
   let service: AuthService;
 
   const initialState = {
@@ -70,16 +69,6 @@ describe('AuthService autologin', () => {
 
     service = TestBed.inject(AuthService);
     store = TestBed.inject(MockStore);
-    component = new AppComponent(service);
-  });
-
-  it('should call autoLogin when ngOnInit', () => {
-    const spy = spyOn(service, 'autoLogin').and.callFake(() => {
-      return EMPTY;
-    });
-
-    component.ngOnInit();
-    expect(spy).toHaveBeenCalled();
   });
 
   it('no user data in local Storage', () => {
@@ -89,34 +78,26 @@ describe('AuthService autologin', () => {
     expect(dispatchSpy).toHaveBeenCalledWith(expectedAction());
   });
 
-  it('access token not expired', () => {
+  it('refresh token expired', () => {
     const dispatchSpy = spyOn(store, 'dispatch').and.callThrough();
-    const expectedAction = authAction.autoLoginSuccess;
     const localStorageAuthStr = JSON.stringify({
-      customerId: 'test',
-      accessToken: 'test1',
       refreshToken: 'test2',
-      accessTokenExp: new Date().getTime() + 172800 * 1000,
-      refreshTokenExp: 2,
+      refreshTokenExp: new Date().getTime() - 1000,
     });
+    const expectedAction = authAction.getToken;
     service.autoLogin(localStorageAuthStr);
-    expect(dispatchSpy).toHaveBeenCalledWith(
-      expectedAction({ customerId: 'test', accessToken: 'test1', refreshToken: 'test2' })
-    );
+    expect(dispatchSpy).toHaveBeenCalledWith(expectedAction());
   });
 
-  it('access token expired but refrest token not', () => {
-    const spy = spyOn(service, 'refreshToken').and.callFake(() => {
-      return EMPTY;
-    });
+  it('refresh token not expired', () => {
+    const dispatchSpy = spyOn(store, 'dispatch').and.callThrough();
     const localStorageAuthStr = JSON.stringify({
-      customerId: 'test',
-      accessToken: 'test1',
       refreshToken: 'test2',
-      accessTokenExp: 1,
-      refreshTokenExp: new Date().getTime() + 172800 * 1000,
+      refreshTokenExp: new Date().getTime() + 10000,
     });
+    const expectedAction = authAction.autoLoginStart;
     service.autoLogin(localStorageAuthStr);
-    expect(spy).toHaveBeenCalled();
+    const localStorageAuthData: LocalStorageAuthData = JSON.parse(localStorageAuthStr);
+    expect(dispatchSpy).toHaveBeenCalledWith(expectedAction(localStorageAuthData));
   });
 });

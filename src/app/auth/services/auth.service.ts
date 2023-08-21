@@ -130,10 +130,6 @@ export class AuthService {
 
         return;
       }
-
-      this.store.dispatch(authAction.getToken());
-
-      return;
     }
 
     this.store.dispatch(authAction.getToken());
