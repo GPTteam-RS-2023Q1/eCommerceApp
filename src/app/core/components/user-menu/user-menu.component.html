@@ -3,8 +3,8 @@
     tuiButton
     type="button"
     appearance="outline"
-    size="m"
-    icon="tuiIconUserLarge"
+    [size]="sizeInput"
+    [icon]="sizeInput ? 'tuiIconUser' : 'tuiIconUserLarge'"
     [iconRight]="open ? 'tuiIconChevronUp' : 'tuiIconChevronDown'"
     [pseudoActive]="open || null"
   >
@@ -13,13 +13,13 @@
 </tui-hosted-dropdown>
 <ng-template #dropdown let-close="close">
   <tui-data-list>
-    <tui-opt-group>
+    <tui-opt-group class="auth-option">
       <button tuiOption (click)="toProfile()" class="auth-option">
-        <tui-svg src="tuiIconSettingsLarge"></tui-svg>
+        <tui-svg [src]="sizeInput ? 'tuiIconSettings' : 'tuiIconSettingsLarge'"></tui-svg>
         <span>profile</span>
       </button>
       <button tuiOption class="exit auth-option" (click)="logOut()">
-        <tui-svg src="tuiIconLogOutLarge"></tui-svg>
+        <tui-svg [src]="sizeInput ? 'tuiIconLogOut' : 'tuiIconLogOutLarge'"></tui-svg>
         <span>log out</span>
       </button>
     </tui-opt-group>

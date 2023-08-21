@@ -35,6 +35,17 @@
     align-items: center;
   }
 
+  @media (width <= 1024px) {
+    .logo {
+      width: 150px;
+      height: 37.5px;
+    }
+
+    .container-user {
+      gap: 15px;
+    }
+  }
+
   @media (width <= 768px) {
     & {
       height: 120px;
