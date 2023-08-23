@@ -1,1 +1,6 @@
-<p>page profile</p>
+<div>{{ (customer$ | async)?.firstName }}</div>
+<div>{{ (customer$ | async)?.lastName }}</div>
+<div>{{ (customer$ | async)?.dateOfBirth | date }}</div>
+<div *ngIf="customer$ | async">
+  <ec-user-address></ec-user-address>
+</div>
