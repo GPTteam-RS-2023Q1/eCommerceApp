@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { CommonModule } from '@angular/common';
 import { MaimRoutingModule } from '@app/main/main-routing.module';
@@ -21,6 +22,7 @@ describe('MainComponent', () => {
         TuiIslandModule,
         TuiPaginationModule,
         TuiButtonModule,
+        RouterTestingModule,
       ],
     });
     fixture = TestBed.createComponent(MainComponent);
