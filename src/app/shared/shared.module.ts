@@ -25,7 +25,10 @@ import {
   TuiIslandModule,
   TuiPaginationModule,
   TuiToggleModule,
+  TuiTagModule,
 } from '@taiga-ui/kit';
+
+import { TuiTableModule } from '@taiga-ui/addon-table';
 
 import { EmailInputComponent } from './components/email-input/email-input.component';
 import { InputComponent } from './components/input/input.component';
@@ -56,6 +59,8 @@ import { PasswordInputComponent } from './components/password-input/password-inp
     TuiCarouselModule,
     TuiIslandModule,
     TuiPaginationModule,
+    TuiTableModule,
+    TuiTagModule,
   ],
   exports: [
     CommonModule,
@@ -83,6 +88,8 @@ import { PasswordInputComponent } from './components/password-input/password-inp
     TuiCarouselModule,
     TuiIslandModule,
     TuiPaginationModule,
+    TuiTableModule,
+    TuiTagModule,
   ],
 })
 export class SharedModule {}
