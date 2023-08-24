@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, OnDestroy } from '@angular/core';
 import { Customer } from '@app/auth/models/customer.model';
 import { COUNTRIES } from '@app/consts/country-data';
-import { selectCustomer } from '@app/ngrx/selectors/profle.selector';
+import { selectCustomer } from '@app/ngrx/selectors/customer.selector';
 import { UserAddress } from '@app/user/models/user-address.model';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';

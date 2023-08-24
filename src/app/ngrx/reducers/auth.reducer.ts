@@ -7,7 +7,6 @@ const initialState: AuthState = {
   accessToken: null,
   refreshToken: null,
   errorMessage: null,
-  customer: null,
 };
 
 export const authReducer = createReducer(
@@ -35,22 +34,6 @@ export const authReducer = createReducer(
       ...state,
       errorMessage: null,
       accessToken,
-    })
-  ),
-  on(
-    authAction.loginCustomer,
-    (state, { customer }): AuthState => ({
-      ...state,
-      errorMessage: null,
-      customer,
-    })
-  ),
-  on(
-    authAction.getCustomer,
-    (state, { customer }): AuthState => ({
-      ...state,
-      errorMessage: null,
-      customer,
     })
   ),
   on(authAction.authFail, (state, { errorMessage }): AuthState => {
@@ -84,7 +67,6 @@ export const authReducer = createReducer(
       accessToken: null,
       refreshToken: null,
       errorMessage: null,
-      customer: null,
     })
   )
 );

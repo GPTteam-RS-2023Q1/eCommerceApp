@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { selectCustomer } from '@app/ngrx/selectors/profle.selector';
+import { selectCustomer } from '@app/ngrx/selectors/customer.selector';
 import { Store } from '@ngrx/store';
 
 @Component({
