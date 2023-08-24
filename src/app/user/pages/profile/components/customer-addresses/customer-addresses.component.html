@@ -1,0 +1,10 @@
+<div class="container">
+  <h2>Addresses</h2>
+  <div class="addresses-container">
+    <ec-customer-address
+      class="address"
+      *ngFor="let item of addresses"
+      [address]="item"
+    ></ec-customer-address>
+  </div>
+</div>
