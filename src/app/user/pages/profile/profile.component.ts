@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { Customer } from '@app/auth/models/customer.model';
 import { selectCustomer } from '@app/ngrx/selectors/customer.selector';
 import { Store } from '@ngrx/store';
@@ -15,13 +21,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private sub = new Subscription();
   public customer$ = this.store.select(selectCustomer);
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private changeDetector: ChangeDetectorRef) {}
 
   public ngOnInit(): void {
     this.sub.add(
       this.customer$.subscribe((customer) => {
         if (customer) {
           this.customer = customer;
+          this.changeDetector.markForCheck();
         }
       })
     );

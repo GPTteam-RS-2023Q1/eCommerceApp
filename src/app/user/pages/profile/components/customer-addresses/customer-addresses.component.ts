@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+} from '@angular/core';
 import { Customer } from '@app/auth/models/customer.model';
 import { UserAddress } from '@app/user/models/user-address.model';
 
@@ -8,11 +14,15 @@ import { UserAddress } from '@app/user/models/user-address.model';
   styleUrls: ['./customer-addresses.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CustomerAddressesComponent implements OnInit {
+export class CustomerAddressesComponent implements OnInit, OnChanges {
   @Input() public customer!: Customer;
   public addresses!: UserAddress[];
 
   public ngOnInit(): void {
+    this.addresses = this.defineTagsForAddresses(this.customer);
+  }
+
+  public ngOnChanges(): void {
     this.addresses = this.defineTagsForAddresses(this.customer);
   }
 

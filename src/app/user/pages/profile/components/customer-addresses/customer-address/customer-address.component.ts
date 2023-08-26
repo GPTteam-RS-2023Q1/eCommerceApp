@@ -2,6 +2,11 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { COUNTRIES } from '@app/consts/country-data';
 import { UserAddress } from '@app/user/models/user-address.model';
 import { TuiStatus } from '@taiga-ui/kit';
+import { RemoveAddressAction } from '@app/user/models/remove-address.model';
+import { CustomerUpdateActions } from '@app/user/models/enums/customer-actions.enum';
+import { Store } from '@ngrx/store';
+import { customerAction } from '@app/ngrx/actions/customer.actions';
+import { UpdateCustomerService } from '../../../services/update-cutomer.service';
 
 @Component({
   selector: 'ec-customer-address',
@@ -12,6 +17,11 @@ import { TuiStatus } from '@taiga-ui/kit';
 export class CustomerAddressComponent {
   @Input() public address!: UserAddress;
   public countires = Object.values(COUNTRIES);
+
+  constructor(
+    private updateCustomerService: UpdateCustomerService,
+    private store: Store
+  ) {}
 
   public findCountyNameByTag(countryTag: string): string {
     const counrty = this.countires.find((country) => country.tag === countryTag);
@@ -37,5 +47,19 @@ export class CustomerAddressComponent {
 
   public remove(address: UserAddress): void {
     console.log(address);
+
+    const action: RemoveAddressAction = {
+      action: CustomerUpdateActions.removeAddress,
+      addressId: address.id,
+    };
+
+    this.updateCustomerService.updateCustomer([action]).subscribe({
+      next: (response) => {
+        this.store.dispatch(customerAction.saveCustomer({ customer: response }));
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

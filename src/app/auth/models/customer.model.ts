@@ -12,4 +12,5 @@ export interface Customer {
   shippingAddressIds: string[];
   billingAddressIds: string[];
   addresses: Address[];
+  version: number;
 }
