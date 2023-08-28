@@ -4,6 +4,7 @@ import { AddressForm } from '@app/auth/models/address-from.model';
 import { CustomerDraft } from '@app/auth/models/customer-draft.model';
 import { COUNTRIES } from '@app/consts/country-data';
 import { compareObjects } from '@app/utils/compareObjects';
+import { createDate } from '@app/utils/createDate';
 
 interface CreateCustomerParams {
   email: string;
@@ -31,7 +32,7 @@ export class CustomerBuilderService {
       password: params.password,
       firstName: params.firstName,
       lastName: params.lastName,
-      dateOfBirth: this.createDate(params.dateOfBirth),
+      dateOfBirth: createDate(params.dateOfBirth),
       addresses,
       billingAddresses: [this.getAddressIndex(billingAddress, addresses)],
       shippingAddresses: [this.getAddressIndex(shippingAddress, addresses)],
@@ -69,12 +70,6 @@ export class CustomerBuilderService {
     addresses: AddressForm[] = this.customer.addresses
   ): number {
     return addresses.includes(address) ? addresses.indexOf(address) : 0;
-  }
-
-  private createDate(date: Date): string {
-    return `${date.getFullYear()}-${(date.getMonth() + 1)
-      .toString()
-      .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
   }
 
   private setAddresses(

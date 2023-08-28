@@ -8,6 +8,7 @@ import { CustomerAddressesComponent } from './pages/profile/components/customer-
 import { CustomerAddressComponent } from './pages/profile/components/customer-addresses/customer-address/customer-address.component';
 import { CustomerInfoComponent } from './pages/profile/components/customer-info/customer-info.component';
 import { PasswordDialogComponent } from './pages/profile/components/dialogs/password-dialog/password-dialog.component';
+import { UserInfoDialogComponent } from './pages/profile/components/dialogs/user-info-dialog/user-info-dialog.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { PasswordDialogComponent } from './pages/profile/components/dialogs/pass
     CustomerAddressComponent,
     CustomerInfoComponent,
     PasswordDialogComponent,
+    UserInfoDialogComponent,
   ],
   imports: [SharedModule, UserRoutingModule],
 })

@@ -9,11 +9,13 @@ import { Customer } from '@app/auth/models/customer.model';
 import { selectCustomer } from '@app/ngrx/selectors/customer.selector';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { CustomerActionBuilder } from './services/customer-action-builder.service';
 
 @Component({
   selector: 'ec-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
+  providers: [CustomerActionBuilder],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent implements OnInit, OnDestroy {

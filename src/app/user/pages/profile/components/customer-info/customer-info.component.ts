@@ -10,6 +10,7 @@ import { TuiDialogService } from '@taiga-ui/core';
 import { tuiAvatarOptionsProvider } from '@taiga-ui/kit';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { PasswordDialogComponent } from '../dialogs/password-dialog/password-dialog.component';
+import { UserInfoDialogComponent } from '../dialogs/user-info-dialog/user-info-dialog.component';
 
 @Component({
   selector: 'ec-customer-info',
@@ -34,6 +35,9 @@ export class CustomerInfoComponent {
 
   public edit(): void {
     console.log(this.customer);
+    this.dialogs
+      .open(new PolymorpheusComponent(UserInfoDialogComponent, this.injector))
+      .subscribe();
   }
 
   public changePassword(): void {
