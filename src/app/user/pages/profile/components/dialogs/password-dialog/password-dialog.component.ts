@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/cor
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { TuiDialogContext } from '@taiga-ui/core';
 import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { authAction } from '@app/ngrx/actions/auth.actions';
 import { UpdateCustomerService } from '../../../services/update-cutomer.service';
 
 @Component({
@@ -18,7 +20,8 @@ export class PasswordDialogComponent implements OnInit {
     @Inject(POLYMORPHEUS_CONTEXT)
     private readonly context: TuiDialogContext<boolean>,
     private readonly fb: NonNullableFormBuilder,
-    private readonly uppdateCustomerService: UpdateCustomerService
+    private readonly uppdateCustomerService: UpdateCustomerService,
+    private readonly store: Store
   ) {}
 
   public ngOnInit(): void {
@@ -38,8 +41,15 @@ export class PasswordDialogComponent implements OnInit {
     this.uppdateCustomerService
       .changePassword(this.form.value.oldPassword, this.form.value.newPassword)
       .subscribe({
-        next: () => {
+        next: (response) => {
           this.isLoading = false;
+          this.store.dispatch(
+            authAction.loginCustomer({
+              customer: response,
+              email: response.email,
+              password: this.form.value.newPassword,
+            })
+          );
           this.context.completeWith(true);
         },
         error: (err) => {

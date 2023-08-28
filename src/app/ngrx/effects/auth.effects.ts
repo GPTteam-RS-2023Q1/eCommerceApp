@@ -136,6 +136,10 @@ export class AuthEffects {
       return this.actions$.pipe(
         ofType(authAction.loginSuccess),
         tap(() => {
+          if (this.router.routerState.snapshot.url.includes('user')) {
+            return;
+          }
+
           this.router.navigate(['store']);
         })
       );
