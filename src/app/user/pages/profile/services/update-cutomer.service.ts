@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class UpdateCustomerService {
   constructor(private http: HttpClient, private store: Store) {}
 
-  public updateCustomer(actions: CustomerAction[]): Observable<any> {
+  public updateCustomer(actions: CustomerAction[]): Observable<Customer> {
     return this.store.select(selectCustomerVersionAndId).pipe(
       take(1),
       exhaustMap((selector) => {
@@ -20,6 +20,31 @@ export class UpdateCustomerService {
           {
             version: selector?.version,
             actions,
+          },
+          {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+            }),
+          }
+        );
+      })
+    );
+  }
+
+  public changePassword(
+    currentPassword: string,
+    newPassword: string
+  ): Observable<Customer> {
+    return this.store.select(selectCustomerVersionAndId).pipe(
+      take(1),
+      exhaustMap((selector) => {
+        return this.http.post<Customer>(
+          `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/customers/password`,
+          {
+            id: selector?.id,
+            version: selector?.version,
+            currentPassword,
+            newPassword,
           },
           {
             headers: new HttpHeaders({

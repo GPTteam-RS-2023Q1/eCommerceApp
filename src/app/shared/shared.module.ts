@@ -11,6 +11,7 @@ import {
   TuiLinkModule,
   TuiNotificationModule,
   TuiSvgModule,
+  TuiDialogModule,
 } from '@taiga-ui/core';
 import {
   TuiCarouselModule,
@@ -34,9 +35,15 @@ import { TuiTableModule } from '@taiga-ui/addon-table';
 import { EmailInputComponent } from './components/email-input/email-input.component';
 import { InputComponent } from './components/input/input.component';
 import { PasswordInputComponent } from './components/password-input/password-input.component';
+import { FormFailNotificationComponent } from './components/form-fail-notification/form-fail-notification.component';
 
 @NgModule({
-  declarations: [InputComponent, EmailInputComponent, PasswordInputComponent],
+  declarations: [
+    InputComponent,
+    EmailInputComponent,
+    PasswordInputComponent,
+    FormFailNotificationComponent,
+  ],
   imports: [
     CommonModule,
     TuiNotificationModule,
@@ -63,6 +70,7 @@ import { PasswordInputComponent } from './components/password-input/password-inp
     TuiTableModule,
     TuiTagModule,
     TuiAvatarModule,
+    TuiDialogModule,
   ],
   exports: [
     CommonModule,
@@ -93,6 +101,8 @@ import { PasswordInputComponent } from './components/password-input/password-inp
     TuiTableModule,
     TuiTagModule,
     TuiAvatarModule,
+    TuiDialogModule,
+    FormFailNotificationComponent,
   ],
 })
 export class SharedModule {}
