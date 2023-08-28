@@ -1,5 +1,7 @@
 <div *ngIf="product" class="card">
-  <img [ngSrc]="url" class="image" />
+  <div class="image">
+    <img [ngSrc]="(activeImage$$ | async) || '_'" fill />
+  </div>
   <div class="info">
     <h3 class="price">{{ price | currency : 'USD' }}</h3>
     <h2 class="name"></h2>

@@ -4,7 +4,10 @@
   }
 
   .image {
+    position: relative;
+    aspect-ratio: 600/866;
     width: 100%;
+    object-fit: contain;
   }
 
   .info {
