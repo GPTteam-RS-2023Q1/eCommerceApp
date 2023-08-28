@@ -1,0 +1,8 @@
+:host {
+  .products {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, 250px);
+    margin: 0 auto;
+  }
+}
