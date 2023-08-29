@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Customer } from '@app/auth/models/customer.model';
 import { selectCustomerVersionAndId } from '@app/ngrx/selectors/customer.selector';
-import { CustomerAction } from '@app/user/models/customer-action.model';
+import { CustomerAction } from '@app/user/models/customer-update-actions/customer-action.model';
 import { Store } from '@ngrx/store';
 import { Observable, exhaustMap, take } from 'rxjs';
 import { environment } from 'src/environments/environment';

@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
-import { ChangeEmailAction } from '@app/user/models/change-email.modet';
-import { CustomerAction } from '@app/user/models/customer-action.model';
+import { AddressForm } from '@app/auth/models/address-from.model';
+import { ChangeEmailAction } from '@app/user/models/customer-update-actions/change-email.modet';
+import { CustomerAction } from '@app/user/models/customer-update-actions/customer-action.model';
 import { CustomerUpdateActions } from '@app/user/models/enums/customer-actions.enum';
-import { RemoveAddressAction } from '@app/user/models/remove-address.model';
-import { SetDateOfBirthAction } from '@app/user/models/set-date-of-birth.model';
-import { SetFirstNameAction } from '@app/user/models/set-first-name.model';
-import { SetLastNameAction } from '@app/user/models/set-last-name.model';
+import { RemoveAddressAction } from '@app/user/models/customer-update-actions/remove-address.model';
+import { SetDateOfBirthAction } from '@app/user/models/customer-update-actions/set-date-of-birth.model';
+import { SetFirstNameAction } from '@app/user/models/customer-update-actions/set-first-name.model';
+import { SetLastNameAction } from '@app/user/models/customer-update-actions/set-last-name.model';
 import { createDate } from '@app/utils/createDate';
+import { ChangeAddressAction } from '@app/user/models/customer-update-actions/change-address.model';
+import { AddAddressAction } from '@app/user/models/customer-update-actions/add-address.model';
 
 @Injectable()
 export class CustomerActionBuilder {
@@ -58,6 +61,30 @@ export class CustomerActionBuilder {
       addressId,
     };
     this.actions.push(removeAddress);
+
+    return this;
+  }
+
+  public addAddress(address: AddressForm): CustomerActionBuilder {
+    const addAddress: AddAddressAction = {
+      action: CustomerUpdateActions.addAddress,
+      address,
+    };
+    this.actions.push(addAddress);
+
+    return this;
+  }
+
+  public addChangeAddress(
+    addressId: string,
+    address: AddressForm
+  ): CustomerActionBuilder {
+    const changeAddress: ChangeAddressAction = {
+      action: CustomerUpdateActions.changeAddress,
+      addressId,
+      address,
+    };
+    this.actions.push(changeAddress);
 
     return this;
   }

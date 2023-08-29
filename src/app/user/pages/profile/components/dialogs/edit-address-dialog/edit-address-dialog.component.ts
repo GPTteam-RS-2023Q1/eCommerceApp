@@ -28,12 +28,12 @@ export class EditAddressDialogComponent implements OnInit {
   public ngOnInit(): void {
     const address = this.context.data;
     this.form = this.fb.group({
-      tags: [address.tags],
+      tags: [address?.tags ?? null],
       address: {
-        country: address.country,
-        city: address.city,
-        streetName: address.streetName,
-        postalCode: address.postalCode,
+        country: address?.country ?? '',
+        city: address?.city ?? '',
+        streetName: address?.streetName ?? '',
+        postalCode: address?.postalCode ?? '',
       },
     });
   }
