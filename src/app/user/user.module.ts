@@ -9,6 +9,7 @@ import { CustomerAddressComponent } from './pages/profile/components/customer-ad
 import { CustomerInfoComponent } from './pages/profile/components/customer-info/customer-info.component';
 import { PasswordDialogComponent } from './pages/profile/components/dialogs/password-dialog/password-dialog.component';
 import { UserInfoDialogComponent } from './pages/profile/components/dialogs/user-info-dialog/user-info-dialog.component';
+import { EditAddressDialogComponent } from './pages/profile/components/dialogs/edit-address-dialog/edit-address-dialog.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { UserInfoDialogComponent } from './pages/profile/components/dialogs/user
     CustomerInfoComponent,
     PasswordDialogComponent,
     UserInfoDialogComponent,
+    EditAddressDialogComponent,
   ],
   imports: [SharedModule, UserRoutingModule],
 })

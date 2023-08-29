@@ -43,34 +43,30 @@ export class UserInfoDialogComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    this.form = this.fb.group({
-      email: [''],
-      firstName: [
-        '',
-        [
-          Validators.required,
-          whiteSpaceValidator('Name'),
-          numbersValidator('Name'),
-          specialCharactersValidator('Name'),
-        ],
-      ],
-      lastName: [
-        '',
-        [
-          Validators.required,
-          whiteSpaceValidator('Last name'),
-          numbersValidator('Last name'),
-          specialCharactersValidator('Last name'),
-        ],
-      ],
-      dateOfBirth: [null, birthdayValidator],
-    });
-
     this.subs.add(
       this.customer$.subscribe((customer) => {
-        this.form.controls['email'].patchValue(customer?.email);
-        this.form.controls['firstName'].patchValue(customer?.firstName);
-        this.form.controls['lastName'].patchValue(customer?.lastName);
+        this.form = this.fb.group({
+          email: [customer?.email],
+          firstName: [
+            customer?.firstName,
+            [
+              Validators.required,
+              whiteSpaceValidator('Name'),
+              numbersValidator('Name'),
+              specialCharactersValidator('Name'),
+            ],
+          ],
+          lastName: [
+            customer?.lastName,
+            [
+              Validators.required,
+              whiteSpaceValidator('Last name'),
+              numbersValidator('Last name'),
+              specialCharactersValidator('Last name'),
+            ],
+          ],
+          dateOfBirth: [null, birthdayValidator],
+        });
 
         if (!customer?.dateOfBirth) {
           return;

@@ -36,6 +36,7 @@ import { EmailInputComponent } from './components/email-input/email-input.compon
 import { InputComponent } from './components/input/input.component';
 import { PasswordInputComponent } from './components/password-input/password-input.component';
 import { FormFailNotificationComponent } from './components/form-fail-notification/form-fail-notification.component';
+import { AddressFormComponent } from './components/address-form/address-form.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { FormFailNotificationComponent } from './components/form-fail-notificati
     EmailInputComponent,
     PasswordInputComponent,
     FormFailNotificationComponent,
+    AddressFormComponent,
   ],
   imports: [
     CommonModule,
@@ -103,6 +105,7 @@ import { FormFailNotificationComponent } from './components/form-fail-notificati
     TuiAvatarModule,
     TuiDialogModule,
     FormFailNotificationComponent,
+    AddressFormComponent,
   ],
 })
 export class SharedModule {}

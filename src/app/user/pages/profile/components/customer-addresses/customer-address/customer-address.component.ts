@@ -1,12 +1,19 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { COUNTRIES } from '@app/consts/country-data';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  Inject,
+  Injector,
+} from '@angular/core';
 import { UserAddress } from '@app/user/models/user-address.model';
 import { TuiStatus } from '@taiga-ui/kit';
-import { RemoveAddressAction } from '@app/user/models/remove-address.model';
-import { CustomerUpdateActions } from '@app/user/models/enums/customer-actions.enum';
 import { Store } from '@ngrx/store';
 import { customerAction } from '@app/ngrx/actions/customer.actions';
+import { TuiDialogService } from '@taiga-ui/core';
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { UpdateCustomerService } from '../../../services/update-cutomer.service';
+import { CustomerActionBuilder } from '../../../services/customer-action-builder.service';
+import { EditAddressDialogComponent } from '../../dialogs/edit-address-dialog/edit-address-dialog.component';
 
 @Component({
   selector: 'ec-customer-address',
@@ -16,17 +23,14 @@ import { UpdateCustomerService } from '../../../services/update-cutomer.service'
 })
 export class CustomerAddressComponent {
   @Input() public address!: UserAddress;
-  public countires = Object.values(COUNTRIES);
 
   constructor(
+    @Inject(Injector) private readonly injector: Injector,
+    @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
     private updateCustomerService: UpdateCustomerService,
-    private store: Store
+    private store: Store,
+    private customerActionBuilder: CustomerActionBuilder
   ) {}
-
-  public findCountyNameByTag(countryTag: string): string {
-    const counrty = this.countires.find((country) => country.tag === countryTag);
-    return counrty ? counrty.name : countryTag;
-  }
 
   public getTagColor(tag: string): TuiStatus {
     switch (tag) {
@@ -43,17 +47,22 @@ export class CustomerAddressComponent {
 
   public editAddress(address: UserAddress): void {
     console.log(address);
+    this.dialogs
+      .open<UserAddress>(
+        new PolymorpheusComponent(EditAddressDialogComponent, this.injector),
+        {
+          data: this.address,
+        }
+      )
+      .subscribe();
   }
 
   public remove(address: UserAddress): void {
     console.log(address);
 
-    const action: RemoveAddressAction = {
-      action: CustomerUpdateActions.removeAddress,
-      addressId: address.id,
-    };
+    const action = this.customerActionBuilder.addRemoveAddress(address.id).getActions();
 
-    this.updateCustomerService.updateCustomer([action]).subscribe({
+    this.updateCustomerService.updateCustomer(action).subscribe({
       next: (response) => {
         this.store.dispatch(customerAction.saveCustomer({ customer: response }));
       },
