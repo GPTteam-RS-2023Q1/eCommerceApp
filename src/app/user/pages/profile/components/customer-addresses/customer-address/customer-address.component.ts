@@ -52,6 +52,7 @@ export class CustomerAddressComponent {
         new PolymorpheusComponent(EditAddressDialogComponent, this.injector),
         {
           data: this.address,
+          label: 'Address Edit',
         }
       )
       .subscribe();

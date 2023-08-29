@@ -12,6 +12,7 @@ import {
   TuiNotificationModule,
   TuiSvgModule,
   TuiDialogModule,
+  TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import {
   TuiCarouselModule,
@@ -28,6 +29,7 @@ import {
   TuiToggleModule,
   TuiTagModule,
   TuiAvatarModule,
+  TuiMultiSelectModule,
 } from '@taiga-ui/kit';
 
 import { TuiTableModule } from '@taiga-ui/addon-table';
@@ -73,6 +75,8 @@ import { AddressFormComponent } from './components/address-form/address-form.com
     TuiTagModule,
     TuiAvatarModule,
     TuiDialogModule,
+    TuiMultiSelectModule,
+    TuiTextfieldControllerModule,
   ],
   exports: [
     CommonModule,
@@ -106,6 +110,8 @@ import { AddressFormComponent } from './components/address-form/address-form.com
     TuiDialogModule,
     FormFailNotificationComponent,
     AddressFormComponent,
+    TuiMultiSelectModule,
+    TuiTextfieldControllerModule,
   ],
 })
 export class SharedModule {}

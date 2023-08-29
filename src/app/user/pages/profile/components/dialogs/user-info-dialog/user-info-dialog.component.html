@@ -1,5 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="ok()">
+  <h3 *ngIf="!error">User Info</h3>
   <ec-form-fail-notification
+    *ngIf="error"
     [error]="error"
     [parentForm]="form"
     (errorHandle)="onErrorHandle()"
@@ -28,7 +30,7 @@
       tuiButton
       size="m"
       type="submit"
-      [disabled]="!form.valid || !form.touched"
+      [disabled]="!form.valid || form.pristine"
       [showLoader]="isLoading"
     >
       Change

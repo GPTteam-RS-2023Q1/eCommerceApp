@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { TuiDialogContext } from '@taiga-ui/core';
 import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
@@ -13,7 +13,6 @@ import { UpdateCustomerService } from '../../../services/update-cutomer.service'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditAddressDialogComponent implements OnInit {
-  @Input() public data!: string;
   public form!: FormGroup;
   public isLoading = false;
   public error = '';
@@ -29,6 +28,7 @@ export class EditAddressDialogComponent implements OnInit {
   public ngOnInit(): void {
     const address = this.context.data;
     this.form = this.fb.group({
+      tags: [address.tags],
       address: {
         country: address.country,
         city: address.city,
