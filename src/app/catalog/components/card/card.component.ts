@@ -9,8 +9,7 @@ import {
 
 import { BehaviorSubject } from 'rxjs';
 
-import { Product } from '@app/core/models/product';
-import { Image } from '@app/core/models/product-variant';
+import { Product, ProductData } from '@app/core/models/product';
 
 @Component({
   selector: 'ec-card',
@@ -19,42 +18,33 @@ import { Image } from '@app/core/models/product-variant';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent implements OnInit {
-  @Input() public product?: Product;
+  @Input({ required: true }) public product!: Product;
 
-  public activeImage$$ = new BehaviorSubject('_');
-
-  public price!: string;
-
-  public images: Image[] = [];
+  public activeImage$$ = new BehaviorSubject('');
 
   constructor(private readonly element: ElementRef) {}
 
-  private getPrice(): string {
-    const price = this.product?.masterData.current.masterVariant.prices[0];
-    if (price) {
-      return (Number(price.value.centAmount) / 100).toFixed(2);
-    }
-
-    return '';
-  }
-
-  private getImages(): Image[] {
-    return this.product?.masterData.current.masterVariant.images || [];
+  public get current(): ProductData {
+    return this.product.masterData.current;
   }
 
   public ngOnInit(): void {
-    this.price = this.getPrice();
-    this.images = this.getImages();
-    this.activeImage$$.next(this.images[0].url);
+    this.activeImage$$.next(this.current.masterVariant.images[0].url);
   }
 
   @HostListener('mousemove', ['$event'])
-  public changeImage(event: MouseEvent): void {
+  public onMouseMove(event: MouseEvent): void {
+    const { images } = this.current.masterVariant;
     const element = this.element.nativeElement;
-    const delimetr = element.clientWidth / this.images.length;
+    const delimeter = element.clientWidth / images.length;
     const relativeMousePosition = event.clientX - element.offsetLeft;
 
-    const imageIndex = Math.floor(relativeMousePosition / delimetr);
-    this.activeImage$$.next(this.images[imageIndex].url);
+    const imageIndex = Math.floor(relativeMousePosition / delimeter);
+    this.activeImage$$.next(images[imageIndex].url);
+  }
+
+  @HostListener('mouseleave')
+  public onMouseLeave(): void {
+    this.activeImage$$.next(this.current.masterVariant.images[0].url);
   }
 }

@@ -34,6 +34,7 @@ export interface CategoryReference {
 
 export interface LocalizedString {
   en: string;
+  ru: string;
 }
 
 export interface ProductType {

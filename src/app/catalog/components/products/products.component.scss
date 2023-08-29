@@ -1,8 +1,11 @@
 :host {
   .products {
-    display: grid;
-    grid-gap: 20px;
-    grid-template-columns: repeat(auto-fit, 250px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    row-gap: 30px;
+    justify-content: center;
+
     margin: 0 auto;
   }
 }

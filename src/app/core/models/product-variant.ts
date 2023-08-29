@@ -14,7 +14,7 @@ export interface Price {
   key: string;
   value: TypedMoney;
   countryCode: `${string}${string}`;
-  discounted: DiscountedPrice;
+  discounted?: DiscountedPrice;
 }
 
 export interface TypedMoney {
@@ -25,7 +25,7 @@ export interface TypedMoney {
 }
 
 export interface DiscountedPrice {
-  type: TypedMoney;
+  value: TypedMoney;
   discount: ProductDiscountReference;
 }
 

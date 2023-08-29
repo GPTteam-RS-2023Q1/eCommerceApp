@@ -1,16 +1,28 @@
+@import '../../../../templates';
+
 :host {
   .card {
+    overflow: hidden;
+    width: 250px;
     box-shadow: 0 3px 3px rgb(0 0 0 / 10%);
+    transition: all 0.3s ease 0s;
+  }
+
+  .card:hover {
+    cursor: pointer;
+    box-shadow: 0 5px 5px rgb(0 0 0 / 15%);
   }
 
   .image {
-    position: relative;
-    aspect-ratio: 600/866;
     width: 100%;
-    object-fit: contain;
   }
 
   .info {
+    position: relative;
     padding: 10px 5px;
+  }
+
+  h4 {
+    @extend %h4;
   }
 }

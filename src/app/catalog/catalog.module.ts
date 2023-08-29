@@ -1,6 +1,7 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { CoreModule } from '@app/core/core.module';
 import { SharedModule } from '@app/shared/shared.module';
 
 import { CatalogRoutingModule } from './catalog-routing.module';
@@ -10,6 +11,12 @@ import { ProductsComponent } from './components/products/products.component';
 
 @NgModule({
   declarations: [ProductsComponent, CardComponent, CatalogComponent],
-  imports: [CommonModule, SharedModule, CatalogRoutingModule, NgOptimizedImage],
+  imports: [
+    CommonModule,
+    SharedModule,
+    CatalogRoutingModule,
+    NgOptimizedImage,
+    CoreModule,
+  ],
 })
 export class CatalogModule {}

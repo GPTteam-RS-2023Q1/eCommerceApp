@@ -1,0 +1,36 @@
+@import '../../../../variables';
+
+:host {
+  .card {
+    .value {
+      font: var(--tui-font-text-m);
+      font-weight: bold;
+    }
+
+    .value.standart {
+      margin-right: 5px;
+      font: var(--tui-font-text-s);
+      text-decoration: line-through;
+    }
+
+    .discounted {
+      color: $red;
+    }
+
+    .discount {
+      position: absolute;
+      top: -21px;
+      left: -2px;
+      transform: skew(-7deg);
+
+      padding: 0 5px;
+
+      font: var(--tui-font-text-xs);
+      font-size: 12px;
+      color: $full-white;
+      letter-spacing: 0.05rem;
+
+      background-color: $red;
+    }
+  }
+}
