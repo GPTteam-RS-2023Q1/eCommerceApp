@@ -89,7 +89,7 @@ export class CustomerBuilderService {
     return COUNTRIES[country].tag;
   }
 
-  private createAddress(address: AddressForm): AddressForm {
+  public createAddress(address: AddressForm): AddressForm {
     return { ...address, country: this.setCountry(address.country) };
   }
 }

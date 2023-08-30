@@ -8,16 +8,12 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AbstractRajiControl } from '@app/shared/models/classes/abstract-raji-control';
+import { Tag } from '@app/user/models/enums/tags.enum';
 import { TUI_DEFAULT_MATCHER, tuiPure } from '@taiga-ui/cdk';
 import { TuiMultiSelectComponent } from '@taiga-ui/kit';
 import { Subscription } from 'rxjs';
 
-const ITEMS: readonly string[] = [
-  'default shipping address',
-  'default billing address',
-  'shipping address',
-  'billing address',
-];
+const ITEMS: readonly Tag[] = Object.values(Tag);
 
 @Component({
   selector: 'ec-address-tag-input',

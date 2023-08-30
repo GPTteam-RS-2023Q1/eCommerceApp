@@ -23,6 +23,7 @@ import { AddressTagInputComponent } from './pages/profile/components/address-tag
     UserInfoDialogComponent,
     EditAddressDialogComponent,
     AddressTagInputComponent,
+    UserInfoDialogComponent,
   ],
   imports: [SharedModule, UserRoutingModule],
 })

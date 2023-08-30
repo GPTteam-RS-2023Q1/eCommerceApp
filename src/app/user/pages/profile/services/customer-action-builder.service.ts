@@ -10,10 +10,21 @@ import { SetLastNameAction } from '@app/user/models/customer-update-actions/set-
 import { createDate } from '@app/utils/createDate';
 import { ChangeAddressAction } from '@app/user/models/customer-update-actions/change-address.model';
 import { AddAddressAction } from '@app/user/models/customer-update-actions/add-address.model';
+import { AddressTagAction } from '@app/user/models/customer-update-actions/address-tag.model';
+import { Tag } from '@app/user/models/enums/tags.enum';
+import { CustomerBuilderService } from '@app/core/services/customer-builder.service';
 
 @Injectable()
 export class CustomerActionBuilder {
   private readonly actions: CustomerAction[] = [];
+  private setTagsDictionary: Record<Tag, CustomerUpdateActions> = {
+    'default shipping address': CustomerUpdateActions.setDefaultShippingAddress,
+    'default billing address': CustomerUpdateActions.setDefaultBillingAddress,
+    'billing address': CustomerUpdateActions.addBillingAddressId,
+    'shipping address': CustomerUpdateActions.addShippingAddressId,
+  };
+
+  constructor(private customerBuilder: CustomerBuilderService) {}
 
   public addChangeEmail(email: string): CustomerActionBuilder {
     const changeEmail: ChangeEmailAction = {
@@ -68,9 +79,62 @@ export class CustomerActionBuilder {
   public addAddress(address: AddressForm): CustomerActionBuilder {
     const addAddress: AddAddressAction = {
       action: CustomerUpdateActions.addAddress,
-      address,
+      address: this.customerBuilder.createAddress(address),
     };
     this.actions.push(addAddress);
+
+    return this;
+  }
+
+  public addAddressTagAction(
+    action: CustomerUpdateActions,
+    addressId?: string,
+    addressKey?: string
+  ): CustomerActionBuilder {
+    const addAddressTag: AddressTagAction = {
+      action,
+      addressId,
+      addressKey,
+    };
+    this.actions.push(addAddressTag);
+
+    return this;
+  }
+
+  public setTags(
+    tags: Tag[],
+    addressId?: string,
+    addressKey?: string
+  ): CustomerActionBuilder {
+    tags.forEach((tag) => {
+      this.addAddressTagAction(this.setTagsDictionary[tag], addressId, addressKey);
+    });
+
+    return this;
+  }
+
+  public removeTags(
+    tags: Tag[],
+    addressId?: string,
+    addressKey?: string
+  ): CustomerActionBuilder {
+    tags.forEach((tag) => {
+      if (tag === Tag.billindAddress) {
+        this.addAddressTagAction(
+          CustomerUpdateActions.removeBillingAddressId,
+          addressId,
+          addressKey
+        );
+      }
+
+      if (tag === Tag.shippingAddress) {
+        this.addAddressTagAction(
+          CustomerUpdateActions.removeShippingAddressId,
+          addressId,
+          addressKey
+        );
+      }
+    });
 
     return this;
   }
@@ -82,7 +146,7 @@ export class CustomerActionBuilder {
     const changeAddress: ChangeAddressAction = {
       action: CustomerUpdateActions.changeAddress,
       addressId,
-      address,
+      address: this.customerBuilder.createAddress(address),
     };
     this.actions.push(changeAddress);
 
@@ -92,6 +156,7 @@ export class CustomerActionBuilder {
   public getActions(): CustomerAction[] {
     const customerActions = this.actions.slice();
     this.actions.length = 0;
+
     return customerActions;
   }
 }

@@ -11,6 +11,7 @@ import { Store } from '@ngrx/store';
 import { customerAction } from '@app/ngrx/actions/customer.actions';
 import { TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import { Tag } from '@app/user/models/enums/tags.enum';
 import { UpdateCustomerService } from '../../../services/update-cutomer.service';
 import { CustomerActionBuilder } from '../../../services/customer-action-builder.service';
 import { EditAddressDialogComponent } from '../../dialogs/edit-address-dialog/edit-address-dialog.component';
@@ -34,11 +35,11 @@ export class CustomerAddressComponent {
 
   public getTagColor(tag: string): TuiStatus {
     switch (tag) {
-      case 'default shipping address':
+      case Tag.defaultShippingAddress:
         return 'primary';
-      case 'default billing address':
+      case Tag.defaultBillingAddress:
         return 'error';
-      case 'shipping address':
+      case Tag.shippingAddress:
         return 'warning';
       default:
         return 'success';

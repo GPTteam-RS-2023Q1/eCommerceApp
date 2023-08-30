@@ -4,7 +4,9 @@ import { TuiDialogContext } from '@taiga-ui/core';
 import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { UserAddress } from '@app/user/models/user-address.model';
+import { customerAction } from '@app/ngrx/actions/customer.actions';
 import { UpdateCustomerService } from '../../../services/update-cutomer.service';
+import { CustomerActionBuilder } from '../../../services/customer-action-builder.service';
 
 @Component({
   selector: 'ec-edit-address-dialog',
@@ -22,7 +24,8 @@ export class EditAddressDialogComponent implements OnInit {
     private readonly context: TuiDialogContext<boolean, UserAddress>,
     private readonly fb: NonNullableFormBuilder,
     private readonly uppdateCustomerService: UpdateCustomerService,
-    private readonly store: Store
+    private readonly store: Store,
+    private readonly actionBuilder: CustomerActionBuilder
   ) {}
 
   public ngOnInit(): void {
@@ -44,6 +47,33 @@ export class EditAddressDialogComponent implements OnInit {
 
   public ok(): void {
     console.log(this.form);
+    let action;
+    if (this.context.data) {
+      action = this.actionBuilder
+        .addChangeAddress(this.context.data.id, this.form.value.address)
+        .removeTags(this.context.data.tags, this.context.data.id)
+        .setTags(this.form.value.tags, this.context.data.id)
+        .getActions();
+    } else {
+      action = this.actionBuilder
+        .addAddress(this.form.value.address)
+        .setTags(this.form.value.tags)
+        .getActions();
+    }
+
+    console.log(action);
+    this.isLoading = true;
+    this.uppdateCustomerService.updateCustomer(action).subscribe({
+      next: (response) => {
+        this.isLoading = false;
+        this.store.dispatch(customerAction.saveCustomer({ customer: response }));
+        this.context.completeWith(true);
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.error = err.error.message;
+      },
+    });
   }
 
   public cancel(): void {
