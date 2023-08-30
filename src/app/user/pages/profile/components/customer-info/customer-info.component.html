@@ -1,0 +1,39 @@
+<div class="customer-card">
+  <tui-island size="l" textAlign="center">
+    <div class="tui-island__content">
+      <figure class="tui-island__figure">
+        <tui-avatar [text]="customer.firstName" class="tui-space_top-1"></tui-avatar>
+      </figure>
+      <div>
+        <h3 class="tui-island__title">
+          {{ customer.firstName }} {{ customer.lastName }}
+        </h3>
+        <p class="tui-island__paragraph">First Name: {{ customer.firstName }}</p>
+        <p class="tui-island__paragraph">Last Name: {{ customer.lastName }}</p>
+        <p class="tui-island__paragraph">
+          Date of Birth: {{ customer.dateOfBirth | date }}
+        </p>
+        <button
+          tuiButton
+          type="button"
+          appearance="flat"
+          size="m"
+          class="tui-island__footer-button"
+          (click)="edit()"
+        >
+          Edit
+        </button>
+        <button
+          tuiButton
+          type="button"
+          appearance="flat"
+          size="m"
+          class="tui-island__footer-button red"
+          (click)="changePassword()"
+        >
+          Change Password
+        </button>
+      </div>
+    </div>
+  </tui-island>
+</div>

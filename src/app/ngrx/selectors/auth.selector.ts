@@ -1,8 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { AuthState, authStateName } from '../state.model';
+import { selectCustomerState } from './customer.selector';
 
 export const selectAuthState = createFeatureSelector<AuthState>(authStateName);
+
 export const selectAccessToken = createSelector(
   selectAuthState,
   (authState) => authState.accessToken
@@ -13,11 +15,6 @@ export const selectAuthError = createSelector(
 );
 
 export const selectIsAuth = createSelector(
-  selectAuthState,
-  (authState) => !!authState.customer?.id
-);
-
-export const selectUserName = createSelector(
-  selectAuthState,
-  (authState) => authState.customer?.firstName ?? 'user'
+  selectCustomerState,
+  (customerState) => !!customerState.customer?.id
 );

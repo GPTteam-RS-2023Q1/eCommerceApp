@@ -29,6 +29,7 @@
     "@ngrx/store": "^16.1.0",
     "@ngrx/store-devtools": "^16.2.0",
     "@taiga-ui/addon-commerce": "^3.39.1",
+    "@taiga-ui/addon-table": "^3.41.1",
     "@taiga-ui/cdk": "^3.39.1",
     "@taiga-ui/core": "^3.39.1",
     "@taiga-ui/icons": "^3.39.1",
@@ -36,10 +37,12 @@
     "@taiga-ui/layout": "^3.39.1",
     "@taiga-ui/styles": "^3.39.1",
     "@tinkoff/ng-dompurify": "3.0.0",
+    "@types/uuid": "^9.0.2",
     "angular-in-memory-web-api": "^0.16.0",
     "dompurify": "2.2.9",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "uuid": "^9.0.0",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {

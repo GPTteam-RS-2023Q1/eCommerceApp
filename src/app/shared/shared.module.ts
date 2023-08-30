@@ -11,6 +11,8 @@ import {
   TuiLinkModule,
   TuiNotificationModule,
   TuiSvgModule,
+  TuiDialogModule,
+  TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import {
   TuiCarouselModule,
@@ -25,14 +27,27 @@ import {
   TuiIslandModule,
   TuiPaginationModule,
   TuiToggleModule,
+  TuiTagModule,
+  TuiAvatarModule,
+  TuiMultiSelectModule,
 } from '@taiga-ui/kit';
+
+import { TuiTableModule } from '@taiga-ui/addon-table';
 
 import { EmailInputComponent } from './components/email-input/email-input.component';
 import { InputComponent } from './components/input/input.component';
 import { PasswordInputComponent } from './components/password-input/password-input.component';
+import { FormFailNotificationComponent } from './components/form-fail-notification/form-fail-notification.component';
+import { AddressFormComponent } from './components/address-form/address-form.component';
 
 @NgModule({
-  declarations: [InputComponent, EmailInputComponent, PasswordInputComponent],
+  declarations: [
+    InputComponent,
+    EmailInputComponent,
+    PasswordInputComponent,
+    FormFailNotificationComponent,
+    AddressFormComponent,
+  ],
   imports: [
     CommonModule,
     TuiNotificationModule,
@@ -56,6 +71,12 @@ import { PasswordInputComponent } from './components/password-input/password-inp
     TuiCarouselModule,
     TuiIslandModule,
     TuiPaginationModule,
+    TuiTableModule,
+    TuiTagModule,
+    TuiAvatarModule,
+    TuiDialogModule,
+    TuiMultiSelectModule,
+    TuiTextfieldControllerModule,
   ],
   exports: [
     CommonModule,
@@ -83,6 +104,14 @@ import { PasswordInputComponent } from './components/password-input/password-inp
     TuiCarouselModule,
     TuiIslandModule,
     TuiPaginationModule,
+    TuiTableModule,
+    TuiTagModule,
+    TuiAvatarModule,
+    TuiDialogModule,
+    FormFailNotificationComponent,
+    AddressFormComponent,
+    TuiMultiSelectModule,
+    TuiTextfieldControllerModule,
   ],
 })
 export class SharedModule {}

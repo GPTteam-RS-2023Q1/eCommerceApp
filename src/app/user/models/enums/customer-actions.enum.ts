@@ -1,0 +1,15 @@
+export const enum CustomerUpdateActions {
+  changeEmail = 'changeEmail',
+  setFirstName = 'setFirstName',
+  setLastName = 'setLastName',
+  addAddress = 'addAddress',
+  changeAddress = 'changeAddress',
+  removeAddress = 'removeAddress',
+  setDefaultShippingAddress = 'setDefaultShippingAddress',
+  addShippingAddressId = 'addShippingAddressId',
+  removeShippingAddressId = 'removeShippingAddressId',
+  setDefaultBillingAddress = 'setDefaultBillingAddress',
+  addBillingAddressId = 'addBillingAddressId',
+  removeBillingAddressId = 'removeBillingAddressId',
+  setDateOfBirth = 'setDateOfBirth',
+}

@@ -8,8 +8,9 @@ export interface Customer {
   lastName: string;
   dateOfBirth: string;
   defaultBillingAddressId: string;
-  defaultShippingAddressID: string;
+  defaultShippingAddressId: string;
   shippingAddressIds: string[];
   billingAddressIds: string[];
   addresses: Address[];
+  version: number;
 }
