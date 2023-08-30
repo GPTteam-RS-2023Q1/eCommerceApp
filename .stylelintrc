@@ -6,6 +6,7 @@
   ],
   "plugins": ["stylelint-order", "stylelint-scss"],
   "rules": {
+    "no-descending-specificity": null,
     "no-empty-source": null,
     "declaration-empty-line-before": null,
     "selector-class-pattern": null,
