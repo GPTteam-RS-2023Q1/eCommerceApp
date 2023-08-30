@@ -1,4 +1,5 @@
 import { Customer } from '@app/auth/models/customer.model';
+import { Product } from '@app/core/models/product';
 
 export interface AuthState {
   accessToken: string | null;
@@ -16,4 +17,11 @@ export const customerStateName = 'customerState';
 export interface AppState {
   authState: AuthState;
   customerState: CustomerState;
+  catalog: CatalogState;
+}
+
+export const catalogStateName = 'catalog';
+
+export interface CatalogState {
+  products: Product[] | null;
 }
