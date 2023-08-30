@@ -1,35 +1,44 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   HostListener,
   Input,
-  OnInit,
 } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 
 import { Product, ProductData } from '@app/core/models/product';
 
+const DEFAULT_IMAGE_INDEX = 0;
+
 @Component({
   selector: 'ec-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('showHide', [
+      transition(':enter', [
+        style({ visibility: 'hidden' }),
+        animate('0ms', style({ visibility: 'visible' })),
+      ]),
+      transition(':leave', [animate('0ms 50ms ease', style({ visibility: 'hidden' }))]),
+    ]),
+  ],
 })
-export class CardComponent implements OnInit {
+export class CardComponent {
   @Input({ required: true }) public product!: Product;
 
-  public activeImage$$ = new BehaviorSubject('');
+  public activeImageIndex$$ = new BehaviorSubject(DEFAULT_IMAGE_INDEX);
+
+  public sizes?: string[];
 
   constructor(private readonly element: ElementRef) {}
 
   public get current(): ProductData {
     return this.product.masterData.current;
-  }
-
-  public ngOnInit(): void {
-    this.activeImage$$.next(this.current.masterVariant.images[0].url);
   }
 
   @HostListener('mousemove', ['$event'])
@@ -40,11 +49,21 @@ export class CardComponent implements OnInit {
     const relativeMousePosition = event.clientX - element.offsetLeft;
 
     const imageIndex = Math.floor(relativeMousePosition / delimeter);
-    this.activeImage$$.next(images[imageIndex].url);
+    this.activeImageIndex$$.next(imageIndex);
   }
 
   @HostListener('mouseleave')
   public onMouseLeave(): void {
-    this.activeImage$$.next(this.current.masterVariant.images[0].url);
+    this.activeImageIndex$$.next(DEFAULT_IMAGE_INDEX);
+  }
+
+  @HostListener('mouseenter')
+  public onMouseEnter(): void {
+    if (!this.sizes) {
+      this.sizes = this.product.masterData.current.variants.map((variant) => {
+        return variant.attributes.find((attribute) => attribute.name === 'size')?.value
+          .label;
+      });
+    }
   }
 }
