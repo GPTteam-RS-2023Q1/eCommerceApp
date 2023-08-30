@@ -4,11 +4,18 @@ import {
   Input,
   OnInit,
   OnChanges,
+  Injector,
+  OnDestroy,
 } from '@angular/core';
 import { Customer } from '@app/auth/models/customer.model';
 import { COUNTRIES } from '@app/consts/country-data';
 import { Tag } from '@app/user/models/enums/tags.enum';
+import { Subscription } from 'rxjs';
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { UserAddress } from '@app/user/models/user-address.model';
+import { TuiDialogService } from '@taiga-ui/core';
+import { NotificationService } from '@app/shared/services/notofication.service';
+import { EditAddressDialogComponent } from '../dialogs/edit-address-dialog/edit-address-dialog.component';
 
 @Component({
   selector: 'ec-customer-addresses',
@@ -16,10 +23,17 @@ import { UserAddress } from '@app/user/models/user-address.model';
   styleUrls: ['./customer-addresses.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CustomerAddressesComponent implements OnInit, OnChanges {
+export class CustomerAddressesComponent implements OnInit, OnChanges, OnDestroy {
   @Input() public customer!: Customer;
   public addresses!: UserAddress[];
   private countires = Object.values(COUNTRIES);
+  private subs = new Subscription();
+
+  constructor(
+    private readonly injector: Injector,
+    private readonly dialogs: TuiDialogService,
+    private notificationService: NotificationService
+  ) {}
 
   public ngOnInit(): void {
     this.addresses = this.defineTagsForAddresses(this.customer);
@@ -32,6 +46,23 @@ export class CustomerAddressesComponent implements OnInit, OnChanges {
   private findCountyNameByTag(countryTag: string): string {
     const counrty = this.countires.find((country) => country.tag === countryTag);
     return counrty ? counrty.name : countryTag;
+  }
+
+  public addAddress(): void {
+    this.subs.add(
+      this.dialogs
+        .open<boolean>(
+          new PolymorpheusComponent(EditAddressDialogComponent, this.injector),
+          {
+            label: 'New Address',
+          }
+        )
+        .subscribe((status) => {
+          if (status) {
+            this.notificationService.smallNotify('Address was successfully added', 3000);
+          }
+        })
+    );
   }
 
   public defineTagsForAddresses(customer: Customer | null): UserAddress[] {
@@ -70,5 +101,9 @@ export class CustomerAddressesComponent implements OnInit, OnChanges {
     });
 
     return userAddresses;
+  }
+
+  public ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 }

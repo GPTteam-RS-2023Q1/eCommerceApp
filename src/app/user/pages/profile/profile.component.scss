@@ -3,3 +3,14 @@
   flex-direction: column;
   gap: 20px;
 }
+
+tui-notification {
+  position: fixed;
+  right: -250px;
+  max-width: 250px;
+  transition: 0.2s all;
+}
+
+.visible {
+  right: 0;
+}

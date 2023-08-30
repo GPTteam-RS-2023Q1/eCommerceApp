@@ -2,13 +2,15 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  Inject,
   Injector,
+  OnDestroy,
 } from '@angular/core';
 import { Customer } from '@app/auth/models/customer.model';
 import { TuiDialogService } from '@taiga-ui/core';
+import { Subscription } from 'rxjs';
 import { tuiAvatarOptionsProvider } from '@taiga-ui/kit';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import { NotificationService } from '@app/shared/services/notofication.service';
 import { PasswordDialogComponent } from '../dialogs/password-dialog/password-dialog.component';
 import { UserInfoDialogComponent } from '../dialogs/user-info-dialog/user-info-dialog.component';
 
@@ -25,25 +27,47 @@ import { UserInfoDialogComponent } from '../dialogs/user-info-dialog/user-info-d
     }),
   ],
 })
-export class CustomerInfoComponent {
+export class CustomerInfoComponent implements OnDestroy {
   @Input() public customer!: Customer;
+  private subs = new Subscription();
 
   constructor(
-    @Inject(Injector) private readonly injector: Injector,
-    @Inject(TuiDialogService) private readonly dialogs: TuiDialogService
+    private readonly injector: Injector,
+    private readonly dialogs: TuiDialogService,
+    private notificationServive: NotificationService
   ) {}
 
   public edit(): void {
-    console.log(this.customer);
-    this.dialogs
-      .open(new PolymorpheusComponent(UserInfoDialogComponent, this.injector))
-      .subscribe();
+    this.subs.add(
+      this.dialogs
+        .open<boolean>(new PolymorpheusComponent(UserInfoDialogComponent, this.injector))
+        .subscribe((status) => {
+          if (status) {
+            this.notificationServive.smallNotify(
+              'Your user info was changed successfully.',
+              3000
+            );
+          }
+        })
+    );
   }
 
   public changePassword(): void {
-    console.log(this.customer);
-    this.dialogs
-      .open(new PolymorpheusComponent(PasswordDialogComponent, this.injector))
-      .subscribe();
+    this.subs.add(
+      this.dialogs
+        .open<boolean>(new PolymorpheusComponent(PasswordDialogComponent, this.injector))
+        .subscribe((status) => {
+          if (status) {
+            this.notificationServive.smallNotify(
+              'Your password was changed successfully. Relogining...',
+              3000
+            );
+          }
+        })
+    );
+  }
+
+  public ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 }

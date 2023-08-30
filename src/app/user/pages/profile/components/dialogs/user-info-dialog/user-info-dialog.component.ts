@@ -1,14 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Inject,
+  Injector,
   OnInit,
   OnDestroy,
 } from '@angular/core';
-import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
-import { TuiDialogContext } from '@taiga-ui/core';
-import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { Validators } from '@angular/forms';
 import { whiteSpaceValidator } from '@app/auth/validators/white-space-validator';
 import { numbersValidator } from '@app/auth/validators/numbers-validator';
 import { specialCharactersValidator } from '@app/auth/validators/special-characters-validator';
@@ -16,9 +13,7 @@ import { birthdayValidator } from '@app/auth/validators/birthday-validator';
 import { selectCustomer } from '@app/ngrx/selectors/customer.selector';
 import { Subscription } from 'rxjs';
 import { TuiDay } from '@taiga-ui/cdk';
-import { customerAction } from '@app/ngrx/actions/customer.actions';
-import { UpdateCustomerService } from '../../../services/update-cutomer.service';
-import { CustomerActionBuilder } from '../../../services/customer-action-builder.service';
+import { BaseUserProfileDialog } from '../baseUserProfileDialog';
 
 @Component({
   selector: 'ec-user-info-dialog',
@@ -26,21 +21,16 @@ import { CustomerActionBuilder } from '../../../services/customer-action-builder
   styleUrls: ['./user-info-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserInfoDialogComponent implements OnInit, OnDestroy {
+export class UserInfoDialogComponent
+  extends BaseUserProfileDialog
+  implements OnInit, OnDestroy
+{
   public customer$ = this.store.select(selectCustomer);
-  public form!: FormGroup;
-  public isLoading = false;
-  public error = '';
   public subs = new Subscription();
 
-  constructor(
-    @Inject(POLYMORPHEUS_CONTEXT)
-    private readonly context: TuiDialogContext<boolean>,
-    private readonly fb: NonNullableFormBuilder,
-    private readonly uppdateCustomerService: UpdateCustomerService,
-    private readonly store: Store,
-    private readonly actionBuilder: CustomerActionBuilder
-  ) {}
+  constructor(private injector: Injector) {
+    super(injector);
+  }
 
   public ngOnInit(): void {
     this.subs.add(
@@ -80,10 +70,6 @@ export class UserInfoDialogComponent implements OnInit, OnDestroy {
     );
   }
 
-  public onErrorHandle(): void {
-    this.error = '';
-  }
-
   public ok(): void {
     this.isLoading = true;
     const actions = this.actionBuilder
@@ -95,19 +81,12 @@ export class UserInfoDialogComponent implements OnInit, OnDestroy {
 
     this.uppdateCustomerService.updateCustomer(actions).subscribe({
       next: (response) => {
-        this.isLoading = false;
-        this.store.dispatch(customerAction.saveCustomer({ customer: response }));
-        this.context.completeWith(true);
+        this.onResponse(response);
       },
       error: (err) => {
-        this.error = err.error.message;
+        this.onError(err);
       },
     });
-  }
-
-  public cancel(): void {
-    this.isLoading = false;
-    this.context.completeWith(false);
   }
 
   public ngOnDestroy(): void {

@@ -88,13 +88,15 @@ export class CustomerActionBuilder {
 
   public addAddressTagAction(
     action: CustomerUpdateActions,
-    addressId?: string,
-    addressKey?: string
+    options?: {
+      addressId?: string;
+      addressKey?: string;
+    }
   ): CustomerActionBuilder {
     const addAddressTag: AddressTagAction = {
       action,
-      addressId,
-      addressKey,
+      addressId: options?.addressId,
+      addressKey: options?.addressKey,
     };
     this.actions.push(addAddressTag);
 
@@ -103,11 +105,13 @@ export class CustomerActionBuilder {
 
   public setTags(
     tags: Tag[],
-    addressId?: string,
-    addressKey?: string
+    options?: {
+      addressId?: string;
+      addressKey?: string;
+    }
   ): CustomerActionBuilder {
     tags.forEach((tag) => {
-      this.addAddressTagAction(this.setTagsDictionary[tag], addressId, addressKey);
+      this.addAddressTagAction(this.setTagsDictionary[tag], options);
     });
 
     return this;
@@ -115,24 +119,18 @@ export class CustomerActionBuilder {
 
   public removeTags(
     tags: Tag[],
-    addressId?: string,
-    addressKey?: string
+    options?: {
+      addressId?: string;
+      addressKey?: string;
+    }
   ): CustomerActionBuilder {
     tags.forEach((tag) => {
       if (tag === Tag.billindAddress) {
-        this.addAddressTagAction(
-          CustomerUpdateActions.removeBillingAddressId,
-          addressId,
-          addressKey
-        );
+        this.addAddressTagAction(CustomerUpdateActions.removeBillingAddressId, options);
       }
 
       if (tag === Tag.shippingAddress) {
-        this.addAddressTagAction(
-          CustomerUpdateActions.removeShippingAddressId,
-          addressId,
-          addressKey
-        );
+        this.addAddressTagAction(CustomerUpdateActions.removeShippingAddressId, options);
       }
     });
 

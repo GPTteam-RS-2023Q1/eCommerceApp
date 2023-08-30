@@ -1,4 +1,9 @@
 <div class="container">
+  <tui-notification
+    status="success"
+    [ngClass]="{ visible: this.notificationService.notification | async }"
+    >{{ this.notificationService.notification | async }}</tui-notification
+  >
   <ec-customer-info [customer]="customer"></ec-customer-info>
   <ec-customer-addresses [customer]="customer"></ec-customer-addresses>
 </div>

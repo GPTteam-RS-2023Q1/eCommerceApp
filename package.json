@@ -37,10 +37,12 @@
     "@taiga-ui/layout": "^3.39.1",
     "@taiga-ui/styles": "^3.39.1",
     "@tinkoff/ng-dompurify": "3.0.0",
+    "@types/uuid": "^9.0.2",
     "angular-in-memory-web-api": "^0.16.0",
     "dompurify": "2.2.9",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "uuid": "^9.0.0",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {

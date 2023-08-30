@@ -1,10 +1,6 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
-import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
-import { TuiDialogContext } from '@taiga-ui/core';
-import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { ChangeDetectionStrategy, Component, Injector, OnInit } from '@angular/core';
 import { authAction } from '@app/ngrx/actions/auth.actions';
-import { UpdateCustomerService } from '../../../services/update-cutomer.service';
+import { BaseUserProfileDialog } from '../baseUserProfileDialog';
 
 @Component({
   selector: 'ec-password-dialog',
@@ -12,17 +8,10 @@ import { UpdateCustomerService } from '../../../services/update-cutomer.service'
   styleUrls: ['./password-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PasswordDialogComponent implements OnInit {
-  public form!: FormGroup;
-  public isLoading = false;
-  public error = '';
-  constructor(
-    @Inject(POLYMORPHEUS_CONTEXT)
-    private readonly context: TuiDialogContext<boolean>,
-    private readonly fb: NonNullableFormBuilder,
-    private readonly uppdateCustomerService: UpdateCustomerService,
-    private readonly store: Store
-  ) {}
+export class PasswordDialogComponent extends BaseUserProfileDialog implements OnInit {
+  constructor(private injector: Injector) {
+    super(injector);
+  }
 
   public ngOnInit(): void {
     this.form = this.fb.group({
@@ -31,12 +20,7 @@ export class PasswordDialogComponent implements OnInit {
     });
   }
 
-  public onErrorHandle(): void {
-    this.error = '';
-  }
-
   public ok(): void {
-    console.log(this.form.value);
     this.isLoading = true;
     this.uppdateCustomerService
       .changePassword(this.form.value.oldPassword, this.form.value.newPassword)
@@ -53,14 +37,8 @@ export class PasswordDialogComponent implements OnInit {
           this.context.completeWith(true);
         },
         error: (err) => {
-          this.isLoading = false;
-          this.error = err.error.message;
+          this.onError(err);
         },
       });
-  }
-
-  public cancel(): void {
-    this.isLoading = false;
-    this.context.completeWith(false);
   }
 }

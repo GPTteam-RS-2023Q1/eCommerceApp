@@ -2,8 +2,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  Inject,
   Injector,
+  OnDestroy,
 } from '@angular/core';
 import { UserAddress } from '@app/user/models/user-address.model';
 import { TuiStatus } from '@taiga-ui/kit';
@@ -12,6 +12,8 @@ import { customerAction } from '@app/ngrx/actions/customer.actions';
 import { TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { Tag } from '@app/user/models/enums/tags.enum';
+import { Subscription } from 'rxjs';
+import { NotificationService } from '@app/shared/services/notofication.service';
 import { UpdateCustomerService } from '../../../services/update-cutomer.service';
 import { CustomerActionBuilder } from '../../../services/customer-action-builder.service';
 import { EditAddressDialogComponent } from '../../dialogs/edit-address-dialog/edit-address-dialog.component';
@@ -22,15 +24,17 @@ import { EditAddressDialogComponent } from '../../dialogs/edit-address-dialog/ed
   styleUrls: ['./customer-address.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CustomerAddressComponent {
+export class CustomerAddressComponent implements OnDestroy {
   @Input() public address!: UserAddress;
+  private subs = new Subscription();
 
   constructor(
-    @Inject(Injector) private readonly injector: Injector,
-    @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
+    private readonly injector: Injector,
+    private readonly dialogs: TuiDialogService,
     private updateCustomerService: UpdateCustomerService,
     private store: Store,
-    private customerActionBuilder: CustomerActionBuilder
+    private customerActionBuilder: CustomerActionBuilder,
+    private notificationService: NotificationService
   ) {}
 
   public getTagColor(tag: string): TuiStatus {
@@ -46,31 +50,42 @@ export class CustomerAddressComponent {
     }
   }
 
-  public editAddress(address: UserAddress): void {
-    console.log(address);
-    this.dialogs
-      .open<UserAddress>(
-        new PolymorpheusComponent(EditAddressDialogComponent, this.injector),
-        {
-          data: this.address,
-          label: 'Address Edit',
-        }
-      )
-      .subscribe();
+  public editAddress(): void {
+    this.subs.add(
+      this.dialogs
+        .open<boolean>(
+          new PolymorpheusComponent(EditAddressDialogComponent, this.injector),
+          {
+            data: this.address,
+            label: 'Address Edit',
+          }
+        )
+        .subscribe((status) => {
+          if (status) {
+            this.notificationService.smallNotify(
+              'Address was successfully changed',
+              3000
+            );
+          }
+        })
+    );
   }
 
   public remove(address: UserAddress): void {
-    console.log(address);
-
     const action = this.customerActionBuilder.addRemoveAddress(address.id).getActions();
 
     this.updateCustomerService.updateCustomer(action).subscribe({
       next: (response) => {
         this.store.dispatch(customerAction.saveCustomer({ customer: response }));
+        this.notificationService.smallNotify('Address was successfully deleted', 3000);
       },
       error: (err) => {
         console.log(err);
       },
     });
+  }
+
+  public ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 }

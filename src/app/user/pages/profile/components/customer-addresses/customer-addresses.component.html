@@ -1,5 +1,17 @@
 <div class="container">
-  <h2>Addresses</h2>
+  <h2>
+    Addresses
+    <button
+      tuiIconButton
+      appearance="flat"
+      size="s"
+      icon="tuiIconPlus"
+      title="Remove"
+      shape="rounded"
+      type="button"
+      (click)="addAddress()"
+    ></button>
+  </h2>
   <div class="addresses-container">
     <ec-customer-address
       class="address"
