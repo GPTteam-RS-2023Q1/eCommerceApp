@@ -1,0 +1,13 @@
+<div class="categories">
+  <tui-tree
+    *ngFor="let item of data"
+    [childrenHandler]="handler"
+    [content]="content"
+    [tuiTreeController]="true"
+    [value]="item"
+  ></tui-tree>
+
+  <ng-template #content let-item>
+    <a class="link" [routerLink]="['../', item.link]">{{ item.text }}</a>
+  </ng-template>
+</div>

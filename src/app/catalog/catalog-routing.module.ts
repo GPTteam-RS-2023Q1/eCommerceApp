@@ -6,6 +6,11 @@ import { CatalogComponent } from './catalog.component';
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
+    redirectTo: 'clothes',
+  },
+  {
+    path: ':category',
     component: CatalogComponent,
   },
 ];

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { catalogActions } from '@app/ngrx/actions/catalog.actions';
 import { selectCatalogProducts } from '@app/ngrx/selectors/catalog.selector';
 
 @Component({
@@ -16,7 +15,6 @@ export class ProductsComponent implements OnInit {
   constructor(private readonly store: Store) {}
 
   public ngOnInit(): void {
-    this.store.dispatch(catalogActions.getProducts());
     this.products$.subscribe((val) => console.log(val));
   }
 }

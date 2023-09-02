@@ -1,4 +1,5 @@
 import { Customer } from '@app/auth/models/customer.model';
+import { Category } from '@app/core/models/category';
 import { Product } from '@app/core/models/product';
 
 export interface AuthState {
@@ -24,4 +25,5 @@ export const catalogStateName = 'catalog';
 
 export interface CatalogState {
   products: Product[] | null;
+  categories: Category[] | null;
 }

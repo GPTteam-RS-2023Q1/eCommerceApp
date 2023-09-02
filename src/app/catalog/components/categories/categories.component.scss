@@ -1,0 +1,19 @@
+:host {
+  .categories {
+    display: flex;
+    flex-direction: column;
+    width: 225px;
+  }
+
+  .link {
+    font: var(--tui-font-text-l);
+    color: #616161;
+    text-decoration: none;
+  }
+
+  ::ng-deep tui-tree {
+    .t-children {
+      margin-left: 10px;
+    }
+  }
+}

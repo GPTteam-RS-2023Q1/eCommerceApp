@@ -5,6 +5,7 @@ import { CatalogState } from '../state.model';
 
 const initialState: CatalogState = {
   products: null,
+  categories: null,
 };
 
 export const catalogReducer = createReducer(
@@ -14,5 +15,13 @@ export const catalogReducer = createReducer(
       ...state,
       products,
     };
-  })
+  }),
+
+  on(
+    catalogActions.getCategoriesSuccess,
+    (state, { categories }): CatalogState => ({
+      ...state,
+      categories,
+    })
+  )
 );

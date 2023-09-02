@@ -8,3 +8,8 @@ export const selectCatalogProducts = createSelector(
   selectCatalogState,
   (state) => state.products
 );
+
+export const selectCatalogCategories = createSelector(
+  selectCatalogState,
+  (state) => state.categories
+);
