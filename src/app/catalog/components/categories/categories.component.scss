@@ -1,3 +1,5 @@
+@import '../../../../variables';
+
 :host {
   .categories {
     display: flex;
@@ -9,6 +11,10 @@
     font: var(--tui-font-text-l);
     color: #616161;
     text-decoration: none;
+  }
+
+  .link.selected {
+    color: $red;
   }
 
   ::ng-deep tui-tree {

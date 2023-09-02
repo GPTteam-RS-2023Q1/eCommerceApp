@@ -8,6 +8,11 @@
   ></tui-tree>
 
   <ng-template #content let-item>
-    <a class="link" [routerLink]="['../', item.link]">{{ item.text }}</a>
+    <a
+      class="link"
+      [ngClass]="(selectedCategory | async) === item.link ? 'selected' : ''"
+      [routerLink]="['../', item.link]"
+      >{{ item.text }}</a
+    >
   </ng-template>
 </div>

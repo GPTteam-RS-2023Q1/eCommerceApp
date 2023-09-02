@@ -9,7 +9,8 @@ import {
 
 import { BehaviorSubject } from 'rxjs';
 
-import { Product, ProductData } from '@app/core/models/product';
+import { ProductProjection } from '@app/catalog/models/product-projection';
+import { ProductVariant } from '@app/core/models/product-variant';
 
 const DEFAULT_IMAGE_INDEX = 0;
 
@@ -29,7 +30,7 @@ const DEFAULT_IMAGE_INDEX = 0;
   ],
 })
 export class CardComponent {
-  @Input({ required: true }) public product!: Product;
+  @Input({ required: true }) public product!: ProductProjection;
 
   public activeImageIndex$$ = new BehaviorSubject(DEFAULT_IMAGE_INDEX);
 
@@ -37,13 +38,13 @@ export class CardComponent {
 
   constructor(private readonly element: ElementRef) {}
 
-  public get current(): ProductData {
-    return this.product.masterData.current;
+  public get variant(): ProductVariant {
+    return this.product.masterVariant;
   }
 
   @HostListener('mousemove', ['$event'])
   public onMouseMove(event: MouseEvent): void {
-    const { images } = this.current.masterVariant;
+    const { images } = this.variant;
     const element = this.element.nativeElement;
     const delimeter = element.clientWidth / images.length;
     const relativeMousePosition = event.clientX - element.offsetLeft;
@@ -60,7 +61,7 @@ export class CardComponent {
   @HostListener('mouseenter')
   public onMouseEnter(): void {
     if (!this.sizes) {
-      this.sizes = this.product.masterData.current.variants.map((variant) => {
+      this.sizes = this.product.variants.map((variant) => {
         return variant.attributes.find((attribute) => attribute.name === 'size')?.value
           .label;
       });

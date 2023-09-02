@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { categoryResolver } from '@app/catalog/guards/catalog.resolver';
-
 import { MainComponent } from './pages/main/main.component';
 
 const routes: Routes = [
@@ -18,7 +16,6 @@ const routes: Routes = [
   {
     path: 'catalog',
     loadChildren: () => import('../catalog/catalog.module').then((m) => m.CatalogModule),
-    resolve: { category: categoryResolver },
   },
 ];
 

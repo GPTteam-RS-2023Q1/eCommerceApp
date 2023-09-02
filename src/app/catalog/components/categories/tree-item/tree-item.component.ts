@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 
@@ -11,10 +11,6 @@ import { TuiTreeItemContentComponent } from '@taiga-ui/kit';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TreeItemComponent extends TuiTreeItemContentComponent {
-  @HostBinding()
-  @Input()
-  public selected = '';
-
   public expanded = new BehaviorSubject(true);
 
   public clicked(): void {

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { CatalogComponent } from './catalog.component';
+import { categoryResolver, productResolver } from './guards/catalog.resolver';
 
 const routes: Routes = [
   {
@@ -12,6 +13,7 @@ const routes: Routes = [
   {
     path: ':category',
     component: CatalogComponent,
+    resolve: { category: categoryResolver, product: productResolver },
   },
 ];
 

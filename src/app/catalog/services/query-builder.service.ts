@@ -1,11 +1,12 @@
-import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+export type BuildedParams = [string, string][];
 
 @Injectable({
   providedIn: 'root',
 })
 export class QueryBuilderService {
-  private params = new HttpParams();
+  private params: BuildedParams = [];
 
   public queryDictionary!: Record<string, (...args: any[]) => void>;
 
@@ -15,11 +16,13 @@ export class QueryBuilderService {
     };
   }
 
-  public withCategory = (category: string): void => {
-    this.params = this.params.append('filter', `categories.key:"{${category}}"`);
-  };
+  public withCategory(category: string): void {
+    this.params.push(['filter.query', `categories.id:subtree("${category}")`]);
+  }
 
-  public getParams(): HttpParams {
-    return this.params;
+  public getParams(): BuildedParams {
+    const { params } = this;
+    this.params = [];
+    return params;
   }
 }

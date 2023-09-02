@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+
+import { map } from 'rxjs';
 
 import { Category } from '@app/core/models/category';
 import { selectCatalogCategories } from '@app/ngrx/selectors/catalog.selector';
@@ -30,12 +33,15 @@ interface TreeNode {
 export class CategoriesComponent implements OnInit {
   public data!: TreeNode[];
 
-  constructor(private store: Store) {}
+  public selectedCategory = this.route.paramMap.pipe(
+    map((params) => params.get('category'))
+  );
+
+  constructor(private store: Store, private route: ActivatedRoute) {}
 
   public ngOnInit(): void {
     this.store.select(selectCatalogCategories).subscribe((categories) => {
       this.data = this.createTree(categories);
-      console.log(categories);
     });
   }
 
@@ -47,7 +53,7 @@ export class CategoriesComponent implements OnInit {
       .filter((category) => category.parent && category.parent.id === parent)
       .map((child) => {
         const array = this.arrayToTree(categories, child.id);
-        return { text: child.name.en, link: child.description.en, children: array };
+        return { text: child.name.en, link: child.key, children: array };
       });
   }
 

@@ -2,6 +2,7 @@ import { LocalizedString } from './product';
 
 export interface Category {
   id: string;
+  key: string;
   version: number;
   name: LocalizedString;
   slug: LocalizedString;
