@@ -1,0 +1,35 @@
+@import '@taiga-ui/core/styles/taiga-ui-local';
+
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.img {
+  cursor: pointer;
+
+  display: block;
+
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.wrapper-modal {
+  display: flex;
+  align-items: center;
+  margin: 0 -5rem;
+
+  :host-context(tui-root._mobile) & {
+    margin: 0;
+
+    button {
+      display: none;
+    }
+  }
+}
+
+// .img-modal {
+//   width: auto;
+//   max-height: 100%;
+// }
