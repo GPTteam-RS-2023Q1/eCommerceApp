@@ -1,13 +1,6 @@
 <ng-container *ngIf="(product$ | async)?.masterData as product">
   <div class="wrapper">
     <div class="container-data">
-      <!-- <div class="image-wrapper">
-        <ng-container *ngFor="let img of product.current.masterVariant.images">
-          <img [src]="img.url" class="img" />
-        </ng-container>
-      </div>
-      <h3 class="description-header">О товаре</h3>
-      <p class="description">{{ product.current.description.ru }}</p> -->
       <ec-carousel-img [imgs]="product.current.masterVariant.images"></ec-carousel-img>
     </div>
     <div class="description-wrapper">
@@ -18,20 +11,17 @@
         class="price-container"
         className="product-price"
       ></ec-price>
-      <p class="description">{{ product.current.description.ru }}</p>
-      <ng-container *ngFor="let param of product.current.masterVariant.attributes">
-        <ng-container *ngIf="param.name !== 'size'">
-          <div class="container-params">
+      <p class="description">{{ product.current.description?.ru || '' }}</p>
+      <div class="attributes">
+        <ng-container *ngFor="let param of product.current.masterVariant.attributes">
+          <div *ngIf="param.name !== 'size'" class="container-params">
             <p class="key">
-              <span>{{ translate(param.name) }}</span>
-              <span
-                >...........................................................................................................................................................................................................</span
-              >
+              <span>{{ translate(param.name) }}:</span>
             </p>
             <span class="value">{{ param.value }}</span>
           </div>
         </ng-container>
-      </ng-container>
+      </div>
       <div class="block-selection">
         <tui-select
           [formControl]="controlSize"

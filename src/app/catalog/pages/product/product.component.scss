@@ -24,38 +24,8 @@
   }
 
   .container-data {
-    // max-width: 40%;
     max-width: 500px;
   }
-
-  // .image-wrapper {
-  //   display: flex;
-  //   justify-content: space-between;
-  //   flex-wrap: wrap;
-  //   row-gap: 15px;
-  //   width: 100%;
-  // }
-
-  // .img {
-  //   max-width: 32%;
-  //   height: auto;
-  //   display: block;
-  //   width: 100%;
-  // }
-
-  // .img:first-child {
-  //   max-width: 49%;
-  //   height: auto;
-  //   display: block;
-  //   width: 100%;
-  // }
-
-  // .img:nth-child(2) {
-  //   max-width: 49%;
-  //   height: auto;
-  //   display: block;
-  //   width: 100%;
-  // }
 
   .description-header {
     width: max-content;
@@ -74,15 +44,15 @@
     font-size: 24px;
   }
 
-  .container-params {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    font-size: 18px;
+  .attributes {
+    align-self: flex-start;
+    font-size: 16px;
   }
 
-  .key {
-    overflow: hidden;
+  .container-params {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
   }
 
   .block-selection {

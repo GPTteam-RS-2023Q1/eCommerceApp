@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { map, Observable } from 'rxjs';
+import { map, Observable, take } from 'rxjs';
 
 import { Product } from '@app/core/models/product';
 import { ProductVariant } from '@app/core/models/product-variant';
@@ -24,8 +24,8 @@ export class ProductComponent implements OnInit {
 
   public ngOnInit(): void {
     this.product$ = this.route.data.pipe(
+      take(1),
       map((data) => {
-        console.log(data['product']);
         return data['product'];
       })
     );

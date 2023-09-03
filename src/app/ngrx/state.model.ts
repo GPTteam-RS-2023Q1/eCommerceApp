@@ -1,5 +1,6 @@
 import { Customer } from '@app/auth/models/customer.model';
-import { Product } from '@app/core/models/product';
+import { ProductProjection } from '@app/catalog/models/product-projection';
+import { Category } from '@app/core/models/category';
 
 export interface AuthState {
   accessToken: string | null;
@@ -23,5 +24,6 @@ export interface AppState {
 export const catalogStateName = 'catalog';
 
 export interface CatalogState {
-  products: Product[] | null;
+  products: ProductProjection[] | null;
+  categories: Category[] | null;
 }

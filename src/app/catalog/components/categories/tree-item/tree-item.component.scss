@@ -1,0 +1,38 @@
+:host {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  height: var(--tui-height-s);
+  padding: 0 0.5rem;
+  padding: 0 2px;
+
+  background: var(--tui-base-01);
+  border-radius: var(--tui-radius-xs);
+
+  transition: all 0.2s ease 0s;
+
+  &:hover {
+    background-color: #e6efff;
+  }
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .icon {
+    color: var(--tui-link-night-hover);
+    border-radius: 50%;
+    transition: all 0.2s ease 0s;
+  }
+
+  .icon:hover {
+    background-color: #b5cefd;
+  }
+
+  .icon.expanded {
+    transform: rotate(90deg);
+  }
+}

@@ -1,14 +1,14 @@
 <div *ngIf="product" class="card">
   <div class="image-counter">
     <div
-      *ngFor="let image of current.masterVariant.images; index as i"
+      *ngFor="let image of variant.images; index as i"
       class="rectangle"
       [ngClass]="(activeImageIndex$$ | async) === i ? 'active' : ''"
     ></div>
   </div>
 
   <div class="image-wrapper">
-    <ng-container *ngFor="let image of current.masterVariant.images; index as i">
+    <ng-container *ngFor="let image of variant.images; index as i">
       <div
         [@showHide]="(activeImageIndex$$ | async) === i"
         class="image"
@@ -20,9 +20,9 @@
   </div>
 
   <div class="info">
-    <ec-price className="card" [price]="current.masterVariant.prices[0]"></ec-price>
-    <h4 class="brand">{{ current.name.ru }}</h4>
-    <h4 class="description">{{ current.metaDescription.ru }}</h4>
+    <ec-price className="card" [price]="variant.prices[0]"></ec-price>
+    <h4 class="brand">{{ product.name.ru }}</h4>
+    <h4 class="description">{{ product.metaDescription.ru }}</h4>
   </div>
 
   <p class="sizes">
