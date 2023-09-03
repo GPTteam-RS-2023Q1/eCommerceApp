@@ -8,8 +8,4 @@ import { TuiTreeItemContentComponent } from '@taiga-ui/kit';
   styleUrls: ['./tree-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TreeItemComponent extends TuiTreeItemContentComponent {
-  public click(): void {
-    console.log(this.context.$implicit);
-  }
-}
+export class TreeItemComponent extends TuiTreeItemContentComponent {}

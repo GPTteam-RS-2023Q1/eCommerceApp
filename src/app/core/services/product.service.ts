@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment.development';
 import { BuildedParams } from '@app/catalog/services/query-builder.service';
 
 import { ProductProjectionPageQueryResponse } from '../models/page-query-results';
+import { Product } from '../models/product';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,12 @@ export class ProductService {
     return this.http.get<ProductProjectionPageQueryResponse>(
       `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/product-projections/search`,
       { params }
+    );
+  }
+
+  public getProduct(id: string): Observable<Product> {
+    return this.http.get<Product>(
+      `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/products/${id}`
     );
   }
 }

@@ -38,6 +38,9 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['']);
   }
 
+  public toCatalog(): void {
+    this.router.navigate(['store/catalog']);
+  }
   public toCart(): void {
     this.router.navigate(['user/cart']);
   }

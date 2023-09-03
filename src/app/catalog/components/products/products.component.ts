@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { selectCatalogProducts } from '@app/ngrx/selectors/catalog.selector';
@@ -9,12 +10,16 @@ import { selectCatalogProducts } from '@app/ngrx/selectors/catalog.selector';
   styleUrls: ['./products.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
   public products$ = this.store.select(selectCatalogProducts);
 
-  constructor(private readonly store: Store) {}
+  constructor(
+    private readonly store: Store,
+    private readonly router: Router,
+    private route: ActivatedRoute
+  ) {}
 
-  public ngOnInit(): void {
-    this.products$.subscribe((val) => console.log(val));
+  public navigateToProduct(id: string): void {
+    this.router.navigate([id], { relativeTo: this.route });
   }
 }

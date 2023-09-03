@@ -19,7 +19,7 @@ export interface ProductCatalogData {
 
 export interface ProductData {
   categories: CategoryReference[];
-  description: LocalizedString;
+  description?: LocalizedString;
   metaDescription: LocalizedString;
   masterVariant: ProductVariant;
   name: LocalizedString;

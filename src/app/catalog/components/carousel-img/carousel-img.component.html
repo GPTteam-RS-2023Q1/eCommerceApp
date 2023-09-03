@@ -1,0 +1,55 @@
+<div tuiCarouselButtons class="wrapper">
+  <button
+    icon="tuiIconChevronLeftLarge"
+    title="Previous"
+    tuiIconButton
+    type="button"
+    (click)="carousel.prev()"
+  ></button>
+  <tui-carousel #carousel class="carousel">
+    <ng-container *ngFor="let img of imgs; let i = index">
+      <tui-island *tuiItem>
+        <img [src]="img.url" class="img" (click)="onClick(i)" />
+      </tui-island>
+    </ng-container>
+  </tui-carousel>
+  <button
+    icon="tuiIconChevronRightLarge"
+    title="Next"
+    tuiIconButton
+    type="button"
+    (click)="carousel.next()"
+  ></button>
+</div>
+
+<ng-template [(tuiDialog)]="open">
+  <div tuiCarouselButtons class="wrapper-modal" (touchstart.passive.stop)="(0)">
+    <button
+      icon="tuiIconChevronLeftLarge"
+      tuiIconButton
+      tuiMode="onDark"
+      type="button"
+      class="tui-space_right-4"
+      (click)="navigate(-1)"
+    ></button>
+    <tui-carousel [(index)]="index">
+      <ng-container *ngFor="let img of imgs">
+        <img [src]="img.url" class="img-modal" *tuiItem />
+      </ng-container>
+    </tui-carousel>
+    <button
+      icon="tuiIconChevronRightLarge"
+      tuiIconButton
+      tuiMode="onDark"
+      type="button"
+      class="tui-space_left-4"
+      (click)="navigate(1)"
+    ></button>
+  </div>
+  <tui-pagination
+    size="s"
+    class="tui-space_top-4"
+    [length]="imgs.length"
+    [(index)]="index"
+  ></tui-pagination>
+</ng-template>
