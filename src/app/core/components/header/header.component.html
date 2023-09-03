@@ -1,4 +1,15 @@
 <header class="header">
+  <button
+    class="catalog-btn"
+    (click)="toCatalog()"
+    tuiButton
+    type="button"
+    appearance="outline"
+    [size]="size"
+    icon="tuiIconBookOpenLarge"
+  >
+    Catalog
+  </button>
   <img class="logo" src="../../../../assets/logo.svg" alt="logo" (click)="toMain()" />
   <div class="container-user">
     <ec-auth-menu *ngIf="(isAuth | async) === false" [sizeInput]="size"></ec-auth-menu>

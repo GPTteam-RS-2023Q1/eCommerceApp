@@ -25,6 +25,11 @@
     filter: drop-shadow(4px 4px 0 #726c6c);
   }
 
+  .catalog-btn {
+    position: absolute;
+    left: 0;
+  }
+
   .logo.animate {
     animation: fadeIn 500ms ease-in-out;
   }
@@ -54,6 +59,16 @@
     .logo {
       position: static;
       transform: none;
+      order: 0;
+    }
+
+    .catalog-btn {
+      position: static;
+      order: 1;
+    }
+
+    .container-user {
+      order: 2;
     }
 
     .header {
