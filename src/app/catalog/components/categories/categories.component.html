@@ -3,12 +3,14 @@
     *ngFor="let item of data"
     [childrenHandler]="handler"
     [content]="content"
+    [map]="map"
     [tuiTreeController]="true"
     [value]="item"
   ></tui-tree>
 
   <ng-template #content let-item>
     <a
+      (click)="openNode(item)"
       class="link"
       [ngClass]="(selectedCategory | async) === item.link ? 'selected' : ''"
       [routerLink]="['../', item.link]"

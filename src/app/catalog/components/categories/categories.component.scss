@@ -14,7 +14,7 @@
   }
 
   .link.selected {
-    color: $red;
+    color: var(--tui-link-night-hover);
   }
 
   ::ng-deep tui-tree {

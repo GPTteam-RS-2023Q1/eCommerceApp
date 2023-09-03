@@ -1,8 +1,8 @@
-<div class="wrapper">
+<div (click)="click()" class="wrapper">
   <tui-svg
-    [ngClass]="(expanded | async) ? 'expanded' : ''"
-    (click)="clicked()"
+    [ngClass]="(context.$implicit.expanded$ | async) ? 'expanded' : ''"
     class="icon"
+    (click)="onClick()"
     *ngIf="isExpandable"
     src="tuiIconChevronRightLarge"
   ></tui-svg>

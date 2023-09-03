@@ -1,7 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { BehaviorSubject } from 'rxjs';
-
 import { TuiTreeItemContentComponent } from '@taiga-ui/kit';
 
 @Component({
@@ -11,10 +9,7 @@ import { TuiTreeItemContentComponent } from '@taiga-ui/kit';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TreeItemComponent extends TuiTreeItemContentComponent {
-  public expanded = new BehaviorSubject(true);
-
-  public clicked(): void {
-    this.onClick();
-    this.expanded.next(this.isExpanded);
+  public click(): void {
+    console.log(this.context.$implicit);
   }
 }

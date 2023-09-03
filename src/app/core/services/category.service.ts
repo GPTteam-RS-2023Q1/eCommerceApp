@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
@@ -19,9 +19,14 @@ export class CategoryService {
     );
   }
 
-  public getCategoryByKey(key: string): Observable<Category> {
+  public getCategoryByKey(key: string, expand?: string): Observable<Category> {
+    let params = new HttpParams();
+    if (expand) {
+      params = params.append('exapnd', expand);
+    }
     return this.http.get<Category>(
-      `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/categories/key=${key}`
+      `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/categories/key=${key}`,
+      { params }
     );
   }
 }
