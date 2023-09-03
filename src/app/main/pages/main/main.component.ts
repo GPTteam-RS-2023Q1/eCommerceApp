@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ec-main',
@@ -14,7 +14,7 @@ export class MainComponent {
 
   public items = new Array(this.countBanner).fill('');
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router) {}
 
   public toCatalog(): void {
     this.router.navigate(['store/catalog']);

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { catalogActions } from '@app/ngrx/actions/catalog.actions';
@@ -13,10 +14,18 @@ import { selectCatalogProducts } from '@app/ngrx/selectors/catalog.selector';
 export class ProductsComponent implements OnInit {
   public products$ = this.store.select(selectCatalogProducts);
 
-  constructor(private readonly store: Store) {}
+  constructor(
+    private readonly store: Store,
+    private readonly router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   public ngOnInit(): void {
     this.store.dispatch(catalogActions.getProducts());
     this.products$.subscribe((val) => console.log(val));
+  }
+
+  public navigateToProduct(id: string): void {
+    this.router.navigate([id], { relativeTo: this.route });
   }
 }

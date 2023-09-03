@@ -1,3 +1,7 @@
 <div class="products">
-  <ec-card *ngFor="let product of products$ | async" [product]="product"></ec-card>
+  <ec-card
+    *ngFor="let product of products$ | async"
+    [product]="product"
+    (click)="navigateToProduct(product.id)"
+  ></ec-card>
 </div>
