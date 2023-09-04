@@ -1,6 +1,7 @@
 :host {
   .filters {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
     align-items: center;
     justify-content: center;
@@ -10,5 +11,11 @@
 
   .search {
     width: 400px;
+  }
+
+  @media (width < 768px) {
+    .search {
+      width: 100%;
+    }
   }
 }
