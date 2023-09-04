@@ -1,0 +1,24 @@
+<tui-combo-box
+  *tuiLet="request(search) | async as text"
+  class="b-form"
+  [formControl]="control"
+  [valueContent]="value"
+  [(search)]="search"
+  (keydown)="onEnter($event)"
+>
+  Поиск
+  <input autocomplete="new-password" tuiTextfield />
+  <ng-template #value let-item>
+    <span class="name">{{ item }}</span>
+  </ng-template>
+  <ng-template tuiDataList>
+    <tui-data-list *ngIf="text; else loading">
+      <button (click)="onSelect(item)" *ngFor="let item of text" tuiOption [value]="item">
+        <span class="name">{{ item.input }}</span>
+      </button>
+    </tui-data-list>
+    <ng-template #loading>
+      <tui-loader class="tui-space_vertical-4"></tui-loader>
+    </ng-template>
+  </ng-template>
+</tui-combo-box>

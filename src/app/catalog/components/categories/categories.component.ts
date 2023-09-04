@@ -55,30 +55,28 @@ export class CategoriesComponent implements OnInit {
         this.data = this.createTree(categories);
       });
 
-    /* this.openTree(this.route.snapshot.paramMap.get('category') || ''); */
+    this.openTree();
   }
 
   public handler: TuiHandler<TreeNode, TreeNode[]> = (item) =>
     item.children || EMPTY_ARRAY;
 
-  private openTree(categoryKey: string | null): void {
-    this.categoryService.getCategoryByKey(categoryKey || '').subscribe((value) => {
-      let nodes = this.data;
-      value.ancestors.forEach((ancestor) => {
-        const parent = nodes.find((node) => node.id === ancestor.id);
-        if (parent) {
-          this.openNode(parent);
-          nodes = parent.children;
-        }
-      });
-
-      const target = nodes.find((node) => node.id === value.id);
-
-      if (target) {
-        this.openNode(target);
+  private openTree(): void {
+    const activeCategory = this.route.snapshot.data['category'] as Category;
+    let nodes = this.data;
+    activeCategory.ancestors.forEach((ancestor) => {
+      const parent = nodes.find((node) => node.id === ancestor.id);
+      if (parent) {
+        this.openNode(parent);
+        nodes = parent.children;
       }
-      console.log(this.map);
     });
+
+    const target = nodes.find((node) => node.id === activeCategory.id);
+
+    if (target) {
+      this.openNode(target);
+    }
   }
 
   private arrayToTree(categories: Category[], parent?: string): TreeNode[] {
@@ -92,7 +90,6 @@ export class CategoriesComponent implements OnInit {
           link: child.key,
           children: array,
         };
-        // this.map.set(node, false);
         return node;
       });
   }

@@ -1,17 +1,19 @@
 import {
-  ChangeDetectionStrategy,
-  forwardRef,
-  Component,
   AfterViewInit,
-  ViewChild,
-  OnDestroy,
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
   Input,
+  OnDestroy,
+  ViewChild,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { Subscription } from 'rxjs';
+
 import { AbstractRajiControl } from '@app/shared/models/classes/abstract-raji-control';
 import { TUI_DEFAULT_MATCHER, tuiPure } from '@taiga-ui/cdk';
 import { TuiMultiSelectComponent } from '@taiga-ui/kit';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ec-tag-input',

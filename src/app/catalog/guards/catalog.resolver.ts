@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { catchError, EMPTY, exhaustMap, map, tap } from 'rxjs';
+import { catchError, EMPTY, exhaustMap, map, retry, switchMap, tap } from 'rxjs';
 
 import { Category } from '@app/core/models/category';
 import { CategoryService } from '@app/core/services/category.service';
@@ -17,42 +17,52 @@ export const productResolver: ResolveFn<ProductProjection[]> = (
 ) => {
   const store = inject(Store);
   const router = inject(Router);
-  const queryBuilder = inject(QueryBuilderService);
+  const qb = inject(QueryBuilderService);
   const productService = inject(ProductService);
 
   const { category } = route.params;
   return inject(CategoryService)
-    .getCategoryByKey(category || '')
+    .getCategoryByKey(category)
+    .pipe(retry(3))
     .pipe(
       exhaustMap((param) => {
-        queryBuilder.withCategory(param.id);
-        return productService.getProducts(queryBuilder.getParams()).pipe(
-          catchError(() => {
-            router.navigate(['**']);
-            return EMPTY;
-          }),
-          map((value) => value.results),
-          tap((value) =>
-            store.dispatch(catalogActions.getProductsSuccess({ products: value }))
-          )
-        );
+        qb.filterByCategory(param.id);
+        Object.entries(route.queryParams).forEach(([key, value]) => {
+          qb.queryDictionary[key](value);
+        });
+        return productService
+          .getProducts({
+            parameters: qb.getBuildedParams(),
+          })
+          .pipe(
+            catchError(() => {
+              router.navigate(['**']);
+              return EMPTY;
+            }),
+            map((value) => value.results),
+            tap((value) =>
+              store.dispatch(catalogActions.getProductsSuccess({ products: value }))
+            )
+          );
       })
     );
 };
 
-export const categoryResolver: ResolveFn<Category[]> = () => {
+export const categoryResolver: ResolveFn<Category> = (route: ActivatedRouteSnapshot) => {
   const store = inject(Store);
   const router = inject(Router);
-  return inject(CategoryService)
-    .getCategories()
-    .pipe(
-      catchError(() => {
-        router.navigate(['**']);
-        return EMPTY;
-      }),
-      map((value) => value.results),
-      tap((value) =>
-        store.dispatch(catalogActions.getCategoriesSuccess({ categories: value }))
-      )
-    );
+  const categorySerivce = inject(CategoryService);
+  return categorySerivce.getCategories().pipe(
+    catchError(() => {
+      router.navigate(['**']);
+      return EMPTY;
+    }),
+    map((value) => value.results),
+    tap((value) => {
+      store.dispatch(catalogActions.getCategoriesSuccess({ categories: value }));
+    }),
+    switchMap(() => {
+      return categorySerivce.getCategoryByKey(route.params['category']);
+    })
+  );
 };
