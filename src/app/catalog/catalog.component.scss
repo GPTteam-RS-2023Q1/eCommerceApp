@@ -48,3 +48,9 @@
     }
   }
 }
+
+::ng-deep {
+  tui-root._mobile tui-dialog {
+    margin: auto !important;
+  }
+}

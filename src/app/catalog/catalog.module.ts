@@ -20,6 +20,7 @@ import { PriceInputComponent } from './components/price-input/price-input.compon
 import { ProductsComponent } from './components/products/products.component';
 import { SearchComponent } from './components/search/search.component';
 import { ProductComponent } from './pages/product/product.component';
+import { SortComponent } from './components/sort/sort.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ProductComponent } from './pages/product/product.component';
     FilterMultiSelectComponent,
     PriceInputComponent,
     FilterModalComponent,
+    SortComponent,
   ],
   imports: [
     CommonModule,
