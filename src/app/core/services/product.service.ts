@@ -15,10 +15,14 @@ import { Product } from '../models/product';
 export class ProductService {
   constructor(private readonly http: HttpClient) {}
 
-  public getProducts(
-    parameters: BuildedParams
-  ): Observable<ProductProjectionPageQueryResponse> {
-    let params = new HttpParams();
+  public getProducts({
+    parameters,
+    limit = 20,
+  }: {
+    parameters: BuildedParams;
+    limit?: number;
+  }): Observable<ProductProjectionPageQueryResponse> {
+    let params = new HttpParams().append('limit', limit);
     parameters.forEach((param) => {
       params = params.append(...param);
     });

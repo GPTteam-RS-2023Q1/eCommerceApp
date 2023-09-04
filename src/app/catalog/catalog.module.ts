@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { CoreModule } from '@app/core/core.module';
 import { SharedModule } from '@app/shared/shared.module';
-import { TuiTreeModule } from '@taiga-ui/kit';
+import { TuiLetModule } from '@taiga-ui/cdk';
+import { TuiLoaderModule } from '@taiga-ui/core';
+import { TuiMultiSelectModule, TuiTreeModule } from '@taiga-ui/kit';
 
 import { CatalogRoutingModule } from './catalog-routing.module';
 import { CatalogComponent } from './catalog.component';
@@ -13,6 +15,7 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { TreeItemComponent } from './components/categories/tree-item/tree-item.component';
 import { FiltersComponent } from './components/filters/filters.component';
 import { ProductsComponent } from './components/products/products.component';
+import { SearchComponent } from './components/search/search.component';
 import { ProductComponent } from './pages/product/product.component';
 
 @NgModule({
@@ -25,6 +28,7 @@ import { ProductComponent } from './pages/product/product.component';
     ProductComponent,
     CarouselImgComponent,
     FiltersComponent,
+    SearchComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +37,9 @@ import { ProductComponent } from './pages/product/product.component';
     NgOptimizedImage,
     CoreModule,
     TuiTreeModule,
+    TuiLoaderModule,
+    TuiMultiSelectModule,
+    TuiLetModule,
   ],
 })
 export class CatalogModule {}

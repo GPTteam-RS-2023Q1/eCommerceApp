@@ -17,7 +17,7 @@ export const productResolver: ResolveFn<ProductProjection[]> = (
 ) => {
   const store = inject(Store);
   const router = inject(Router);
-  const queryBuilder = inject(QueryBuilderService);
+  const qb = inject(QueryBuilderService);
   const productService = inject(ProductService);
 
   const { category } = route.params;
@@ -26,8 +26,14 @@ export const productResolver: ResolveFn<ProductProjection[]> = (
     .pipe(retry(3))
     .pipe(
       exhaustMap((param) => {
+        qb.filterByCategory(param.id);
+        Object.entries(route.queryParams).forEach(([key, value]) => {
+          qb.queryDictionary[key](value);
+        });
         return productService
-          .getProducts(queryBuilder.filterByCategory(param.id).getBuildedParams())
+          .getProducts({
+            parameters: qb.getBuildedParams(),
+          })
           .pipe(
             catchError(() => {
               router.navigate(['**']);

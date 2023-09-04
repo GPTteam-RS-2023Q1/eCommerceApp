@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
+import { QueryBuilderService } from '@app/catalog/services/query-builder.service';
+import { catalogActions } from '@app/ngrx/actions/catalog.actions';
 import { selectCatalogProducts } from '@app/ngrx/selectors/catalog.selector';
 
 @Component({
@@ -16,11 +18,18 @@ export class ProductsComponent implements OnInit {
   constructor(
     private readonly store: Store,
     private readonly router: Router,
-    private route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly qb: QueryBuilderService
   ) {}
 
   public ngOnInit(): void {
-    this.products$.subscribe((val) => console.log(val));
+    this.route.queryParamMap.subscribe(() => {
+      this.store.dispatch(
+        catalogActions.getProducts({
+          params: this.qb.withParamsFromURL(this.route.snapshot).getBuildedParams(),
+        })
+      );
+    });
   }
 
   public navigateToProduct(id: string): void {
