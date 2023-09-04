@@ -1,21 +1,24 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
   Injector,
+  Input,
   OnDestroy,
 } from '@angular/core';
-import { UserAddress } from '@app/user/models/user-address.model';
-import { TuiStatus } from '@taiga-ui/kit';
 import { Store } from '@ngrx/store';
-import { customerAction } from '@app/ngrx/actions/customer.actions';
-import { TuiDialogService } from '@taiga-ui/core';
-import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
-import { Tag } from '@app/user/models/enums/tags.enum';
+
 import { Subscription } from 'rxjs';
+
+import { customerAction } from '@app/ngrx/actions/customer.actions';
 import { NotificationService } from '@app/shared/services/notofication.service';
-import { UpdateCustomerService } from '../../../services/update-cutomer.service';
+import { Tag } from '@app/user/models/enums/tags.enum';
+import { UserAddress } from '@app/user/models/user-address.model';
+import { TuiDialogService } from '@taiga-ui/core';
+import { TuiStatus } from '@taiga-ui/kit';
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+
 import { CustomerActionBuilder } from '../../../services/customer-action-builder.service';
+import { UpdateCustomerService } from '../../../services/update-cutomer.service';
 import { EditAddressDialogComponent } from '../../dialogs/edit-address-dialog/edit-address-dialog.component';
 
 @Component({

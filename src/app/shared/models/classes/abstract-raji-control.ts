@@ -30,7 +30,6 @@ export abstract class AbstractRajiControl<T> implements ControlValueAccessor {
   }
 
   public onInput(): void {
-    console.log(1);
     this.onChange(this.control.value);
   }
 }
