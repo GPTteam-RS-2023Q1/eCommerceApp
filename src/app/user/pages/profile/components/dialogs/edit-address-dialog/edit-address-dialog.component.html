@@ -5,7 +5,7 @@
     [parentForm]="form"
     (errorHandle)="onErrorHandle()"
   ></ec-form-fail-notification>
-  <ec-address-tag-input class="test" formControlName="tags"></ec-address-tag-input>
+  <ec-tag-input class="test" formControlName="tags" [items]="items"></ec-tag-input>
   <ec-address-form formControlName="address"></ec-address-form>
   <div class="btn-container">
     <button
