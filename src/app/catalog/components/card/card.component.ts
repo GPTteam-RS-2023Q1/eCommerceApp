@@ -44,7 +44,6 @@ export class CardComponent {
 
   @HostListener('mousemove', ['$event'])
   public onMouseMove(event: MouseEvent): void {
-    debugger;
     const { images } = this.variant;
     const element = this.element.nativeElement as HTMLElement;
     const delimeter = element.clientWidth / images.length;
