@@ -44,10 +44,11 @@ export class CardComponent {
 
   @HostListener('mousemove', ['$event'])
   public onMouseMove(event: MouseEvent): void {
+    debugger;
     const { images } = this.variant;
-    const element = this.element.nativeElement;
+    const element = this.element.nativeElement as HTMLElement;
     const delimeter = element.clientWidth / images.length;
-    const relativeMousePosition = event.clientX - element.offsetLeft;
+    const relativeMousePosition = event.clientX - element.getBoundingClientRect().x;
 
     const imageIndex = Math.floor(relativeMousePosition / delimeter);
     this.activeImageIndex$$.next(imageIndex);
