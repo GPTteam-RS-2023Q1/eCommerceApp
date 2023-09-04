@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddressTagInputComponent } from './address-tag-input.component';
+import { TagInputComponent } from './tag-input.component';
 
 describe('AddressTagInputComponent', () => {
-  let component: AddressTagInputComponent;
-  let fixture: ComponentFixture<AddressTagInputComponent>;
+  let component: TagInputComponent;
+  let fixture: ComponentFixture<TagInputComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AddressTagInputComponent],
+      declarations: [TagInputComponent],
     });
-    fixture = TestBed.createComponent(AddressTagInputComponent);
+    fixture = TestBed.createComponent(TagInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

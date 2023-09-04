@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, Injector } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
 import { AddressForm } from '@app/auth/models/address-from.model';
+import { Tag } from '@app/user/models/enums/tags.enum';
 import { BaseUserProfileDialog } from '../baseUserProfileDialog';
 
 @Component({
@@ -10,6 +11,8 @@ import { BaseUserProfileDialog } from '../baseUserProfileDialog';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditAddressDialogComponent extends BaseUserProfileDialog implements OnInit {
+  public items: Tag[] = Object.values(Tag);
+
   constructor(private injector: Injector) {
     super(injector);
   }

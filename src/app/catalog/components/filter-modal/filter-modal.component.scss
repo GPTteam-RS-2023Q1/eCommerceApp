@@ -1,0 +1,11 @@
+:host {
+  .filters {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 40px;
+  }
+
+  .filter-item {
+    max-width: 250px;
+  }
+}
