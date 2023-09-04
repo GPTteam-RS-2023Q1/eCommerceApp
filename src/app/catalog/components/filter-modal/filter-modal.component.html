@@ -1,0 +1,37 @@
+<div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="filters">
+    <ec-filter-multi-select
+      class="filter-item"
+      formControlName="colors"
+      [items]="colors"
+      [placeHolder]="'Цвет'"
+    ></ec-filter-multi-select>
+    <ec-filter-multi-select
+      class="filter-item"
+      formControlName="seasons"
+      [items]="seasons"
+      [placeHolder]="'Сезон'"
+    ></ec-filter-multi-select>
+    <ec-filter-multi-select
+      class="filter-item"
+      formControlName="patterns"
+      [items]="pattern"
+      [placeHolder]="'Узор'"
+    ></ec-filter-multi-select>
+    <ec-price-input
+      formControlName="price"
+      [min]="minPrice"
+      [max]="maxPrice"
+    ></ec-price-input>
+    <button tuiButton size="m" type="submit">Apply</button>
+    <button
+      tuiButton
+      size="m"
+      type="button"
+      appearance="secondary-destructive"
+      (click)="reset()"
+    >
+      Reset
+    </button>
+  </form>
+</div>

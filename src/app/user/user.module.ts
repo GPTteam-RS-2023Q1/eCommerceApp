@@ -10,7 +10,7 @@ import { CustomerInfoComponent } from './pages/profile/components/customer-info/
 import { PasswordDialogComponent } from './pages/profile/components/dialogs/password-dialog/password-dialog.component';
 import { UserInfoDialogComponent } from './pages/profile/components/dialogs/user-info-dialog/user-info-dialog.component';
 import { EditAddressDialogComponent } from './pages/profile/components/dialogs/edit-address-dialog/edit-address-dialog.component';
-import { AddressTagInputComponent } from './pages/profile/components/address-tag-input/address-tag-input.component';
+import { TagInputComponent } from './pages/profile/components/tag-input/tag-input.component';
 
 @NgModule({
   declarations: [
@@ -22,8 +22,8 @@ import { AddressTagInputComponent } from './pages/profile/components/address-tag
     PasswordDialogComponent,
     UserInfoDialogComponent,
     EditAddressDialogComponent,
-    AddressTagInputComponent,
     UserInfoDialogComponent,
+    TagInputComponent,
   ],
   imports: [SharedModule, UserRoutingModule],
 })

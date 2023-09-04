@@ -112,6 +112,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   public openNode(node: TreeNode): void {
+    this.categoryService.menuSubject.next(false);
     this.map.set(node, true);
   }
 }

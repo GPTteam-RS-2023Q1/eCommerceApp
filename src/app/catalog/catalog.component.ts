@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { ProductService } from '@app/core/services/product.service';
+import { Observable, share } from 'rxjs';
 
-import { QueryBuilderService } from './services/query-builder.service';
+import { CategoryService } from '@app/core/services/category.service';
 
 @Component({
   selector: 'ec-catalog',
@@ -10,16 +10,15 @@ import { QueryBuilderService } from './services/query-builder.service';
   styleUrls: ['./catalog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CatalogComponent /* implements OnInit  */ {
-  constructor(private service: ProductService, private qb: QueryBuilderService) {}
+export class CatalogComponent {
+  public isMenuOpen$: Observable<boolean>;
 
-  /* public ngOnInit(): void {
-    this.service
-      .getProducts({
-        parameters: this.qb.fiterByText('камуфляж').getBuildedParams(),
-      })
-      .subscribe((val) => {
-        console.log(val);
-      });
-  } */
+  constructor(public categoryService: CategoryService) {
+    this.isMenuOpen$ = this.categoryService.menuSubject.asObservable().pipe(share());
+  }
+
+  public toggleMenu(): void {
+    const isOpen = this.categoryService.menuSubject.getValue();
+    this.categoryService.menuSubject.next(!isOpen);
+  }
 }
