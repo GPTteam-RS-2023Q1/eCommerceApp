@@ -1,4 +1,11 @@
 <div class="filters">
   <ec-search class="search"></ec-search>
-  <button tuiButton class="filters" (click)="open()">Фильтры</button>
+  <button
+    tuiButton
+    icon="tuiIconFilterLarge"
+    size="m"
+    appearance="outline"
+    (click)="open()"
+  ></button>
+  <ec-sort></ec-sort>
 </div>

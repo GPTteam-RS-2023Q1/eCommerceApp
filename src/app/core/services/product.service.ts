@@ -26,7 +26,6 @@ export class ProductService {
     parameters.forEach((param) => {
       params = params.append(...param);
     });
-    console.log(params);
     return this.http.get<ProductProjectionPageQueryResponse>(
       `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/product-projections/search`,
       { params }

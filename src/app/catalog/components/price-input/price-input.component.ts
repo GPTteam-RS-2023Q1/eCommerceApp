@@ -31,11 +31,11 @@ export class PriceInputComponent
 {
   @ViewChild(TuiInputRangeComponent) public input!: TuiInputRangeComponent;
   public subs = new Subscription();
+  public pluralize = { one: '$', other: '$' };
   @Input({ required: true }) public max!: number;
   @Input({ required: true }) public min!: number;
 
   public ngAfterViewInit(): void {
-    console.dir(this.input.nativeFocusableElement);
     this.input.nativeFocusableElement?.addEventListener('blur', () => {
       this.onChange(this.control.value);
       this.onTouch();
