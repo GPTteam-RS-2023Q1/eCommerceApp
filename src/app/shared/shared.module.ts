@@ -3,16 +3,20 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaskitoModule } from '@maskito/angular';
+import { TuiTableModule } from '@taiga-ui/addon-table';
 import {
   TuiButtonModule,
   TuiDataListModule,
+  TuiDialogModule,
   TuiErrorModule,
   TuiHostedDropdownModule,
   TuiLinkModule,
   TuiNotificationModule,
   TuiSvgModule,
+  TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import {
+  TuiAvatarModule,
   TuiCarouselModule,
   TuiCheckboxLabeledModule,
   TuiComboBoxModule,
@@ -23,16 +27,27 @@ import {
   TuiInputModule,
   TuiInputPasswordModule,
   TuiIslandModule,
+  TuiMultiSelectModule,
   TuiPaginationModule,
+  TuiSelectModule,
+  TuiTagModule,
   TuiToggleModule,
 } from '@taiga-ui/kit';
 
+import { AddressFormComponent } from './components/address-form/address-form.component';
 import { EmailInputComponent } from './components/email-input/email-input.component';
+import { FormFailNotificationComponent } from './components/form-fail-notification/form-fail-notification.component';
 import { InputComponent } from './components/input/input.component';
 import { PasswordInputComponent } from './components/password-input/password-input.component';
 
 @NgModule({
-  declarations: [InputComponent, EmailInputComponent, PasswordInputComponent],
+  declarations: [
+    InputComponent,
+    EmailInputComponent,
+    PasswordInputComponent,
+    FormFailNotificationComponent,
+    AddressFormComponent,
+  ],
   imports: [
     CommonModule,
     TuiNotificationModule,
@@ -56,6 +71,13 @@ import { PasswordInputComponent } from './components/password-input/password-inp
     TuiCarouselModule,
     TuiIslandModule,
     TuiPaginationModule,
+    TuiTableModule,
+    TuiTagModule,
+    TuiAvatarModule,
+    TuiDialogModule,
+    TuiMultiSelectModule,
+    TuiTextfieldControllerModule,
+    TuiSelectModule,
   ],
   exports: [
     CommonModule,
@@ -83,6 +105,15 @@ import { PasswordInputComponent } from './components/password-input/password-inp
     TuiCarouselModule,
     TuiIslandModule,
     TuiPaginationModule,
+    TuiTableModule,
+    TuiTagModule,
+    TuiAvatarModule,
+    TuiDialogModule,
+    FormFailNotificationComponent,
+    AddressFormComponent,
+    TuiMultiSelectModule,
+    TuiTextfieldControllerModule,
+    TuiSelectModule,
   ],
 })
 export class SharedModule {}

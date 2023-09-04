@@ -1,0 +1,112 @@
+@import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap';
+
+:host {
+  .wrapper {
+    display: flex;
+
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 10px 20px;
+
+    font-family: Montserrat, sans-serif !important;
+  }
+
+  .description-wrapper {
+    position: sticky;
+    top: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+
+    width: calc(100% - 500px);
+    height: max-content;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .container-data {
+    max-width: 500px;
+  }
+
+  .description-header {
+    width: max-content;
+    padding-top: 20px;
+    font-size: 20px;
+    border-bottom: 2px solid black;
+  }
+
+  .description {
+    padding: 10px 0;
+    font-size: 18px;
+  }
+
+  .name,
+  .brand {
+    font-size: 24px;
+  }
+
+  .attributes {
+    align-self: flex-start;
+    font-size: 16px;
+  }
+
+  .container-params {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .block-selection {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-end;
+
+    width: 100%;
+    padding: 0 30px;
+  }
+
+  .price-container {
+    position: relative;
+
+    ::ng-deep {
+      .discount {
+        top: -5px !important;
+        right: -45px !important;
+        left: initial !important;
+      }
+    }
+  }
+
+  @media (width <= 850px) {
+    .wrapper {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .description-wrapper {
+      width: 80%;
+    }
+  }
+
+  @media (width <= 650px) {
+    .container-data {
+      max-width: 300px;
+    }
+
+    .description-wrapper {
+      width: 100%;
+    }
+  }
+}
+
+::ng-deep {
+  .tui-space_vertical-4 {
+    width: 100px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}

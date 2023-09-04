@@ -1,0 +1,42 @@
+<ng-container *ngIf="(product$ | async)?.masterData as product">
+  <div class="wrapper">
+    <div class="container-data">
+      <ec-carousel-img [imgs]="product.current.masterVariant.images"></ec-carousel-img>
+    </div>
+    <div class="description-wrapper">
+      <p class="brand">{{ product.current.name.ru }}</p>
+      <p class="name">{{ product.current.metaDescription.ru }}</p>
+      <ec-price
+        [price]="product.current.masterVariant.prices[0]"
+        class="price-container"
+        className="product-price"
+      ></ec-price>
+      <p class="description">{{ product.current.description?.ru || '' }}</p>
+      <div class="attributes">
+        <ng-container *ngFor="let param of product.current.masterVariant.attributes">
+          <div *ngIf="param.name !== 'size'" class="container-params">
+            <p class="key">
+              <span>{{ translate(param.name) }}:</span>
+            </p>
+            <span class="value">{{ param.value }}</span>
+          </div>
+        </ng-container>
+      </div>
+      <div class="block-selection">
+        <tui-select
+          [formControl]="controlSize"
+          tuiTextfieldSize="m"
+          class="tui-space_vertical-4"
+        >
+          Size
+          <input placeholder="Choose your size" tuiTextfield />
+          <tui-data-list-wrapper
+            *tuiDataList
+            [items]="getSize(product.current.variants)"
+          ></tui-data-list-wrapper>
+        </tui-select>
+        <button tuiButton type="button" size="m">В корзину</button>
+      </div>
+    </div>
+  </div>
+</ng-container>

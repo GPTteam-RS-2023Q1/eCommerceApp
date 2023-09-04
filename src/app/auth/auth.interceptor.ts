@@ -5,8 +5,10 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, exhaustMap, take } from 'rxjs';
 import { Store } from '@ngrx/store';
+
+import { exhaustMap, Observable, take } from 'rxjs';
+
 import { selectAccessToken } from '@app/ngrx/selectors/auth.selector';
 
 @Injectable()

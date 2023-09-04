@@ -7,7 +7,7 @@
 
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
 
     max-width: 1440px;
     height: 100%;
@@ -54,11 +54,19 @@
     .logo {
       position: static;
       transform: none;
+      order: 0;
+    }
+
+    .catalog-btn {
+      order: 1;
+    }
+
+    .container-user {
+      order: 2;
     }
 
     .header {
       flex-direction: column;
-      align-items: center;
       justify-content: space-around;
     }
   }

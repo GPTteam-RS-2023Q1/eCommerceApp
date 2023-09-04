@@ -1,0 +1,17 @@
+<div class="wrapper">
+  <tui-multi-select
+    class="b-form"
+    [editable]="false"
+    [formControl]="control"
+    [(search)]="search"
+    [tuiTextfieldLabelOutside]="true"
+    [tuiTextfieldCleaner]="true"
+  >
+    Address Tags
+    <tui-data-list-wrapper
+      *tuiDataList
+      tuiMultiSelectGroup
+      [items]="filter(search)"
+    ></tui-data-list-wrapper>
+  </tui-multi-select>
+</div>

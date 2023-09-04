@@ -1,0 +1,13 @@
+<div class="products">
+  <ng-container *ngIf="(products$ | async)?.length; else notFound">
+    <ec-card
+      *ngFor="let product of products$ | async"
+      [product]="product"
+      (click)="navigateToProduct(product.id)"
+    ></ec-card>
+  </ng-container>
+
+  <ng-template #notFound>
+    <h2>Продуктов по данному запросу нет в наличии</h2>
+  </ng-template>
+</div>

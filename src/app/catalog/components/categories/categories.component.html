@@ -1,0 +1,20 @@
+<div class="categories">
+  <tui-tree
+    *ngFor="let item of data"
+    [childrenHandler]="handler"
+    [content]="content"
+    [map]="map"
+    [tuiTreeController]="false"
+    [value]="item"
+  ></tui-tree>
+
+  <ng-template #content let-item>
+    <a
+      (click)="openNode(item)"
+      class="link"
+      [ngClass]="(selectedCategory | async) === item.link ? 'selected' : ''"
+      [routerLink]="['../', item.link]"
+      >{{ item.text }}</a
+    >
+  </ng-template>
+</div>

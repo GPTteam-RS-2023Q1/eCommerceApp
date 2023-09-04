@@ -1,0 +1,31 @@
+<div *ngIf="product" class="card">
+  <div class="image-counter">
+    <div
+      *ngFor="let image of variant.images; index as i"
+      class="rectangle"
+      [ngClass]="(activeImageIndex$$ | async) === i ? 'active' : ''"
+    ></div>
+  </div>
+
+  <div class="image-wrapper">
+    <ng-container *ngFor="let image of variant.images; index as i">
+      <div
+        [@showHide]="(activeImageIndex$$ | async) === i"
+        class="image"
+        *ngIf="(activeImageIndex$$ | async) === i"
+      >
+        <img [ngSrc]="image.url" fill />
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="info">
+    <ec-price className="card" [price]="variant.prices[0]"></ec-price>
+    <h4 class="brand">{{ product.name.ru }}</h4>
+    <h4 class="description">{{ product.metaDescription.ru }}</h4>
+  </div>
+
+  <p class="sizes">
+    Размеры: <span class="sizes-values">{{ sizes?.join(' ') }}</span>
+  </p>
+</div>

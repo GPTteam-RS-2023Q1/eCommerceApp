@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { authAction } from '@app/ngrx/actions/auth.actions';
-import { selectUserName } from '@app/ngrx/selectors/auth.selector';
+import { selectUserName } from '@app/ngrx/selectors/customer.selector';
 import { LocalKey } from '@app/shared/models/localStorage.enun';
 import { TuiHostedDropdownComponent } from '@taiga-ui/core';
 

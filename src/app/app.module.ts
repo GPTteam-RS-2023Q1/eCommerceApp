@@ -1,7 +1,10 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { APP_INITIALIZER, NgModule, inject } from '@angular/core';
+import { APP_INITIALIZER, inject, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Actions, ofType } from '@ngrx/effects';
+
+import { firstValueFrom } from 'rxjs';
 
 import {
   TUI_SANITIZER,
@@ -11,15 +14,13 @@ import {
 } from '@taiga-ui/core';
 import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 
-import { Actions, ofType } from '@ngrx/effects';
-import { firstValueFrom } from 'rxjs';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptorService } from './auth/auth.interceptor';
-import { CoreModule } from './core/core.module';
-import { AppStoreModule } from './ngrx/store.module';
 import { AuthService } from './auth/services/auth.service';
+import { CoreModule } from './core/core.module';
 import { authAction } from './ngrx/actions/auth.actions';
+import { AppStoreModule } from './ngrx/store.module';
 
 function initAutoLogin(): () => Promise<void> {
   const actions$ = inject(Actions);

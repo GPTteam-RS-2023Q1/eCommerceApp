@@ -1,0 +1,8 @@
+<tui-notification
+  [ngClass]="{ visible: error }"
+  status="error"
+  [hasIcon]="false"
+  (close)="onClose()"
+>
+  {{ error }}
+</tui-notification>

@@ -1,0 +1,29 @@
+<tui-hosted-dropdown tuiDropdownLimitWidth="min" [content]="dropdown" [(open)]="open">
+  <button
+    tuiButton
+    type="button"
+    appearance="outline"
+    size="m"
+    icon="tuiIconSlidersLarge"
+    [iconRight]="open ? 'tuiIconChevronUp' : 'tuiIconChevronDown'"
+    [pseudoActive]="open || null"
+  ></button>
+</tui-hosted-dropdown>
+<ng-template #dropdown let-close="close">
+  <tui-data-list>
+    <tui-opt-group>
+      <button tuiOption (click)="priceAsc()" class="auth-option">
+        <span>По возрастанию цены</span>
+      </button>
+      <button tuiOption (click)="priceDesc()" class="auth-option">
+        <span>По убыванию цены</span>
+      </button>
+      <button tuiOption (click)="nameAsc()" class="auth-option">
+        <span>В алфавитном порядке</span>
+      </button>
+      <button tuiOption (click)="nameDesc()" class="auth-option">
+        <span>В обратном алфавитном порядке</span>
+      </button>
+    </tui-opt-group>
+  </tui-data-list>
+</ng-template>

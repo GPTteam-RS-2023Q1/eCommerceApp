@@ -1,0 +1,24 @@
+<div class="wrapper">
+  <button
+    appearance="whiteblock"
+    tuiButton
+    type="button"
+    class="btm-menu"
+    icon="tuiIconMenuLarge"
+    (click)="toggleMenu()"
+  >
+    Каталог
+    <tui-svg
+      [src]="(isMenuOpen$ | async) ? 'tuiIconChevronLeft' : 'tuiIconChevronRight'"
+    ></tui-svg>
+  </button>
+  <div class="wrapper-column">
+    <div class="left-column" [ngClass]="{ open: isMenuOpen$ | async }">
+      <ec-categories></ec-categories>
+    </div>
+    <div class="right-column">
+      <ec-filters></ec-filters>
+      <ec-products></ec-products>
+    </div>
+  </div>
+</div>

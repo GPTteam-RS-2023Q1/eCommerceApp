@@ -1,0 +1,40 @@
+<tui-island class="address">
+  <h3 class="tui-island__title">
+    {{ address.country }}
+  </h3>
+  <h4 class=".tui-island__category">
+    <tui-tag
+      *ngFor="let tag of address.tags"
+      class="tui-space_right-1"
+      [value]="tag"
+      [status]="getTagColor(tag)"
+    ></tui-tag>
+  </h4>
+  <p class="tui-island__paragraph">City: {{ address.city }}</p>
+  <p class="tui-island__paragraph">Street: {{ address.streetName }}</p>
+  <p class="tui-island__paragraph">PostalCode: {{ address.postalCode }}</p>
+  <p class="tui-island__paragraph tui-island__paragraph_button">
+    <button
+      tuiIconButton
+      appearance="flat"
+      size="s"
+      icon="tuiIconEdit"
+      title="Remove"
+      shape="rounded"
+      type="button"
+      class="remove"
+      (click)="editAddress()"
+    ></button>
+    <button
+      tuiIconButton
+      appearance="flat"
+      size="s"
+      icon="tuiIconTrash"
+      title="Remove"
+      shape="rounded"
+      type="button"
+      class="remove"
+      (click)="remove(address)"
+    ></button>
+  </p>
+</tui-island>

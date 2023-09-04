@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+tui-notification {
+  position: fixed;
+  right: -250px;
+  max-width: 250px;
+  transition: 0.2s all;
+}
+
+.visible {
+  right: 0;
+}
+
+::ng-deep {
+  tui-root._mobile tui-dialog {
+    margin: auto !important;
+  }
+}

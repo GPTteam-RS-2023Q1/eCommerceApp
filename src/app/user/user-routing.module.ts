@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { CartComponent } from './pages/cart/cart.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { ProfileGuard } from './pages/profile/guard/profile.guard';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [ProfileGuard],
   },
 ];
 
