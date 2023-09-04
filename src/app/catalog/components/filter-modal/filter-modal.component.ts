@@ -55,6 +55,7 @@ export class FilterModalComponent implements OnInit {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: this.form.value,
+      queryParamsHandling: 'merge',
     });
 
     this.context.completeWith(true);
