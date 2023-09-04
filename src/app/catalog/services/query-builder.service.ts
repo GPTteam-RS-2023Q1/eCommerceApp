@@ -19,6 +19,18 @@ export class QueryBuilderService {
       text: (text: string): void => {
         this.fiterByText(text);
       },
+      colors: (colors: string[]): void => {
+        this.filterByColor(colors);
+      },
+      price: (price: string[]): void => {
+        this.filterByPrice(price);
+      },
+      seasons: (seasons: string[]): void => {
+        this.filterBySeasons(seasons);
+      },
+      patterns: (patterns: string[]): void => {
+        this.filterByPatterns(patterns);
+      },
     };
   }
 
@@ -42,23 +54,21 @@ export class QueryBuilderService {
   public sortByPrice(mode: SortMode): QueryBuilderService {
     this.params.push(['sort', `price ${mode}`]);
     return this;
-
-    return this;
   }
 
-  public withColor(color: string[]): QueryBuilderService {
-    if (color.length === 0 || !color[0]) {
+  public filterByColor(colors: string[]): QueryBuilderService {
+    if (colors.length === 0 || !colors[0]) {
       return this;
     }
 
     this.params.push([
       'filter.query',
-      `variants.attributes.color:${color.map((val) => `"${val}"`).join(',')}`,
+      `variants.attributes.color:${colors.map((val) => `"${val}"`).join(',')}`,
     ]);
     return this;
   }
 
-  public withSeason(season: string[]): QueryBuilderService {
+  public filterBySeasons(season: string[]): QueryBuilderService {
     if (season.length === 0 || !season[0]) {
       return this;
     }
@@ -70,21 +80,21 @@ export class QueryBuilderService {
     return this;
   }
 
-  public withPrice(priceRange: number[]): QueryBuilderService {
+  public filterByPrice(priceRange: string[]): QueryBuilderService {
     if (priceRange.length === 0 || priceRange[0] === undefined) {
       return this;
     }
 
     this.params.push([
       'filter.query',
-      `variants.price.centAmount:range (${priceRange[0] * 100} to ${
-        priceRange[1] * 100
+      `variants.price.centAmount:range (${Number(priceRange[0]) * 100} to ${
+        Number(priceRange[1]) * 100
       })`,
     ]);
     return this;
   }
 
-  public withPattern(pattern: string[]): QueryBuilderService {
+  public filterByPatterns(pattern: string[]): QueryBuilderService {
     if (pattern.length === 0 || !pattern[0]) {
       return this;
     }
@@ -105,6 +115,7 @@ export class QueryBuilderService {
   public withParamsFromURL(route: ActivatedRouteSnapshot): QueryBuilderService {
     this.filterByCategory(route.data['category'].id);
     Object.entries(route.queryParams).forEach(([key, value]) => {
+      console.log(value);
       this.queryDictionary[key](value);
     });
 

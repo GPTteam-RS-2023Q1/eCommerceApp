@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { map, take } from 'rxjs';
 
 import { Category } from '@app/core/models/category';
+import { CategoryService } from '@app/core/services/category.service';
 import { selectCatalogCategories } from '@app/ngrx/selectors/catalog.selector';
 import { EMPTY_ARRAY, TuiHandler } from '@taiga-ui/cdk';
 import { TUI_TREE_CONTENT } from '@taiga-ui/kit';
@@ -40,7 +41,11 @@ export class CategoriesComponent implements OnInit {
     map((params) => params.get('category'))
   );
 
-  constructor(private store: Store, private route: ActivatedRoute) {}
+  constructor(
+    private store: Store,
+    private route: ActivatedRoute,
+    private categoryService: CategoryService
+  ) {}
 
   public ngOnInit(): void {
     this.store

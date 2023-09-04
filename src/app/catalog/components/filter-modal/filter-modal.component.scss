@@ -1,11 +1,16 @@
 :host {
   .filters {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: auto;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 30px;
+    column-gap: 20px;
+
     margin-bottom: 40px;
   }
 
-  .filter-item {
-    max-width: 250px;
+  .buttons {
+    display: flex;
+    justify-content: space-between;
   }
 }
