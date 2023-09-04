@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding: 0 20px;
 }
 
 tui-notification {
@@ -13,4 +14,10 @@ tui-notification {
 
 .visible {
   right: 0;
+}
+
+::ng-deep {
+  tui-root._mobile tui-dialog {
+    margin: auto !important;
+  }
 }
