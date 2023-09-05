@@ -21,7 +21,9 @@ export class ControlDependencyDirective implements OnInit, OnDestroy {
       const element = this.parentForm.form.get(String(this.control.name));
       const targetControl = this.parentForm.control.get(this.controlName);
 
-      element?.disable();
+      if (targetControl?.invalid) {
+        element?.disable();
+      }
 
       this.subscription.add(
         targetControl?.statusChanges.subscribe(() => {
