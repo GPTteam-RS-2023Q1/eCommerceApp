@@ -9,9 +9,9 @@ import { Customer } from '@app/auth/models/customer.model';
 import { authAction } from '@app/ngrx/actions/auth.actions';
 
 import { LocalStorageAuthData } from '../models/authLocalStorage.model';
+import { CustomerDraft } from '../models/customer-draft.model';
 import { GetAccessTokenResponse, GetUSerTokens } from '../models/getTokens.model';
 import { SignInResult } from '../models/signInResult.model';
-import { CustomerDraft } from '../models/customer-draft.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -19,7 +19,7 @@ export class AuthService {
 
   public getAccessToken(): Observable<GetAccessTokenResponse> {
     let httpParams = new HttpParams().set('grant_type', 'client_credentials');
-    httpParams = httpParams.append('scope', environment.CTP_SCOPES); // TODO change scopes to only view products
+    httpParams = httpParams.append('scope', environment.CTP_SCOPES);
 
     return this.http.post<GetUSerTokens>(
       `${environment.CTP_AUTH_URL}/oauth/token`,
@@ -90,7 +90,7 @@ export class AuthService {
 
   public refreshToken(refreshToken: string): Observable<GetAccessTokenResponse> {
     let httpParams = new HttpParams().set('grant_type', 'refresh_token');
-    httpParams = httpParams.append('refresh_token', refreshToken); // TODO change scopes to only view products
+    httpParams = httpParams.append('refresh_token', refreshToken);
 
     return this.http.post<GetUSerTokens>(
       `${environment.CTP_AUTH_URL}/oauth/token`,
