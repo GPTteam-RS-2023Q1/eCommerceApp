@@ -39,6 +39,7 @@ import { EmailInputComponent } from './components/email-input/email-input.compon
 import { FormFailNotificationComponent } from './components/form-fail-notification/form-fail-notification.component';
 import { InputComponent } from './components/input/input.component';
 import { PasswordInputComponent } from './components/password-input/password-input.component';
+import { ControlDependencyDirective } from './directives/control-dependency.directive';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { PasswordInputComponent } from './components/password-input/password-inp
     PasswordInputComponent,
     FormFailNotificationComponent,
     AddressFormComponent,
+    ControlDependencyDirective,
   ],
   imports: [
     CommonModule,
@@ -114,6 +116,7 @@ import { PasswordInputComponent } from './components/password-input/password-inp
     TuiMultiSelectModule,
     TuiTextfieldControllerModule,
     TuiSelectModule,
+    ControlDependencyDirective,
   ],
 })
 export class SharedModule {}
