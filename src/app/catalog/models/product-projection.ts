@@ -2,8 +2,8 @@ import {
   CategoryReference,
   LocalizedString,
   ProductType,
-} from '@app/core/models/product';
-import { ProductVariant } from '@app/core/models/product-variant';
+} from '@app/shared/models/interfaces/product';
+import { ProductVariant } from '@app/shared/models/interfaces/product-variant';
 
 export interface ProductProjection {
   id: string;

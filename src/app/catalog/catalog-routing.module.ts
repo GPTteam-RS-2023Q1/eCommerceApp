@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CatalogComponent } from './catalog.component';
 import {
   categoryResolver,
-  productResolver as productsResolver,
+  productResolver,
+  productsResolver,
 } from './guards/catalog.resolver';
+import { CatalogComponent } from './pages/catalog/catalog.component';
 import { ProductComponent } from './pages/product/product.component';
-import { productResolver } from './resolvers/product.resolver';
 
 const routes: Routes = [
   {

@@ -2,7 +2,7 @@ import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
 import { ProductProjection } from '@app/catalog/models/product-projection';
 import { BuildedParams } from '@app/catalog/services/query-builder.service';
-import { Category } from '@app/core/models/category';
+import { Category } from '@app/shared/models/interfaces/category';
 
 export const catalogActions = createActionGroup({
   source: 'Catalog',

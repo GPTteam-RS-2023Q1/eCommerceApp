@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-import { Category } from '../models/category';
-import { CategoryPageQueryResponse } from '../models/page-query-results';
+import { Category } from '@app/shared/models/interfaces/category';
+import { CategoryPageQueryResponse } from '@app/shared/models/interfaces/page-query-results';
 
 @Injectable({
   providedIn: 'root',

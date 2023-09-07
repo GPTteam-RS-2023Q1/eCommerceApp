@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { Price } from '@app/core/models/product-variant';
+import { Price } from '@app/shared/models/interfaces/product-variant';
 
 @Component({
   selector: 'ec-price',

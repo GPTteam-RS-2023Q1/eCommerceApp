@@ -1,0 +1,7 @@
+<div class="form-row">
+  <tui-input-date class="sign-up-form-age" [formControl]="control">
+    Дата рождения
+    <input tuiTextfield autocomplete="off" (blur)="onTouch()" />
+  </tui-input-date>
+  <tui-error [error]="[] | tuiFieldError | async"></tui-error>
+</div>

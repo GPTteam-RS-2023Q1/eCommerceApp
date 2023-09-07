@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { AddressForm } from '@app/auth/models/address-from.model';
 import { CustomerDraft } from '@app/auth/models/customer-draft.model';
 import { COUNTRIES } from '@app/consts/country-data';
+import { AddressForm } from '@app/shared/models/interfaces/address-from.model';
 import { compareObjects } from '@app/utils/compareObjects';
 import { createDate } from '@app/utils/createDate';
 

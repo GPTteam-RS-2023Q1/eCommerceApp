@@ -1,33 +1,27 @@
 import { Injectable } from '@angular/core';
-import { AddressForm } from '@app/auth/models/address-from.model';
-import { ChangeEmailAction } from '@app/user/models/customer-update-actions/change-email.modet';
-import { CustomerAction } from '@app/user/models/customer-update-actions/customer-action.model';
+
+import { AddressForm } from '@app/shared/models/interfaces/address-from.model';
+import * as Actions from '@app/user/models/customer-update-actions';
 import { CustomerUpdateActions } from '@app/user/models/enums/customer-actions.enum';
-import { RemoveAddressAction } from '@app/user/models/customer-update-actions/remove-address.model';
-import { SetDateOfBirthAction } from '@app/user/models/customer-update-actions/set-date-of-birth.model';
-import { SetFirstNameAction } from '@app/user/models/customer-update-actions/set-first-name.model';
-import { SetLastNameAction } from '@app/user/models/customer-update-actions/set-last-name.model';
-import { createDate } from '@app/utils/createDate';
-import { ChangeAddressAction } from '@app/user/models/customer-update-actions/change-address.model';
-import { AddAddressAction } from '@app/user/models/customer-update-actions/add-address.model';
-import { AddressTagAction } from '@app/user/models/customer-update-actions/address-tag.model';
 import { Tag } from '@app/user/models/enums/tags.enum';
-import { CustomerBuilderService } from '@app/core/services/customer-builder.service';
+import { createDate } from '@app/utils/createDate';
+
+import { CustomerBuilderService } from './customer-builder.service';
 
 @Injectable()
 export class CustomerActionBuilder {
-  private readonly actions: CustomerAction[] = [];
+  private readonly actions: Actions.CustomerAction[] = [];
   private setTagsDictionary: Record<Tag, CustomerUpdateActions> = {
-    'default shipping address': CustomerUpdateActions.setDefaultShippingAddress,
-    'default billing address': CustomerUpdateActions.setDefaultBillingAddress,
-    'billing address': CustomerUpdateActions.addBillingAddressId,
-    'shipping address': CustomerUpdateActions.addShippingAddressId,
+    [Tag.defaultShippingAddress]: CustomerUpdateActions.setDefaultShippingAddress,
+    [Tag.defaultBillingAddress]: CustomerUpdateActions.setDefaultBillingAddress,
+    [Tag.billindAddress]: CustomerUpdateActions.addBillingAddressId,
+    [Tag.shippingAddress]: CustomerUpdateActions.addShippingAddressId,
   };
 
   constructor(private customerBuilder: CustomerBuilderService) {}
 
   public addChangeEmail(email: string): CustomerActionBuilder {
-    const changeEmail: ChangeEmailAction = {
+    const changeEmail: Actions.ChangeEmailAction = {
       action: CustomerUpdateActions.changeEmail,
       email,
     };
@@ -37,7 +31,7 @@ export class CustomerActionBuilder {
   }
 
   public addSetFirstName(firstName: string): CustomerActionBuilder {
-    const setFirstName: SetFirstNameAction = {
+    const setFirstName: Actions.SetFirstNameAction = {
       action: CustomerUpdateActions.setFirstName,
       firstName,
     };
@@ -47,7 +41,7 @@ export class CustomerActionBuilder {
   }
 
   public addSetLastName(lastName: string): CustomerActionBuilder {
-    const setLastName: SetLastNameAction = {
+    const setLastName: Actions.SetLastNameAction = {
       action: CustomerUpdateActions.setLastName,
       lastName,
     };
@@ -57,7 +51,7 @@ export class CustomerActionBuilder {
   }
 
   public addSetDateOfBirth(date: Date): CustomerActionBuilder {
-    const setDateOfBirth: SetDateOfBirthAction = {
+    const setDateOfBirth: Actions.SetDateOfBirthAction = {
       action: CustomerUpdateActions.setDateOfBirth,
       dateOfBirth: createDate(date),
     };
@@ -67,7 +61,7 @@ export class CustomerActionBuilder {
   }
 
   public addRemoveAddress(addressId: string): CustomerActionBuilder {
-    const removeAddress: RemoveAddressAction = {
+    const removeAddress: Actions.RemoveAddressAction = {
       action: CustomerUpdateActions.removeAddress,
       addressId,
     };
@@ -77,7 +71,7 @@ export class CustomerActionBuilder {
   }
 
   public addAddress(address: AddressForm): CustomerActionBuilder {
-    const addAddress: AddAddressAction = {
+    const addAddress: Actions.AddAddressAction = {
       action: CustomerUpdateActions.addAddress,
       address: this.customerBuilder.createAddress(address),
     };
@@ -93,7 +87,7 @@ export class CustomerActionBuilder {
       addressKey?: string;
     }
   ): CustomerActionBuilder {
-    const addAddressTag: AddressTagAction = {
+    const addAddressTag: Actions.AddressTagAction = {
       action,
       addressId: options?.addressId,
       addressKey: options?.addressKey,
@@ -141,7 +135,7 @@ export class CustomerActionBuilder {
     addressId: string,
     address: AddressForm
   ): CustomerActionBuilder {
-    const changeAddress: ChangeAddressAction = {
+    const changeAddress: Actions.ChangeAddressAction = {
       action: CustomerUpdateActions.changeAddress,
       addressId,
       address: this.customerBuilder.createAddress(address),
@@ -151,7 +145,7 @@ export class CustomerActionBuilder {
     return this;
   }
 
-  public getActions(): CustomerAction[] {
+  public getActions(): Actions.CustomerAction[] {
     const customerActions = this.actions.slice();
     this.actions.length = 0;
 

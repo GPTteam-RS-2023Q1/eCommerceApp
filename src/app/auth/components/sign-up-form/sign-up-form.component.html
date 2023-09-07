@@ -4,24 +4,18 @@
   <ec-auth-fail [parentForm]="form"></ec-auth-fail>
 
   <div class="base-information-wrapper">
-    <ec-email-input formControlName="email" placeholder="Email"></ec-email-input>
+    <ec-email-input
+      formControlName="email"
+      placeholder="Электронная почта"
+    ></ec-email-input>
 
     <ec-password-input formControlName="password"></ec-password-input>
 
-    <ec-input formControlName="firstName" placeholder="First name"></ec-input>
+    <ec-input formControlName="firstName" placeholder="Имя"></ec-input>
 
-    <ec-input formControlName="lastName" placeholder="Last name"></ec-input>
+    <ec-input formControlName="lastName" placeholder="Фамилия"></ec-input>
 
-    <div class="form-row">
-      <tui-input-date class="sign-up-form-age" formControlName="dateOfBirth">
-        Choose a date
-        <input tuiTextfield autocomplete="off" />
-      </tui-input-date>
-      <tui-error
-        formControlName="dateOfBirth"
-        [error]="[] | tuiFieldError | async"
-      ></tui-error>
-    </div>
+    <ec-birthday-input formControlName="dateOfBirth"></ec-birthday-input>
   </div>
 
   <tui-toggle id="matchForms" formControlName="matchForms" size="l"></tui-toggle>

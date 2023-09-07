@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit, Injector } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Injector, OnInit } from '@angular/core';
+
 import { v4 as uuidv4 } from 'uuid';
-import { AddressForm } from '@app/auth/models/address-from.model';
+
+import { AddressForm } from '@app/shared/models/interfaces/address-from.model';
 import { Tag } from '@app/user/models/enums/tags.enum';
+
 import { BaseUserProfileDialog } from '../baseUserProfileDialog';
 
 @Component({

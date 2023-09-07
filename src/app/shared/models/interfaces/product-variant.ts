@@ -1,4 +1,4 @@
-import { CurrencyCode } from './currency-code';
+import { CurrencyCode } from '../enums/currency-code';
 
 export interface ProductVariant {
   id: number;

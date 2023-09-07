@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
 import {
   AbstractControl,
   NG_VALIDATORS,
@@ -31,11 +31,9 @@ export class EmailInputComponent
   extends AbstractRajiControl<string>
   implements Validator
 {
-  @Input() public placeholder = '';
-
   public validate(control: AbstractControl<string>): ValidationErrors | null {
     const { value } = control;
-    const emailPattern = /^(?=\S)[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
-    return emailPattern.test(value) ? null : { other: 'Email is invalid' };
+    const emailPattern = /^(?=\S)([a-z0-9.-]+)@[a-z]+\.[a-z]{2,3}$/;
+    return emailPattern.test(value) ? null : { email: 'Некорректная электронная почта' };
   }
 }

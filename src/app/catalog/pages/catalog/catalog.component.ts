@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { Observable, share } from 'rxjs';
 
-import { CategoryService } from '@app/core/services/category.service';
+import { CategoryService } from '@app/catalog/services/category.service';
 
 @Component({
   selector: 'ec-catalog',

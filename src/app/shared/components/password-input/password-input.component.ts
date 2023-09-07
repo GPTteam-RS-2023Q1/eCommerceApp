@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 import {
   AbstractControl,
   NG_VALIDATORS,
@@ -31,6 +31,8 @@ export class PasswordInputComponent
   extends AbstractRajiControl<string>
   implements Validator
 {
+  @Input() public title = 'Пароль';
+
   public validate(control: AbstractControl<string>): ValidationErrors | null {
     const { value } = control;
     const uppercase = /[A-Z]/;
@@ -40,33 +42,33 @@ export class PasswordInputComponent
     const spaces = /\s/;
 
     if (value.length < 8) {
-      return { other: 'Minimum length - 8' };
+      return { other: 'Минимальное количество символов - 8' };
     }
 
     if (!uppercase.test(value)) {
-      return { other: 'the password must include at least a uppercase letter' };
+      return { other: 'Пароль должен содержать минимум одну заглавную букву' };
     }
 
     if (!lowercase.test(value)) {
       return {
-        other: 'the password must include at least one lowercase letter',
+        other: 'Пароль должен содержать минимум одну строчную букву',
       };
     }
 
     if (!numbers.test(value)) {
       return {
-        other: 'the password must include at least one number',
+        other: 'Пароль должен содержать минимум одну цифру',
       };
     }
 
     if (!specialSymbols.test(value)) {
       return {
-        other: 'the password must include at least one special symbol (!@#$%^&*)',
+        other: 'Пароль должен содержать минимум один специальный символ (!@#$%^&*)',
       };
     }
 
     if (spaces.test(value)) {
-      return { other: 'the password should not include spaces' };
+      return { other: 'Пароль не должен содержать пробельных символов' };
     }
 
     return null;

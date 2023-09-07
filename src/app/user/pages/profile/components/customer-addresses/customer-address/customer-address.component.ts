@@ -60,15 +60,12 @@ export class CustomerAddressComponent implements OnDestroy {
           new PolymorpheusComponent(EditAddressDialogComponent, this.injector),
           {
             data: this.address,
-            label: 'Address Edit',
+            label: 'Редактирование адреса',
           }
         )
         .subscribe((status) => {
           if (status) {
-            this.notificationService.smallNotify(
-              'Address was successfully changed',
-              3000
-            );
+            this.notificationService.smallNotify('Адрес изменен', 3000);
           }
         })
     );
@@ -80,7 +77,7 @@ export class CustomerAddressComponent implements OnDestroy {
     this.updateCustomerService.updateCustomer(action).subscribe({
       next: (response) => {
         this.store.dispatch(customerAction.saveCustomer({ customer: response }));
-        this.notificationService.smallNotify('Address was successfully deleted', 3000);
+        this.notificationService.smallNotify('Адрес удален', 3000);
       },
       error: (err) => {
         console.log(err);

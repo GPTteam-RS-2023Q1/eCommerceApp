@@ -1,5 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="ok()">
-  <h3 *ngIf="!error">User Info</h3>
+  <h3 *ngIf="!error">Информация о пользователе</h3>
   <ec-form-fail-notification
     *ngIf="error"
     [error]="error"
@@ -7,23 +7,10 @@
     (errorHandle)="onErrorHandle()"
   ></ec-form-fail-notification>
   <div class="base-information-wrapper">
-    <label>Email</label>
-    <ec-email-input formControlName="email" placeholder="Email"></ec-email-input>
-    <label>First Name</label>
-    <ec-input formControlName="firstName" placeholder="First name"></ec-input>
-    <label>Last Name</label>
-    <ec-input formControlName="lastName" placeholder="Last name"></ec-input>
-    <label>Date of Birth</label>
-    <div class="form-row">
-      <tui-input-date class="sign-up-form-age" formControlName="dateOfBirth">
-        Choose a date
-        <input tuiTextfield autocomplete="off" />
-      </tui-input-date>
-      <tui-error
-        formControlName="dateOfBirth"
-        [error]="[] | tuiFieldError | async"
-      ></tui-error>
-    </div>
+    <ec-email-input formControlName="email"></ec-email-input>
+    <ec-input formControlName="firstName" placeholder="Имя"></ec-input>
+    <ec-input formControlName="lastName" placeholder="Фамилия"></ec-input>
+    <ec-birthday-input formControlName="dateOfBirth"></ec-birthday-input>
   </div>
   <div class="btn-container">
     <button
@@ -33,7 +20,7 @@
       [disabled]="!form.valid || form.pristine"
       [showLoader]="isLoading"
     >
-      Change
+      Изменить
     </button>
     <button
       tuiButton
@@ -42,7 +29,7 @@
       appearance="secondary-destructive"
       (click)="cancel()"
     >
-      Close
+      Закрыть
     </button>
   </div>
 </form>
