@@ -1,6 +1,6 @@
 import { TuiDay } from '@taiga-ui/cdk';
 
-import { AddressForm } from './address-from.model';
+import { AddressForm } from '../../shared/models/interfaces/address-from.model';
 
 export interface SignUpForm {
   name: string;

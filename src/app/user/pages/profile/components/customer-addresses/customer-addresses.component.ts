@@ -1,20 +1,23 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
-  OnInit,
-  OnChanges,
   Injector,
+  Input,
+  OnChanges,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
+
+import { Subscription } from 'rxjs';
+
 import { Customer } from '@app/auth/models/customer.model';
 import { COUNTRIES } from '@app/consts/country-data';
+import { NotificationService } from '@app/shared/services/notofication.service';
 import { Tag } from '@app/user/models/enums/tags.enum';
-import { Subscription } from 'rxjs';
-import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { UserAddress } from '@app/user/models/user-address.model';
 import { TuiDialogService } from '@taiga-ui/core';
-import { NotificationService } from '@app/shared/services/notofication.service';
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+
 import { EditAddressDialogComponent } from '../dialogs/edit-address-dialog/edit-address-dialog.component';
 
 @Component({
@@ -54,12 +57,12 @@ export class CustomerAddressesComponent implements OnInit, OnChanges, OnDestroy 
         .open<boolean>(
           new PolymorpheusComponent(EditAddressDialogComponent, this.injector),
           {
-            label: 'New Address',
+            label: 'Новый адрес',
           }
         )
         .subscribe((status) => {
           if (status) {
-            this.notificationService.smallNotify('Address was successfully added', 3000);
+            this.notificationService.smallNotify('Адрес успешно добавлен', 3000);
           }
         })
     );

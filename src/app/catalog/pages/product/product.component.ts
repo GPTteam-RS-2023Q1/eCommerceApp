@@ -4,8 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { map, Observable, take } from 'rxjs';
 
-import { Product } from '@app/core/models/product';
-import { ProductVariant } from '@app/core/models/product-variant';
+import { Product } from '@app/shared/models/interfaces/product';
+import { ProductVariant } from '@app/shared/models/interfaces/product-variant';
 
 @Component({
   selector: 'ec-product',

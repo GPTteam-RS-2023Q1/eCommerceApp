@@ -2,17 +2,20 @@ import {
   ChangeDetectionStrategy,
   Component,
   Injector,
-  OnInit,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { whiteSpaceValidator } from '@app/auth/validators/white-space-validator';
+
+import { Subscription } from 'rxjs';
+
+import { birthdayValidator } from '@app/auth/validators/birthday-validator';
 import { numbersValidator } from '@app/auth/validators/numbers-validator';
 import { specialCharactersValidator } from '@app/auth/validators/special-characters-validator';
-import { birthdayValidator } from '@app/auth/validators/birthday-validator';
+import { whiteSpaceValidator } from '@app/auth/validators/white-space-validator';
 import { selectCustomer } from '@app/ngrx/selectors/customer.selector';
-import { Subscription } from 'rxjs';
 import { TuiDay } from '@taiga-ui/cdk';
+
 import { BaseUserProfileDialog } from '../baseUserProfileDialog';
 
 @Component({
@@ -41,18 +44,18 @@ export class UserInfoDialogComponent
             customer?.firstName,
             [
               Validators.required,
-              whiteSpaceValidator('Name'),
-              numbersValidator('Name'),
-              specialCharactersValidator('Name'),
+              whiteSpaceValidator(),
+              numbersValidator(),
+              specialCharactersValidator(),
             ],
           ],
           lastName: [
             customer?.lastName,
             [
               Validators.required,
-              whiteSpaceValidator('Last name'),
-              numbersValidator('Last name'),
-              specialCharactersValidator('Last name'),
+              whiteSpaceValidator(),
+              numbersValidator(),
+              specialCharactersValidator(),
             ],
           ],
           dateOfBirth: [null, birthdayValidator],

@@ -1,6 +1,6 @@
 import { Customer } from '@app/auth/models/customer.model';
 import { ProductProjection } from '@app/catalog/models/product-projection';
-import { Category } from '@app/core/models/category';
+import { Category } from '@app/shared/models/interfaces/category';
 
 export interface AuthState {
   accessToken: string | null;

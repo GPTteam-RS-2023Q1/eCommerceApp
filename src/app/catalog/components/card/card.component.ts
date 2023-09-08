@@ -10,7 +10,7 @@ import {
 import { BehaviorSubject } from 'rxjs';
 
 import { ProductProjection } from '@app/catalog/models/product-projection';
-import { ProductVariant } from '@app/core/models/product-variant';
+import { ProductVariant } from '@app/shared/models/interfaces/product-variant';
 
 const DEFAULT_IMAGE_INDEX = 0;
 

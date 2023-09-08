@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { Image } from '@app/core/models/product-variant';
+import { Image } from '@app/shared/models/interfaces/product-variant';
 
 @Component({
   selector: 'ec-carousel-img',

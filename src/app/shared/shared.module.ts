@@ -35,6 +35,7 @@ import {
 } from '@taiga-ui/kit';
 
 import { AddressFormComponent } from './components/address-form/address-form.component';
+import { BirthdayInputComponent } from './components/birthday-input/birthday-input.component';
 import { EmailInputComponent } from './components/email-input/email-input.component';
 import { FormFailNotificationComponent } from './components/form-fail-notification/form-fail-notification.component';
 import { InputComponent } from './components/input/input.component';
@@ -49,6 +50,7 @@ import { ControlDependencyDirective } from './directives/control-dependency.dire
     FormFailNotificationComponent,
     AddressFormComponent,
     ControlDependencyDirective,
+    BirthdayInputComponent,
   ],
   imports: [
     CommonModule,
@@ -117,6 +119,7 @@ import { ControlDependencyDirective } from './directives/control-dependency.dire
     TuiTextfieldControllerModule,
     TuiSelectModule,
     ControlDependencyDirective,
+    BirthdayInputComponent,
   ],
 })
 export class SharedModule {}

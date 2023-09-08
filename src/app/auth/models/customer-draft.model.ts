@@ -1,4 +1,5 @@
-import { Address } from './address.model';
+import { AddressForm } from '@app/shared/models/interfaces/address-from.model';
+
 import { Customer } from './customer.model';
 
 export interface CustomerDraft
@@ -10,5 +11,5 @@ export interface CustomerDraft
   shippingAddresses: number[];
   defaultBillingAddress?: number;
   billingAddresses: number[];
-  addresses: Omit<Address, 'id'>[];
+  addresses: AddressForm[];
 }

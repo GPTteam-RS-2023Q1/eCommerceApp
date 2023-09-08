@@ -4,12 +4,11 @@ import { Store } from '@ngrx/store';
 
 import { Subscription } from 'rxjs';
 
-import { birthdayValidator } from '@app/auth/validators/birthday-validator';
 import { numbersValidator } from '@app/auth/validators/numbers-validator';
 import { specialCharactersValidator } from '@app/auth/validators/special-characters-validator';
 import { whiteSpaceValidator } from '@app/auth/validators/white-space-validator';
-import { CustomerBuilderService } from '@app/core/services/customer-builder.service';
 import { authAction } from '@app/ngrx/actions/auth.actions';
+import { CustomerBuilderService } from '@app/user/pages/profile/services/customer-builder.service';
 import { compareObjects } from '@app/utils/compareObjects';
 
 @Component({
@@ -64,21 +63,21 @@ export class SignUpFormComponent implements OnInit {
         '',
         [
           Validators.required,
-          whiteSpaceValidator('Name'),
-          numbersValidator('Name'),
-          specialCharactersValidator('Name'),
+          whiteSpaceValidator(),
+          numbersValidator(),
+          specialCharactersValidator(),
         ],
       ],
       lastName: [
         '',
         [
           Validators.required,
-          whiteSpaceValidator('Last name'),
-          numbersValidator('Last name'),
-          specialCharactersValidator('Last name'),
+          whiteSpaceValidator(),
+          numbersValidator(),
+          specialCharactersValidator(),
         ],
       ],
-      dateOfBirth: [null, birthdayValidator],
+      dateOfBirth: [null],
       matchForms: [true],
       shippingAddress: {
         country: '',

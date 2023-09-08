@@ -5,9 +5,8 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
 import { BuildedParams } from '@app/catalog/services/query-builder.service';
-
-import { ProductProjectionPageQueryResponse } from '../models/page-query-results';
-import { Product } from '../models/product';
+import { ProductProjectionPageQueryResponse } from '@app/shared/models/interfaces/page-query-results';
+import { Product } from '@app/shared/models/interfaces/product';
 
 @Injectable({
   providedIn: 'root',

@@ -8,10 +8,10 @@
         <h3 class="tui-island__title">
           {{ customer.firstName }} {{ customer.lastName }}
         </h3>
-        <p class="tui-island__paragraph">First Name: {{ customer.firstName }}</p>
-        <p class="tui-island__paragraph">Last Name: {{ customer.lastName }}</p>
+        <p class="tui-island__paragraph">Имя: {{ customer.firstName }}</p>
+        <p class="tui-island__paragraph">Фамилия: {{ customer.lastName }}</p>
         <p class="tui-island__paragraph">
-          Date of Birth: {{ customer.dateOfBirth | date }}
+          Дата рождения: {{ customer.dateOfBirth | date }}
         </p>
         <button
           tuiButton
@@ -21,7 +21,7 @@
           class="tui-island__footer-button"
           (click)="edit()"
         >
-          Edit
+          Редактировать
         </button>
         <button
           tuiButton
@@ -31,7 +31,7 @@
           class="tui-island__footer-button red"
           (click)="changePassword()"
         >
-          Change Password
+          Изменить пароль
         </button>
       </div>
     </div>

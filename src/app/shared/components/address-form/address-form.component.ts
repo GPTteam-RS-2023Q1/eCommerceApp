@@ -23,7 +23,7 @@ import { map, Subscription } from 'rxjs';
 import { numbersValidator } from '@app/auth/validators/numbers-validator';
 import { specialCharactersValidator } from '@app/auth/validators/special-characters-validator';
 import { COUNTRIES, CountryData, defaultCountryData } from '@app/consts/country-data';
-import { AddressForm } from '@app/shared/models/interfaces/address-from';
+import { AddressForm } from '@app/shared/models/interfaces/address-from.model';
 
 @Component({
   selector: 'ec-address-form',
@@ -115,14 +115,7 @@ export class AddressFormComponent
   public ngOnInit(): void {
     this.form = this.fb.group({
       country: ['', this.countryValidator],
-      city: [
-        '',
-        [
-          Validators.required,
-          numbersValidator('City'),
-          specialCharactersValidator('City'),
-        ],
-      ],
+      city: ['', [Validators.required, numbersValidator(), specialCharactersValidator()]],
       streetName: ['', Validators.required],
       postalCode: ['', this.postalCodeValidator],
     });
@@ -141,9 +134,7 @@ export class AddressFormComponent
   ): ValidationErrors | null => {
     const { value } = control;
 
-    return this.items.includes(value)
-      ? null
-      : { address: 'Select a country from the list' };
+    return this.items.includes(value) ? null : { address: 'Выберите страну из списка' };
   };
 
   private postalCodeValidator = (
@@ -154,7 +145,7 @@ export class AddressFormComponent
       return country.test(control.value)
         ? null
         : {
-            postalCode: `Postal code dont match ${this.selectedCountry.name} postal code pattern`,
+            postalCode: `Почтовый индекс не соответствует почтовой системе страны ${this.selectedCountry.name}`,
           };
     }
 

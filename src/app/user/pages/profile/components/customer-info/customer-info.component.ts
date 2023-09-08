@@ -1,16 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
   Injector,
+  Input,
   OnDestroy,
 } from '@angular/core';
-import { Customer } from '@app/auth/models/customer.model';
-import { TuiDialogService } from '@taiga-ui/core';
+
 import { Subscription } from 'rxjs';
+
+import { Customer } from '@app/auth/models/customer.model';
+import { NotificationService } from '@app/shared/services/notofication.service';
+import { TuiDialogService } from '@taiga-ui/core';
 import { tuiAvatarOptionsProvider } from '@taiga-ui/kit';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
-import { NotificationService } from '@app/shared/services/notofication.service';
+
 import { PasswordDialogComponent } from '../dialogs/password-dialog/password-dialog.component';
 import { UserInfoDialogComponent } from '../dialogs/user-info-dialog/user-info-dialog.component';
 
@@ -44,7 +47,7 @@ export class CustomerInfoComponent implements OnDestroy {
         .subscribe((status) => {
           if (status) {
             this.notificationServive.smallNotify(
-              'Your user info was changed successfully.',
+              'Информация о пользователе изменена.',
               3000
             );
           }
@@ -59,7 +62,7 @@ export class CustomerInfoComponent implements OnDestroy {
         .subscribe((status) => {
           if (status) {
             this.notificationServive.smallNotify(
-              'Your password was changed successfully. Relogining...',
+              'Ваш пароль изменен. Перелогинивание...',
               3000
             );
           }

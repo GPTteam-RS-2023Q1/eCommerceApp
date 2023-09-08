@@ -1,4 +1,4 @@
-import { Address } from './address.model';
+import { Address } from '@app/shared/models/interfaces/address.model';
 
 export interface Customer {
   id: string;

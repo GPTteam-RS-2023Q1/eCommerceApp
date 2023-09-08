@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, Inject, Injector } from '@angular/c
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
+import { CategoryService } from '@app/catalog/services/category.service';
+import { ProductService } from '@app/catalog/services/product.service';
 import { QueryBuilderService } from '@app/catalog/services/query-builder.service';
-import { CategoryService } from '@app/core/services/category.service';
-import { ProductService } from '@app/core/services/product.service';
 import { TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 
