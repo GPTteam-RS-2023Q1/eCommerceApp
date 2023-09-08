@@ -18,3 +18,8 @@ export const selectIsAuth = createSelector(
   selectCustomerState,
   (customerState) => !!customerState.customer?.id
 );
+
+export const selectIsUserAuthorizated = createSelector(
+  selectAuthState,
+  (authState) => !!authState.refreshToken
+);

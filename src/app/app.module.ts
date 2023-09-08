@@ -30,7 +30,12 @@ function initAutoLogin(): () => Promise<void> {
     authService.autoLogin(localStorage.getItem('authData'));
     return firstValueFrom(
       actions$.pipe(
-        ofType(authAction.tokenSuccess, authAction.getCustomer, authAction.authFail)
+        ofType(
+          authAction.tokenSuccess,
+          authAction.getCustomer,
+          authAction.authFail,
+          authAction.loginSuccess
+        )
       )
     );
   };
