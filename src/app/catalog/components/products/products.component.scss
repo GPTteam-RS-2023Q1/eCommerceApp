@@ -1,11 +1,11 @@
 :host {
-  .products {
+  .products-wrapper {
     display: flex;
     flex-wrap: wrap;
     gap: 25px;
     row-gap: 30px;
     justify-content: center;
 
-    margin: 0 auto;
+    margin: 0 auto 40px;
   }
 }

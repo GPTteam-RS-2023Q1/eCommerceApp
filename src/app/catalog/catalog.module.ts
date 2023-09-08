@@ -5,7 +5,12 @@ import { CoreModule } from '@app/core/core.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { TuiLetModule } from '@taiga-ui/cdk';
 import { TuiLoaderModule } from '@taiga-ui/core';
-import { TuiInputRangeModule, TuiMultiSelectModule, TuiTreeModule } from '@taiga-ui/kit';
+import {
+  TuiInputRangeModule,
+  TuiMultiSelectModule,
+  TuiPaginationModule,
+  TuiTreeModule,
+} from '@taiga-ui/kit';
 
 import { CatalogRoutingModule } from './catalog-routing.module';
 import { CardComponent } from './components/card/card.component';
@@ -15,6 +20,7 @@ import { TreeItemComponent } from './components/categories/tree-item/tree-item.c
 import { FilterModalComponent } from './components/filter-modal/filter-modal.component';
 import { FilterMultiSelectComponent } from './components/filter-multi-select/filter-multi-select.component';
 import { FiltersComponent } from './components/filters/filters.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 import { PriceInputComponent } from './components/price-input/price-input.component';
 import { PriceComponent } from './components/price/price.component';
 import { ProductsComponent } from './components/products/products.component';
@@ -22,6 +28,7 @@ import { SearchComponent } from './components/search/search.component';
 import { SortComponent } from './components/sort/sort.component';
 import { CatalogComponent } from './pages/catalog/catalog.component';
 import { ProductComponent } from './pages/product/product.component';
+import { GetPageCountPipe } from './pipes/get-page-count.pipe';
 
 @NgModule({
   declarations: [
@@ -39,6 +46,8 @@ import { ProductComponent } from './pages/product/product.component';
     FilterModalComponent,
     SortComponent,
     PriceComponent,
+    PaginationComponent,
+    GetPageCountPipe,
   ],
   imports: [
     CommonModule,
@@ -51,6 +60,7 @@ import { ProductComponent } from './pages/product/product.component';
     TuiMultiSelectModule,
     TuiLetModule,
     TuiInputRangeModule,
+    TuiPaginationModule,
   ],
 })
 export class CatalogModule {}
