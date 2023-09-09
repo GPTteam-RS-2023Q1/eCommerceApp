@@ -10,6 +10,10 @@
     background-color: white;
   }
 
+  .right-column {
+    flex-grow: 1;
+  }
+
   .btm-menu {
     display: none;
   }

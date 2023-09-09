@@ -20,8 +20,11 @@
   </div>
 
   <div class="info">
-    <ec-price className="card" [price]="variant.prices[0]"></ec-price>
-    <h4 class="brand">{{ product.name.ru }}</h4>
+    <div class="baseinfo">
+      <ec-price class="price" className="card" [price]="variant.prices[0]"></ec-price>
+      <button tuiButton appearance="outline" size="s" class="add-to-cart"></button>
+      <h4 class="brand">{{ product.name.ru }}</h4>
+    </div>
     <h4 class="description">{{ product.metaDescription.ru }}</h4>
   </div>
 
