@@ -74,17 +74,20 @@ export class AuthEffects {
       exhaustMap((action) => {
         return this.authService.refreshToken(action.refreshToken).pipe(
           map((response) => {
+            this.authService.setAuthDataToLocalStorage(action.refreshToken);
             const responseScope = response.scope.split(' ');
             const strWithCustomerId = responseScope.find((element) =>
               element.includes('customer_id')
             );
 
             if (!strWithCustomerId) {
-              throw Error("Can't find customer id");
+              return authAction.loginSuccess({
+                accessToken: response.access_token,
+                refreshToken: action.refreshToken,
+              });
             }
 
             const customerId = strWithCustomerId.split(':')[1];
-            this.authService.setAuthDataToLocalStorage(action.refreshToken);
             return authAction.autoLoginSuccess({
               customerId,
               accessToken: response.access_token,
@@ -131,16 +134,32 @@ export class AuthEffects {
     );
   });
 
+  public getAnonymousTokens$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(authAction.anonymousSessionStart),
+      exhaustMap(() => {
+        return this.authService.getAnonymousTokens().pipe(
+          map((response) => {
+            this.authService.setAuthDataToLocalStorage(response.refresh_token);
+            return authAction.loginSuccess({
+              accessToken: response.access_token,
+              refreshToken: response.refresh_token,
+            });
+          }),
+          catchError(() => of())
+        );
+      })
+    );
+  });
+
   public redirectOnLogin$ = createEffect(
     () => {
       return this.actions$.pipe(
         ofType(authAction.loginSuccess),
         tap(() => {
-          if (this.router.routerState.snapshot.url.includes('user')) {
-            return;
+          if (this.router.routerState.snapshot.url.includes('auth')) {
+            this.router.navigate(['store']);
           }
-
-          this.router.navigate(['store']);
         })
       );
     },
