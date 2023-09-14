@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { selectCart } from '@app/ngrx/selectors/cart.selector';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+
+import { selectCart } from '@app/ngrx/selectors/cart.selector';
 
 @Component({
   selector: 'ec-cart',
@@ -8,13 +9,7 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./cart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CartComponent implements OnInit {
+export class CartComponent {
   public cart$ = this.store.select(selectCart);
   constructor(private store: Store) {}
-
-  public ngOnInit(): void {
-    this.cart$.subscribe((val) => {
-      console.log(val);
-    });
-  }
 }

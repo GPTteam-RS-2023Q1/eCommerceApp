@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot } from '@angular/router';
 
+import { PRODUCTS_PER_PAGE } from '../consts/consts';
+
 export type BuildedParams = [string, string][];
 
 @Injectable({ providedIn: 'root' })
@@ -13,6 +15,9 @@ export class QueryBuilderService {
     this.queryDictionary = {
       category: (category: string): void => {
         this.filterByCategory(category);
+      },
+      page: (page: number): void => {
+        this.page(page);
       },
       text: (text: string): void => {
         this.fiterByText(text);
@@ -49,6 +54,11 @@ export class QueryBuilderService {
         ['fuzzyLevel', `${this.getFuzzyLevel(text)}`]
       );
     }
+    return this;
+  }
+
+  public page(page: number): QueryBuilderService {
+    this.params.push(['offset', `${(page - 1) * PRODUCTS_PER_PAGE}`]);
     return this;
   }
 

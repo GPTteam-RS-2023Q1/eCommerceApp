@@ -54,7 +54,7 @@ export class FilterModalComponent implements OnInit {
   public onSubmit(): void {
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: this.form.value,
+      queryParams: { ...this.form.value, page: null },
       queryParamsHandling: 'merge',
     });
 

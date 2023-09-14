@@ -65,7 +65,7 @@ export class CustomerAddressComponent implements OnDestroy {
         )
         .subscribe((status) => {
           if (status) {
-            this.notificationService.smallNotify('Адрес изменен', 3000);
+            this.notificationService.notify('Адрес изменен', 'success');
           }
         })
     );
@@ -77,10 +77,7 @@ export class CustomerAddressComponent implements OnDestroy {
     this.updateCustomerService.updateCustomer(action).subscribe({
       next: (response) => {
         this.store.dispatch(customerAction.saveCustomer({ customer: response }));
-        this.notificationService.smallNotify('Адрес удален', 3000);
-      },
-      error: (err) => {
-        console.log(err);
+        this.notificationService.notify('Адрес удален', 'success');
       },
     });
   }

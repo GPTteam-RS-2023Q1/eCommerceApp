@@ -15,6 +15,7 @@ export interface Price {
   value: TypedMoney;
   countryCode: `${string}${string}`;
   discounted?: DiscountedPrice;
+  channel?: ChannelResourceIdentifier;
 }
 
 export interface TypedMoney {
@@ -47,4 +48,9 @@ export interface Dimensions {
 export interface Attribute {
   name: string;
   value: any;
+}
+
+export interface ChannelResourceIdentifier {
+  id: string;
+  typeId: 'channel';
 }

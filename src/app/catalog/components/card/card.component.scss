@@ -20,6 +20,10 @@
       opacity: 1;
       box-shadow: 0 5px 5px rgb(0 0 0 / 15%);
     }
+
+    .add-to-cart {
+      opacity: 1;
+    }
   }
 
   .image-counter {
@@ -60,6 +64,15 @@
     width: 100%;
   }
 
+  .baseinfo {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-areas:
+      'price button'
+      'brand button';
+    grid-template-columns: auto 40px;
+  }
+
   .info {
     position: relative;
     padding: 10px 5px;
@@ -67,6 +80,29 @@
 
   h4 {
     @extend %h4;
+  }
+
+  .price {
+    grid-area: price;
+  }
+
+  .brand {
+    grid-area: brand;
+  }
+
+  .add-to-cart {
+    grid-area: button;
+    opacity: 0;
+    transition: all 0.3s ease 0s;
+
+    .button {
+      width: 100%;
+
+      background-image: url('../../../../assets/cart.svg');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 70% 70%;
+    }
   }
 
   .description {
@@ -90,8 +126,9 @@
     transition: all 0.3s ease 0s;
   }
 
-  .sizes-values {
+  .size {
     @extend %h4;
+    margin-right: 2px;
     opacity: 0.7;
   }
 }

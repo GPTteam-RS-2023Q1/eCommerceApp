@@ -1,14 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, exhaustMap } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { selectCart } from '@app/ngrx/selectors/cart.selector';
+
+import { catchError, exhaustMap, Observable, take } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
 import { authAction } from '@app/ngrx/actions/auth.actions';
 import { cartActions } from '@app/ngrx/actions/cart.actions';
-import { Actions, ofType } from '@ngrx/effects';
-import { Cart } from '../models/cart.model';
+import { selectCart } from '@app/ngrx/selectors/cart.selector';
+
 import { CartAction } from '../models/cart-update.actions';
+import { Cart } from '../models/cart.model';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
@@ -47,6 +50,7 @@ export class CartService {
 
   public updateCart(actions: CartAction[]): Observable<Cart> {
     return this.cart$.pipe(
+      take(1),
       exhaustMap((cart) => {
         if (!cart) {
           this.store.dispatch(authAction.anonymousSessionStart());
