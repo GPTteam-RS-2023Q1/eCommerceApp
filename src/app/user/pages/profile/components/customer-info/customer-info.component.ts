@@ -46,9 +46,9 @@ export class CustomerInfoComponent implements OnDestroy {
         .open<boolean>(new PolymorpheusComponent(UserInfoDialogComponent, this.injector))
         .subscribe((status) => {
           if (status) {
-            this.notificationServive.smallNotify(
+            this.notificationServive.notify(
               'Информация о пользователе изменена.',
-              3000
+              'success'
             );
           }
         })
@@ -61,9 +61,9 @@ export class CustomerInfoComponent implements OnDestroy {
         .open<boolean>(new PolymorpheusComponent(PasswordDialogComponent, this.injector))
         .subscribe((status) => {
           if (status) {
-            this.notificationServive.smallNotify(
+            this.notificationServive.notify(
               'Ваш пароль изменен. Перелогинивание...',
-              3000
+              'success'
             );
           }
         })

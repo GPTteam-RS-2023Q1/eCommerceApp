@@ -1,0 +1,9 @@
+<div class="notifications">
+  <tui-notification
+    class="notify"
+    @showHide
+    *ngFor="let notify of notifications | async; trackBy: trackBy"
+    [status]="notify.status"
+    >{{ notify.message }}
+  </tui-notification>
+</div>

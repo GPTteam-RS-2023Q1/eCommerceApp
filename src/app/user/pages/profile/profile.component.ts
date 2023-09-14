@@ -1,15 +1,18 @@
 import {
   ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  OnDestroy,
   ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
 } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import { Subscription } from 'rxjs';
+
 import { Customer } from '@app/auth/models/customer.model';
 import { selectCustomer } from '@app/ngrx/selectors/customer.selector';
-import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
 import { NotificationService } from '@app/shared/services/notofication.service';
+
 import { CustomerActionBuilder } from './services/customer-action-builder.service';
 
 @Component({

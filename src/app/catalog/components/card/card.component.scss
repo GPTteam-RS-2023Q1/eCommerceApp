@@ -92,14 +92,17 @@
 
   .add-to-cart {
     grid-area: button;
-
     opacity: 0;
-    background-image: url('../../../../assets/cart.svg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 70% 70%;
-
     transition: all 0.3s ease 0s;
+
+    .button {
+      width: 100%;
+
+      background-image: url('../../../../assets/cart.svg');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 70% 70%;
+    }
   }
 
   .description {
@@ -123,8 +126,9 @@
     transition: all 0.3s ease 0s;
   }
 
-  .sizes-values {
+  .size {
     @extend %h4;
+    margin-right: 2px;
     opacity: 0.7;
   }
 }

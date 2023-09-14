@@ -1,19 +1,15 @@
 <div *ngIf="product" class="card">
-  <div class="image-counter">
-    <div
-      *ngFor="let image of variant.images; index as i"
-      class="rectangle"
-      [ngClass]="(activeImageIndex$$ | async) === i ? 'active' : ''"
-    ></div>
-  </div>
-
   <div class="image-wrapper">
-    <ng-container *ngFor="let image of variant.images; index as i">
+    <div class="image-counter">
       <div
-        [@showHide]="(activeImageIndex$$ | async) === i"
-        class="image"
-        *ngIf="(activeImageIndex$$ | async) === i"
-      >
+        *ngFor="let image of variant.images; index as i"
+        class="rectangle"
+        [ngClass]="(activeImageIndex$$ | async) === i ? 'active' : ''"
+      ></div>
+    </div>
+
+    <ng-container *ngFor="let image of variant.images; index as i">
+      <div @showHide class="image" *ngIf="(activeImageIndex$$ | async) === i">
         <img [ngSrc]="image.url" fill />
       </div>
     </ng-container>
@@ -22,13 +18,50 @@
   <div class="info">
     <div class="baseinfo">
       <ec-price class="price" className="card" [price]="variant.prices[0]"></ec-price>
-      <button tuiButton appearance="outline" size="s" class="add-to-cart"></button>
+
+      <tui-hosted-dropdown
+        tuiDropdownAlign="left"
+        [(open)]="open"
+        [sided]="true"
+        [content]="content"
+        [tuiDropdownMaxHeight]="250"
+        class="add-to-cart"
+      >
+        <button
+          tuiButton
+          appearance="outline"
+          size="s"
+          class="button"
+          type="button"
+          [pseudoActive]="open || null"
+          (click)="openMenu($event)"
+        ></button>
+      </tui-hosted-dropdown>
+      <ng-template #content let-close="close">
+        <tui-data-list>
+          <tui-opt-group>
+            <button
+              class="option"
+              *ngFor="let variant of product.variants"
+              tuiOption
+              (click)="selectSize(variant)"
+            >
+              {{ variant | getSizeOfVariant }}
+            </button>
+          </tui-opt-group>
+        </tui-data-list>
+      </ng-template>
+
       <h4 class="brand">{{ product.name.ru }}</h4>
     </div>
+
     <h4 class="description">{{ product.metaDescription.ru }}</h4>
   </div>
 
   <p class="sizes">
-    Размеры: <span class="sizes-values">{{ sizes?.join(' ') }}</span>
+    Размеры:
+    <span class="size" *ngFor="let variant of product.variants">{{
+      variant | getSizeOfVariant
+    }}</span>
   </p>
 </div>

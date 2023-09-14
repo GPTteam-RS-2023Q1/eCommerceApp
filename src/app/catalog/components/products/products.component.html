@@ -3,6 +3,7 @@
     <ng-container *ngIf="products.results?.length; else notFound">
       <div class="products-wrapper">
         <ec-card
+          (addToCart)="addToCart(product, $event)"
           *ngFor="let product of products.results"
           [product]="product"
           (click)="navigateToProduct(product.id)"

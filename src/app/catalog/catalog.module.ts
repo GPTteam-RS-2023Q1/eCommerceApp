@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { CoreModule } from '@app/core/core.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { TuiLetModule } from '@taiga-ui/cdk';
-import { TuiLoaderModule } from '@taiga-ui/core';
+import { TuiDropdownModule, TuiLoaderModule } from '@taiga-ui/core';
 import {
   TuiInputRangeModule,
   TuiMultiSelectModule,
@@ -29,6 +29,7 @@ import { SortComponent } from './components/sort/sort.component';
 import { CatalogComponent } from './pages/catalog/catalog.component';
 import { ProductComponent } from './pages/product/product.component';
 import { GetPageCountPipe } from './pipes/get-page-count.pipe';
+import { GetSizeOfVariantPipe } from './pipes/get-size-of-variant.pipe';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { GetPageCountPipe } from './pipes/get-page-count.pipe';
     PriceComponent,
     PaginationComponent,
     GetPageCountPipe,
+    GetSizeOfVariantPipe,
   ],
   imports: [
     CommonModule,
@@ -61,6 +63,7 @@ import { GetPageCountPipe } from './pipes/get-page-count.pipe';
     TuiLetModule,
     TuiInputRangeModule,
     TuiPaginationModule,
+    TuiDropdownModule,
   ],
 })
 export class CatalogModule {}
