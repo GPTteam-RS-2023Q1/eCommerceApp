@@ -16,3 +16,6 @@ export interface AddLineItem extends CartAction {
 export interface RemoveLineItem extends CartAction {
   lineItemId: string;
 }
+export interface AddDiscountCode extends CartAction {
+  code: string;
+}
