@@ -12,3 +12,7 @@ export interface AddLineItem extends CartAction {
   quantity?: number;
   distributionChannel?: ChannelResourceIdentifier;
 }
+
+export interface AddDiscountCode extends CartAction {
+  code: string;
+}

@@ -1,0 +1,15 @@
+form {
+  display: flex;
+  justify-content: space-between;
+}
+
+input {
+  padding: 7px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  box-shadow: 0 2px 0 0 lightgray;
+}
+
+input:focus {
+  outline: none;
+}

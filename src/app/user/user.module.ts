@@ -13,6 +13,9 @@ import { UserInfoDialogComponent } from './pages/profile/components/dialogs/user
 import { TagInputComponent } from './pages/profile/components/tag-input/tag-input.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { UserRoutingModule } from './user-routing.module';
+import { OrderInfoComponent } from './pages/cart/components/order-info/order-info.component';
+import { DiscountInputComponent } from './pages/cart/components/discount-input/discount-input.component';
+import { TotalPriceComponent } from './pages/cart/components/total-price/total-price.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,9 @@ import { UserRoutingModule } from './user-routing.module';
     EditAddressDialogComponent,
     UserInfoDialogComponent,
     TagInputComponent,
+    OrderInfoComponent,
+    DiscountInputComponent,
+    TotalPriceComponent,
   ],
   imports: [SharedModule, UserRoutingModule],
   providers: [
