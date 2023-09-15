@@ -62,7 +62,7 @@ export class CustomerAddressesComponent implements OnInit, OnChanges, OnDestroy 
         )
         .subscribe((status) => {
           if (status) {
-            this.notificationService.smallNotify('Адрес успешно добавлен', 3000);
+            this.notificationService.notify('Адрес успешно добавлен', 'success');
           }
         })
     );

@@ -1,6 +1,6 @@
 import { Customer } from '@app/auth/models/customer.model';
-import { ProductProjection } from '@app/catalog/models/product-projection';
 import { Category } from '@app/shared/models/interfaces/category';
+import { ProductProjectionPageQueryResponse } from '@app/shared/models/interfaces/page-query-results';
 import { Cart } from '@app/user/models/cart.model';
 
 export interface AuthState {
@@ -30,6 +30,6 @@ export interface AppState {
 }
 
 export interface CatalogState {
-  products: ProductProjection[] | null;
+  products: ProductProjectionPageQueryResponse | null;
   categories: Category[] | null;
 }

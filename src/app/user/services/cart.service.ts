@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
-import { catchError, exhaustMap, Observable } from 'rxjs';
+import { catchError, exhaustMap, Observable, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { authAction } from '@app/ngrx/actions/auth.actions';
@@ -51,6 +51,7 @@ export class CartService {
 
   public updateCart(actions: CartAction[]): Observable<Cart> {
     return this.cart$.pipe(
+      take(1),
       exhaustMap((cart) => {
         if (!cart) {
           this.store.dispatch(authAction.anonymousSessionStart());

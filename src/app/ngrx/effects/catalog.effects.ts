@@ -17,9 +17,7 @@ export class CatalogEffects {
         return this.productService
           .getProducts({ parameters: params })
           .pipe(
-            map((response) =>
-              catalogActions.getProductsSuccess({ products: response.results })
-            )
+            map((response) => catalogActions.getProductsSuccess({ products: response }))
           );
       })
     );

@@ -29,7 +29,7 @@ export class SortComponent {
     this.component?.nativeFocusableElement?.focus();
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: { sort },
+      queryParams: { sort, page: null },
       queryParamsHandling: 'merge',
     });
   }

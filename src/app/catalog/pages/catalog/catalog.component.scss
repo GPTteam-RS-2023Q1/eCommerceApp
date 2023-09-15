@@ -10,6 +10,10 @@
     background-color: white;
   }
 
+  .right-column {
+    flex-grow: 1;
+  }
+
   .btm-menu {
     display: none;
   }
@@ -40,7 +44,7 @@
       height: 100vh;
       padding-top: 15px;
 
-      transition: transform 1s ease;
+      transition: transform 0.5s ease;
     }
 
     .left-column.open {

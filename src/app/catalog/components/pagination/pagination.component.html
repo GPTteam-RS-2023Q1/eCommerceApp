@@ -1,0 +1,6 @@
+<tui-pagination
+  [activePadding]="activePadding"
+  [index]="(index$ | async) || 0"
+  [length]="length"
+  (indexChange)="onIndexChange($event)"
+></tui-pagination>

@@ -3,8 +3,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  EventEmitter,
   HostListener,
   Input,
+  Output,
 } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
@@ -25,21 +27,28 @@ const DEFAULT_IMAGE_INDEX = 0;
         style({ visibility: 'hidden' }),
         animate('0ms', style({ visibility: 'visible' })),
       ]),
-      transition(':leave', [animate('0ms 50ms ease', style({ visibility: 'hidden' }))]),
+      transition(':leave', [animate('0ms 100ms ease', style({ visibility: 'hidden' }))]),
     ]),
   ],
 })
 export class CardComponent {
   @Input({ required: true }) public product!: ProductProjection;
 
+  @Output() public addToCart = new EventEmitter<ProductVariant>();
+
   public activeImageIndex$$ = new BehaviorSubject(DEFAULT_IMAGE_INDEX);
 
-  public sizes?: string[];
+  public open = false;
 
   constructor(private readonly element: ElementRef) {}
 
   public get variant(): ProductVariant {
     return this.product.masterVariant;
+  }
+
+  public openMenu(e: Event): void {
+    e.stopPropagation();
+    this.open = true;
   }
 
   @HostListener('mousemove', ['$event'])
@@ -58,13 +67,8 @@ export class CardComponent {
     this.activeImageIndex$$.next(DEFAULT_IMAGE_INDEX);
   }
 
-  @HostListener('mouseenter')
-  public onMouseEnter(): void {
-    if (!this.sizes) {
-      this.sizes = this.product.variants.map((variant) => {
-        return variant.attributes.find((attribute) => attribute.name === 'size')?.value
-          .label;
-      });
-    }
+  public selectSize(variant: ProductVariant): void {
+    this.addToCart.emit(variant);
+    this.open = false;
   }
 }

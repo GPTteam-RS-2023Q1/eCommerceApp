@@ -6,14 +6,14 @@ import { catchError, EMPTY, exhaustMap, map, retry, switchMap, tap } from 'rxjs'
 
 import { catalogActions } from '@app/ngrx/actions/catalog.actions';
 import { Category } from '@app/shared/models/interfaces/category';
+import { ProductProjectionPageQueryResponse } from '@app/shared/models/interfaces/page-query-results';
 import { Product } from '@app/shared/models/interfaces/product';
 
-import { ProductProjection } from '../models/product-projection';
 import { CategoryService } from '../services/category.service';
 import { ProductService } from '../services/product.service';
 import { QueryBuilderService } from '../services/query-builder.service';
 
-export const productsResolver: ResolveFn<ProductProjection[]> = (
+export const productsResolver: ResolveFn<ProductProjectionPageQueryResponse> = (
   route: ActivatedRouteSnapshot
 ) => {
   const store = inject(Store);
@@ -40,7 +40,6 @@ export const productsResolver: ResolveFn<ProductProjection[]> = (
               router.navigate(['**']);
               return EMPTY;
             }),
-            map((value) => value.results),
             tap((value) =>
               store.dispatch(catalogActions.getProductsSuccess({ products: value }))
             )

@@ -7,6 +7,7 @@ import { TuiBadgedContentModule } from '@taiga-ui/kit';
 import { AuthMenuComponent } from './components/auth-menu/auth-menu.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
 import { UserMenuComponent } from './components/user-menu/user-menu.component';
 import { AboutComponent } from './pages/about/about.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
@@ -19,8 +20,9 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     AuthMenuComponent,
     FooterComponent,
     AboutComponent,
+    NotificationsComponent,
   ],
   imports: [CommonModule, SharedModule, TuiBadgedContentModule],
-  exports: [HeaderComponent, FooterComponent],
+  exports: [HeaderComponent, FooterComponent, NotificationsComponent],
 })
 export class CoreModule {}
