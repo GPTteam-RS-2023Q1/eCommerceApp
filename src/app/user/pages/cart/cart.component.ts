@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { selectCart } from '@app/ngrx/selectors/cart.selector';
 import { Store } from '@ngrx/store';
+
+import { selectCart } from '@app/ngrx/selectors/cart.selector';
 
 @Component({
   selector: 'ec-cart',

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '@app/shared/shared.module';
+import { TuiBadgedContentModule } from '@taiga-ui/kit';
 
 import { AuthMenuComponent } from './components/auth-menu/auth-menu.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -19,7 +20,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     FooterComponent,
     AboutComponent,
   ],
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, SharedModule, TuiBadgedContentModule],
   exports: [HeaderComponent, FooterComponent],
 })
 export class CoreModule {}

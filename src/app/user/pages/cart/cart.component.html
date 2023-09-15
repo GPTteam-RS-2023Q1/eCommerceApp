@@ -1,1 +1,9 @@
-<p>page cart</p>
+<ng-template *ngIf="cart$ | async as cart; else emptyCard">
+  <!-- <div *ngFor="let Item of cart.lineItems"></div> -->
+</ng-template>
+<ng-template #emptyCard>
+  <h3 class="emptyCard-header">
+    Перейдите в
+    <a tuiLink routerLink="/store/catalog/clothes">каталог</a>, чтобы добавить товары
+  </h3>
+</ng-template>
