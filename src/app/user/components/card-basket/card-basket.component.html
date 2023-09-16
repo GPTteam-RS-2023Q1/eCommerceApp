@@ -1,0 +1,31 @@
+<div class="wrapper">
+  <img [src]="cardItem.variant.images[0].url" class="img" />
+  <p>{{ getAttribute(cardItem.variant.attributes, 'brand') }}</p>
+  <div class="block-price">
+    <p [ngClass]="{ 'line-through': cardItem.price.discounted }">
+      {{ formatPrice(cardItem.price.value.centAmount) | currency : 'USD' }}
+    </p>
+    <p *ngIf="cardItem.price.discounted as discounted" class="discount">
+      {{ formatPrice(discounted.value.centAmount) | currency : 'USD' }}
+    </p>
+  </div>
+  <div class="block-size">
+    <p>Размер:</p>
+    <p>{{ getAttribute(cardItem.variant.attributes, 'size') }}</p>
+  </div>
+  <div class="block-totalPrice">
+    <p>
+      {{ getPrice(cardItem.price, cardItem.quantity) | currency : 'USD' }}
+    </p>
+    <div class="block">
+      <button
+        tuiButton
+        type="button"
+        icon="tuiIconPlus"
+        size="xs"
+        (click)="addToCart()"
+      ></button>
+      <p>{{ cardItem.quantity }}</p>
+    </div>
+  </div>
+</div>

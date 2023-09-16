@@ -31,7 +31,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly qb: QueryBuilderService,
-    private readonly cartSerivce: CartService,
+    private readonly cartService: CartService,
     private readonly cab: CartActionBuilderService,
     private readonly notifyService: NotificationService,
     private readonly cartFacade: CartFacadeService
@@ -68,7 +68,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.notifyService.notify('Продукт уже есть в корзине', 'warning');
         return;
       }
-      this.cartSerivce
+      this.cartService
         .updateCart(this.cab.addLineItem(product.id, variant).getActions())
         .subscribe((cart) => {
           this.store.dispatch(cartActions.saveCart({ cart }));
