@@ -1,1 +1,14 @@
-<p>page cart</p>
+<div *ngIf="cart$ | async as cart; else emptyCard" class="card-container">
+  <ng-container *ngFor="let cardItem of cart.lineItems">
+    <ec-card-basket
+      [cardItem]="cardItem"
+      (click)="navigateToProduct(cardItem.productId)"
+    ></ec-card-basket>
+  </ng-container>
+</div>
+<ng-template #emptyCard>
+  <h3 class="emptyCard-header">
+    Перейдите в
+    <a tuiLink routerLink="/store/catalog/clothes">каталог</a>, чтобы добавить товары
+  </h3>
+</ng-template>

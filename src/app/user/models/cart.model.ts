@@ -1,4 +1,4 @@
-import { ProductVariant } from '@app/shared/models/interfaces/product-variant';
+import { Price, ProductVariant } from '@app/shared/models/interfaces/product-variant';
 
 export interface Cart {
   id: string;
@@ -12,4 +12,6 @@ export interface LineItem {
   productId: string;
   productKey: string;
   variant: ProductVariant;
+  quantity: number;
+  price: Price;
 }

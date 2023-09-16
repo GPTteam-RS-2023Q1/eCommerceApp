@@ -13,6 +13,7 @@ import { UserInfoDialogComponent } from './pages/profile/components/dialogs/user
 import { TagInputComponent } from './pages/profile/components/tag-input/tag-input.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { UserRoutingModule } from './user-routing.module';
+import { CardBasketComponent } from './components/card-basket/card-basket.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { UserRoutingModule } from './user-routing.module';
     EditAddressDialogComponent,
     UserInfoDialogComponent,
     TagInputComponent,
+    CardBasketComponent,
   ],
   imports: [SharedModule, UserRoutingModule],
   providers: [

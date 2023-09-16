@@ -1,0 +1,57 @@
+:host {
+  .wrapper {
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    width: 200px;
+    padding-bottom: 10px;
+
+    text-align: center;
+
+    box-shadow: 0 3px 3px rgb(0 0 0 / 10%);
+  }
+
+  .img {
+    width: 100%;
+  }
+
+  .block {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .block-price {
+    position: relative;
+    display: flex;
+    gap: 5px;
+    padding-left: 20px;
+  }
+
+  .block-size {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding-left: 20px;
+  }
+
+  .discount {
+    position: relative;
+    top: -5px;
+    color: red;
+  }
+
+  .line-through {
+    text-decoration: line-through;
+  }
+
+  .block-totalPrice {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-weight: 900;
+  }
+}

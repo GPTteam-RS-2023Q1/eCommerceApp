@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { selectIsAuth } from '@app/ngrx/selectors/auth.selector';
+import { selectCountCartItem } from '@app/ngrx/selectors/cart.selector';
 
 @Component({
   selector: 'ec-header',
@@ -17,12 +18,15 @@ export class HeaderComponent implements OnInit {
 
   public isAuth!: Observable<boolean>;
 
+  public countCartItem!: Observable<number>;
+
   constructor(private router: Router, private store: Store) {
     this.getSize();
   }
 
   public ngOnInit(): void {
     this.isAuth = this.store.select(selectIsAuth);
+    this.countCartItem = this.store.select(selectCountCartItem);
   }
 
   @HostListener('window:resize')
@@ -41,7 +45,12 @@ export class HeaderComponent implements OnInit {
   public toCatalog(): void {
     this.router.navigate(['store/catalog']);
   }
+
   public toCart(): void {
     this.router.navigate(['user/cart']);
+  }
+
+  public toAbout(): void {
+    this.router.navigate(['about']);
   }
 }
