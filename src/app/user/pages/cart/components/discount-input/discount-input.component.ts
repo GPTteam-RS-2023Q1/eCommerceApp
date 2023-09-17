@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'ec-discount-input',
@@ -14,7 +14,7 @@ export class DiscountInputComponent implements OnInit {
 
   public ngOnInit(): void {
     this.form = this.fb.group({
-      promoInput: [null, Validators.required],
+      promoInput: [null],
     });
   }
 
