@@ -22,7 +22,6 @@ export interface DiscountCodeReference {
   id: string;
   typeId: string;
 }
-
 export interface LineItem {
   id: string;
   key?: string;

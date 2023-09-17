@@ -13,10 +13,10 @@ import { UserInfoDialogComponent } from './pages/profile/components/dialogs/user
 import { TagInputComponent } from './pages/profile/components/tag-input/tag-input.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { UserRoutingModule } from './user-routing.module';
-import { CardBasketComponent } from './components/card-basket/card-basket.component';
 import { OrderInfoComponent } from './pages/cart/components/order-info/order-info.component';
 import { DiscountInputComponent } from './pages/cart/components/discount-input/discount-input.component';
 import { TotalPriceComponent } from './pages/cart/components/total-price/total-price.component';
+import { CardBasketComponent } from './components/card-basket/card-basket.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +30,9 @@ import { TotalPriceComponent } from './pages/cart/components/total-price/total-p
     EditAddressDialogComponent,
     UserInfoDialogComponent,
     TagInputComponent,
+    OrderInfoComponent,
+    DiscountInputComponent,
+    TotalPriceComponent,
     CardBasketComponent,
     OrderInfoComponent,
     DiscountInputComponent,
