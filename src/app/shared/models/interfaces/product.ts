@@ -40,9 +40,15 @@ export interface LocalizedString {
 export interface ProductType {
   id: string;
   typeId: string;
+  attributes: AttributeDefinition[];
 }
 
 export interface TaxCategory {
   id: string;
   typeId: string;
+}
+
+export interface AttributeDefinition {
+  name: string;
+  label: LocalizedString;
 }
