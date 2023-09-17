@@ -18,13 +18,7 @@
       {{ getPrice(cardItem.price, cardItem.quantity) | currency : 'USD' }}
     </p>
     <div class="block">
-      <button
-        tuiButton
-        type="button"
-        icon="tuiIconPlus"
-        size="xs"
-        (click)="addToCart()"
-      ></button>
+      <button tuiButton type="button" icon="tuiIconPlus" size="xs"></button>
       <p>{{ cardItem.quantity }}</p>
     </div>
   </div>

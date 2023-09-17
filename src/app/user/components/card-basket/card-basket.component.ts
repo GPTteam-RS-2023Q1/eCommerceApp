@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { cartActions } from '@app/ngrx/actions/cart.actions';
 import { Attribute, Price } from '@app/shared/models/interfaces/product-variant';
 import { NotificationService } from '@app/shared/services/notofication.service';
 import { LineItem } from '@app/user/models/cart.model';
@@ -28,17 +27,6 @@ export class CardBasketComponent {
     return attr === 'size'
       ? attributes.find((attribute) => attribute.name === attr)?.value.label
       : attributes.find((attribute) => attribute.name === attr)?.value;
-  }
-
-  public addToCart(): void {
-    this.cartService
-      .updateCart(
-        this.cab.addLineItem(this.cardItem.productId, this.cardItem.variant).getActions()
-      )
-      .subscribe((cart) => {
-        this.store.dispatch(cartActions.saveCart({ cart }));
-        this.notifyService.notify('Продукт добавлен в корзину', 'success');
-      });
   }
 
   public formatPrice(price: number): string {

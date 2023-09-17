@@ -6,7 +6,9 @@ import { ProductVariant } from '@app/shared/models/interfaces/product-variant';
   name: 'getSizeOfVariant',
 })
 export class GetSizeOfVariantPipe implements PipeTransform {
-  public transform(variant: ProductVariant): string {
-    return variant.attributes.find((attr) => attr.name === 'size')?.value.key;
+  public transform(variant: ProductVariant | null): string {
+    return variant
+      ? variant.attributes.find((attr) => attr.name === 'size')?.value.key
+      : '';
   }
 }

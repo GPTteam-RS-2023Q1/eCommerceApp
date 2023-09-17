@@ -6,14 +6,11 @@ import { Subscription } from 'rxjs';
 
 import { ProductProjection } from '@app/catalog/models/product-projection';
 import { QueryBuilderService } from '@app/catalog/services/query-builder.service';
-import { cartActions } from '@app/ngrx/actions/cart.actions';
 import { catalogActions } from '@app/ngrx/actions/catalog.actions';
 import { selectCatalogProducts } from '@app/ngrx/selectors/catalog.selector';
 import { ProductVariant } from '@app/shared/models/interfaces/product-variant';
 import { NotificationService } from '@app/shared/services/notofication.service';
-import { CartActionBuilderService } from '@app/user/services/cart-action-builder.service';
 import { CartFacadeService } from '@app/user/services/cart-facade.service';
-import { CartService } from '@app/user/services/cart.service';
 
 @Component({
   selector: 'ec-products',
@@ -31,8 +28,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly qb: QueryBuilderService,
-    private readonly cartService: CartService,
-    private readonly cab: CartActionBuilderService,
     private readonly notifyService: NotificationService,
     private readonly cartFacade: CartFacadeService
   ) {}
@@ -68,12 +63,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.notifyService.notify('Продукт уже есть в корзине', 'warning');
         return;
       }
-      this.cartService
-        .updateCart(this.cab.addLineItem(product.id, variant).getActions())
-        .subscribe((cart) => {
-          this.store.dispatch(cartActions.saveCart({ cart }));
-          this.notifyService.notify('Продукт добавлен в корзину', 'success');
-        });
+      this.cartFacade.addLineItem(product, variant);
     });
   }
 }

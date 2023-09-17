@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MaskitoModule } from '@maskito/angular';
 import { TuiTableModule } from '@taiga-ui/addon-table';
@@ -82,6 +82,7 @@ import { ControlDependencyDirective } from './directives/control-dependency.dire
     TuiMultiSelectModule,
     TuiTextfieldControllerModule,
     TuiSelectModule,
+    FormsModule,
   ],
   exports: [
     CommonModule,
@@ -120,6 +121,7 @@ import { ControlDependencyDirective } from './directives/control-dependency.dire
     TuiSelectModule,
     ControlDependencyDirective,
     BirthdayInputComponent,
+    FormsModule,
   ],
 })
 export class SharedModule {}
