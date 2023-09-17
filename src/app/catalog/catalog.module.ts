@@ -1,4 +1,4 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { CoreModule } from '@app/core/core.module';
@@ -30,6 +30,7 @@ import { CatalogComponent } from './pages/catalog/catalog.component';
 import { ProductComponent } from './pages/product/product.component';
 import { GetPageCountPipe } from './pipes/get-page-count.pipe';
 import { GetSizeOfVariantPipe } from './pipes/get-size-of-variant.pipe';
+import { TranslateAttributePipe } from './pipes/translate-attribute.pipe';
 
 @NgModule({
   declarations: [
@@ -50,9 +51,9 @@ import { GetSizeOfVariantPipe } from './pipes/get-size-of-variant.pipe';
     PaginationComponent,
     GetPageCountPipe,
     GetSizeOfVariantPipe,
+    TranslateAttributePipe,
   ],
   imports: [
-    CommonModule,
     SharedModule,
     CatalogRoutingModule,
     NgOptimizedImage,

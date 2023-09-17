@@ -12,3 +12,7 @@ export interface AddLineItem extends CartAction {
   quantity?: number;
   distributionChannel?: ChannelResourceIdentifier;
 }
+
+export interface RemoveLineItem extends CartAction {
+  lineItemId: string;
+}
