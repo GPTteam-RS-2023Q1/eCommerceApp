@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
+import { CartFacadeService } from '@app/user/services/cart-facade.service';
 
 @Component({
   selector: 'ec-discount-input',
@@ -10,7 +11,10 @@ import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
 export class DiscountInputComponent implements OnInit {
   public form!: FormGroup;
 
-  constructor(private fb: NonNullableFormBuilder) {}
+  constructor(
+    private fb: NonNullableFormBuilder,
+    public cartFacadeService: CartFacadeService
+  ) {}
 
   public ngOnInit(): void {
     this.form = this.fb.group({
@@ -19,6 +23,7 @@ export class DiscountInputComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    console.log(this.form);
+    this.cartFacadeService.addDiscountCode(this.form.value.promoInput);
+    this.form.value.promoInput = '';
   }
 }

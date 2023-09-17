@@ -1,5 +1,8 @@
-import { Price, ProductVariant } from '@app/shared/models/interfaces/product-variant';
-import { CurrencyCode } from '@app/shared/models/enums/currency-code';
+import {
+  Price,
+  ProductVariant,
+  TypedMoney,
+} from '@app/shared/models/interfaces/product-variant';
 
 export interface Cart {
   id: string;
@@ -7,7 +10,7 @@ export interface Cart {
   lineItems: LineItem[];
   totalLineItemQuantity: number;
   discountCodes: DiscountCodeInfo[];
-  totalPrice: CentPrecisionMoney;
+  totalPrice: TypedMoney;
 }
 
 export interface DiscountCodeInfo {
@@ -18,13 +21,6 @@ export interface DiscountCodeInfo {
 export interface DiscountCodeReference {
   id: string;
   typeId: string;
-}
-
-export interface CentPrecisionMoney {
-  centAmount: number;
-  currencyCode: CurrencyCode;
-  type: string;
-  fractionDigits: number;
 }
 
 export interface LineItem {
