@@ -1,6 +1,15 @@
 <form [formGroup]="form" (submit)="onSubmit()">
-  <input formControlName="promoInput" placeholder="Промокод" />
-  <button tuiButton type="submit" appearance="flat" size="s" [disabled]="!form.valid">
+  <!-- <input formControlName="promoInput" placeholder="Промокод" /> -->
+  <tui-input formControlName="promoInput" tuiTextfieldSize="m"
+    >Промкод<input tuiTextfield
+  /></tui-input>
+  <button
+    tuiButton
+    type="submit"
+    appearance="flat"
+    size="s"
+    [disabled]="!form.value.promoInput"
+  >
     Применить
   </button>
 </form>
