@@ -16,6 +16,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { OrderInfoComponent } from './pages/cart/components/order-info/order-info.component';
 import { DiscountInputComponent } from './pages/cart/components/discount-input/discount-input.component';
 import { TotalPriceComponent } from './pages/cart/components/total-price/total-price.component';
+import { CardBasketComponent } from './components/card-basket/card-basket.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { TotalPriceComponent } from './pages/cart/components/total-price/total-p
     OrderInfoComponent,
     DiscountInputComponent,
     TotalPriceComponent,
+    CardBasketComponent,
   ],
   imports: [SharedModule, UserRoutingModule],
   providers: [
