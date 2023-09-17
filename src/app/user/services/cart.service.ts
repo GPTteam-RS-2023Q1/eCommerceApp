@@ -42,7 +42,6 @@ export class CartService {
   }
 
   public updateCartRequest(cart: Cart, actions: CartAction[]): Observable<Cart> {
-    console.log({ version: cart.version, actions });
     return this.http.post<Cart>(
       `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/me/carts/${cart?.id}`,
       { version: cart.version, actions }
