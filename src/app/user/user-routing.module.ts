@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ProfileGuard } from './guard/profile.guard';
 import { CartComponent } from './pages/cart/cart.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { ProfileGuard } from './pages/profile/guard/profile.guard';
 
 const routes: Routes = [
   {
