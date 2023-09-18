@@ -14,6 +14,20 @@ describe('CustomerInfoComponent', () => {
     });
     fixture = TestBed.createComponent(CustomerInfoComponent);
     component = fixture.componentInstance;
+    component.customer = {
+      addresses: [],
+      billingAddressIds: [],
+      dateOfBirth: '',
+      defaultBillingAddressId: '',
+      defaultShippingAddressId: '',
+      email: '',
+      firstName: '',
+      id: '',
+      lastName: '',
+      password: '',
+      shippingAddressIds: [],
+      version: 1,
+    };
     fixture.detectChanges();
   });
 
