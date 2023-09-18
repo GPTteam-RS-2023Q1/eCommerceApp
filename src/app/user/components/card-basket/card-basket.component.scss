@@ -114,4 +114,21 @@
   .quantity {
     max-width: 150px;
   }
+
+  @media (width < 460px) {
+    .image-wrapper {
+      width: 100px;
+    }
+
+    .block {
+      flex-direction: column;
+    }
+  }
+
+  @media (width < 530px) {
+    .controls {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
 }

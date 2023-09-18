@@ -2,6 +2,12 @@
   min-width: 400px;
 }
 
+@media (width < 450px) {
+  .discount {
+    min-width: 250px;
+  }
+}
+
 .discount-container {
   display: flex;
   flex-direction: column;
