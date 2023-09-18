@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MaskitoModule } from '@maskito/angular';
 import { TuiTableModule } from '@taiga-ui/addon-table';
+import { TuiLetModule } from '@taiga-ui/cdk';
 import {
   TuiButtonModule,
   TuiDataListModule,
@@ -41,6 +42,7 @@ import { FormFailNotificationComponent } from './components/form-fail-notificati
 import { InputComponent } from './components/input/input.component';
 import { PasswordInputComponent } from './components/password-input/password-input.component';
 import { ControlDependencyDirective } from './directives/control-dependency.directive';
+import { FormatPricePipe } from './pipes/format-price.pipe';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import { ControlDependencyDirective } from './directives/control-dependency.dire
     AddressFormComponent,
     ControlDependencyDirective,
     BirthdayInputComponent,
+    FormatPricePipe,
   ],
   imports: [
     CommonModule,
@@ -83,6 +86,7 @@ import { ControlDependencyDirective } from './directives/control-dependency.dire
     TuiTextfieldControllerModule,
     TuiSelectModule,
     FormsModule,
+    TuiLetModule,
   ],
   exports: [
     CommonModule,
@@ -122,6 +126,8 @@ import { ControlDependencyDirective } from './directives/control-dependency.dire
     ControlDependencyDirective,
     BirthdayInputComponent,
     FormsModule,
+    FormatPricePipe,
+    TuiLetModule,
   ],
 })
 export class SharedModule {}

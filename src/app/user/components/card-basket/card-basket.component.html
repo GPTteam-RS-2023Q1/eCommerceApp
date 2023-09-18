@@ -1,25 +1,63 @@
-<div class="wrapper">
-  <img [src]="cardItem.variant.images[0].url" class="img" />
-  <p>{{ getAttribute(cardItem.variant.attributes, 'brand') }}</p>
-  <div class="block-price">
-    <p [ngClass]="{ 'line-through': cardItem.price.discounted }">
-      {{ formatPrice(cardItem.price.value.centAmount) | currency : 'USD' }}
-    </p>
-    <p *ngIf="cardItem.price.discounted as discounted" class="discount">
-      {{ formatPrice(discounted.value.centAmount) | currency : 'USD' }}
-    </p>
+<div
+  #images
+  (mousemove)="onMouseMove($event)"
+  (mouseleave)="onMouseLeave()"
+  class="image-wrapper"
+>
+  <div class="image-counter">
+    <div
+      *ngFor="let image of lineItem.variant.images; index as i"
+      class="rectangle"
+      [ngClass]="(activeImageIndex$$ | async) === i ? 'active' : ''"
+    ></div>
   </div>
-  <div class="block-size">
-    <p>Размер:</p>
-    <p>{{ getAttribute(cardItem.variant.attributes, 'size') }}</p>
-  </div>
-  <div class="block-totalPrice">
-    <p>
-      {{ getPrice(cardItem.price, cardItem.quantity) | currency : 'USD' }}
-    </p>
-    <div class="block">
-      <button tuiButton type="button" icon="tuiIconPlus" size="xs"></button>
-      <p>{{ cardItem.quantity }}</p>
+
+  <ng-container *ngFor="let image of lineItem.variant.images; index as i">
+    <div @showHide class="image" *ngIf="(activeImageIndex$$ | async) === i">
+      <img [ngSrc]="image.url" fill />
     </div>
+  </ng-container>
+</div>
+<div class="details">
+  <div class="block">
+    <div class="info">
+      <div class="naming">
+        <h3 class="description">{{ lineItem.custom.fields.description }}</h3>
+        <a (click)="navigate.emit(lineItem.productId)" class="name">
+          {{ lineItem.name.ru }}
+        </a>
+      </div>
+      <div class="attributes">
+        <ng-container *ngFor="let attr of lineItem.variant.attributes">
+          <h4 *ngIf="attr.name === 'size'" class="attribute">
+            Размер: {{ attr.value.label }}
+          </h4>
+          <h4 *ngIf="attr.name === 'color'" class="attribute">Цвет: {{ attr.value }}</h4>
+        </ng-container>
+      </div>
+    </div>
+    <div class="price">
+      <span class="value" [ngClass]="lineItem.price.discounted ? 'standart' : ''"
+        >{{ price | formatPrice | currency : 'USD' }}
+      </span>
+      <span *ngIf="lineItem.price.discounted" class="discounted value">{{
+        discountedPrice | formatPrice | currency : 'USD'
+      }}</span>
+    </div>
+  </div>
+  <div class="controls">
+    <tui-input-number class="quantity" [step]="1" [formControl]="quantity"
+      >Количество</tui-input-number
+    >
+    <button
+      (click)="detele.emit(lineItem.id)"
+      tuiButton
+      icon="../../../../assets/trash-bin.svg"
+      size="s"
+      appearance="outline"
+      class="trash"
+    >
+      Удалить из корзины
+    </button>
   </div>
 </div>

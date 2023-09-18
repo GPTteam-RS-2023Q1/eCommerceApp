@@ -73,6 +73,7 @@ export class CartService {
           this.store.dispatch(authAction.anonymousSessionStart());
           return this.actions$.pipe(
             ofType(cartActions.saveCart),
+            take(1),
             exhaustMap((action) => {
               return this.updateCartRequest(action.cart, actions);
             })

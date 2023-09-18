@@ -21,14 +21,6 @@ export class PriceComponent {
     return this.price.value.centAmount;
   }
 
-  public formatPrice(price: number): string {
-    return (price / 100).toFixed(2);
-  }
-
-  public hasDiscount(): boolean {
-    return Boolean(this.price.discounted);
-  }
-
   public getDiscountPrecentage(baseValue: number, discountedValue: number): number {
     return Math.round(100 - 100 / (baseValue / discountedValue));
   }

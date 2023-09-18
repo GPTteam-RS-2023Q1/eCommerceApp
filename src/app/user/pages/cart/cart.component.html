@@ -1,17 +1,19 @@
-<div *ngIf="cart$ | async as cart; else emptyCard">
-  <div class="card-container">
-    <ng-container *ngFor="let cardItem of cart.lineItems">
+<div *ngIf="cart$ | async as cart" class="wrapper">
+  <div *ngIf="cart.lineItems?.length; else empty" class="container">
+    <div class="cards">
       <ec-card-basket
-        [cardItem]="cardItem"
-        (click)="navigateToProduct(cardItem.productId)"
+        *ngFor="let cardItem of cart.lineItems; trackBy: identify"
+        [lineItem]="cardItem"
+        (navigate)="navigateToProduct($event)"
+        (detele)="cartFacade.removeLineItem($event)"
       ></ec-card-basket>
-    </ng-container>
+    </div>
+    <ec-order-info [cart]="cart"></ec-order-info>
   </div>
-  <ec-order-info [cart]="cart"></ec-order-info>
+  <ng-template #empty>
+    <h3 class="empty">
+      Перейдите в
+      <a tuiLink routerLink="/store/catalog/clothes">каталог</a>, чтобы добавить товары
+    </h3>
+  </ng-template>
 </div>
-<ng-template #emptyCard>
-  <h3 class="emptyCard-header">
-    Перейдите в
-    <a tuiLink routerLink="/store/catalog/clothes">каталог</a>, чтобы добавить товары
-  </h3>
-</ng-template>

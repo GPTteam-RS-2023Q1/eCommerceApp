@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
 import { ProductProjection } from '@app/catalog/models/product-projection';
+import { ProductService } from '@app/catalog/services/product.service';
 import { QueryBuilderService } from '@app/catalog/services/query-builder.service';
 import { catalogActions } from '@app/ngrx/actions/catalog.actions';
 import { selectCatalogProducts } from '@app/ngrx/selectors/catalog.selector';
@@ -29,7 +30,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private readonly route: ActivatedRoute,
     private readonly qb: QueryBuilderService,
     private readonly notifyService: NotificationService,
-    private readonly cartFacade: CartFacadeService
+    private readonly cartFacade: CartFacadeService,
+    private readonly productService: ProductService
   ) {}
 
   public ngOnInit(): void {
@@ -63,7 +65,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.notifyService.notify('Продукт уже есть в корзине', 'warning');
         return;
       }
-      this.cartFacade.addLineItem(product, variant);
+      this.productService.getProduct(product.id).subscribe((p) => {
+        this.cartFacade.addLineItem(p, variant);
+      });
     });
+  }
+
+  public identify(index: number, item: ProductProjection): string {
+    return item.id;
   }
 }

@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { CoreModule } from '@app/core/core.module';
 import { SharedModule } from '@app/shared/shared.module';
-import { TuiLetModule } from '@taiga-ui/cdk';
 import { TuiDropdownModule, TuiLoaderModule } from '@taiga-ui/core';
 import {
   TuiInputRangeModule,
@@ -61,7 +60,6 @@ import { TranslateAttributePipe } from './pipes/translate-attribute.pipe';
     TuiTreeModule,
     TuiLoaderModule,
     TuiMultiSelectModule,
-    TuiLetModule,
     TuiInputRangeModule,
     TuiPaginationModule,
     TuiDropdownModule,

@@ -1,20 +1,30 @@
 @import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap';
 
 :host {
-  .emptyCard-header {
+  .wrapper {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  .empty {
     padding: 30px;
     font-family: Montserrat, sans-serif !important;
     font-size: 20px;
     text-align: center;
   }
 
-  .card-container {
+  .container {
     display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
+    gap: 25px;
+    align-items: start;
+    margin: 0 auto 40px;
+  }
 
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 30px;
+  .cards {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    row-gap: 20px;
   }
 }

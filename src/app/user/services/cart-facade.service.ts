@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { map, Observable, take, Subject } from 'rxjs';
+import { map, Observable, Subject, take } from 'rxjs';
 
 import { ProductProjection } from '@app/catalog/models/product-projection';
 import { cartActions } from '@app/ngrx/actions/cart.actions';
@@ -11,9 +11,9 @@ import { ProductVariant } from '@app/shared/models/interfaces/product-variant';
 import { NotificationService } from '@app/shared/services/notofication.service';
 
 import { Cart, LineItem } from '../models/cart.model';
+import { DiscountInfo } from '../models/discounts.model';
 import { CartActionBuilderService } from './cart-action-builder.service';
 import { CartService } from './cart.service';
-import { DiscountInfo } from '../models/discounts.model';
 
 @Injectable({
   providedIn: 'root',
@@ -56,10 +56,7 @@ export class CartFacadeService {
     );
   }
 
-  public addLineItem(
-    product: ProductProjection | Product,
-    variant: ProductVariant
-  ): void {
+  public addLineItem(product: Product, variant: ProductVariant): void {
     this.cartService
       .updateCart(this.cartActionBuilder.addLineItem(product, variant).getActions())
       .subscribe(() => {
@@ -100,5 +97,13 @@ export class CartFacadeService {
       this.notifyService.notify('Промокод успешно удален', 'success');
       this.getCartDiscounts();
     });
+  }
+
+  public changeLineItemQuantity(lineItemId: string, quantity: number): void {
+    this.cartService
+      .updateCart(
+        this.cartActionBuilder.changeQuantity(lineItemId, quantity).getActions()
+      )
+      .subscribe();
   }
 }

@@ -23,6 +23,11 @@ export const selectCurrency = createSelector(
   (state) => state.cart?.totalPrice.currencyCode
 );
 
-export const selectPriceWithoutDiscount = createSelector(selectCartState, (state) =>
-  state.cart?.lineItems.reduce((acc, item) => acc + item.price.value.centAmount / 100, 0)
-);
+export const selectPriceWithoutDiscount = createSelector(selectCartState, (state) => {
+  return state.cart?.lineItems.reduce((acc, item) => {
+    const price = item.price.discounted
+      ? item.price.discounted.value.centAmount
+      : item.price.value.centAmount;
+    return acc + (price * item.quantity) / 100;
+  }, 0);
+});
