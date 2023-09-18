@@ -20,8 +20,8 @@ import { Subscription } from 'rxjs';
 })
 export class DiscountInfoComponent implements OnInit, OnDestroy {
   @Input({ required: true }) public cartDiscounts: CartDiscount[] = [];
-  public cartCurrency: CurrencyCode = CurrencyCode.USD;
-  public cartCurrency$ = this.store.select(selectCurrency);
+  private cartCurrency: CurrencyCode = CurrencyCode.USD;
+  private cartCurrency$ = this.store.select(selectCurrency);
   private subs = new Subscription();
 
   constructor(private store: Store) {}

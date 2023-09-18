@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TotalPriceComponent {
-  @Input({ required: true }) public totalPrice!: TypedMoney | undefined;
+  @Input({ required: true }) public totalPrice!: TypedMoney;
 
   public fullPrice = this.store.select(selectPriceWithoutDiscount);
 

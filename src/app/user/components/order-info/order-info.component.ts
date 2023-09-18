@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderInfoComponent implements OnInit {
-  @Input({ required: true }) public cart!: Cart | null;
+  @Input({ required: true }) public cart!: Cart;
   public discounts$ = this.store.select(selectDiscounts);
 
   public cartDiscounts = this.cartServiceFacade.cartDiscounts;
