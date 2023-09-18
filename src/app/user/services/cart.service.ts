@@ -60,8 +60,7 @@ export class CartService {
         { version: cart.version, actions }
       )
       .pipe(
-        tap((newCart) => this.store.dispatch(cartActions.saveCart({ cart: newCart }))),
-        catchError(() => of())
+        tap((newCart) => this.store.dispatch(cartActions.saveCart({ cart: newCart })))
       );
   }
 

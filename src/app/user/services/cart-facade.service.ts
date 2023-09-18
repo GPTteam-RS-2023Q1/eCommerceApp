@@ -59,16 +59,22 @@ export class CartFacadeService {
   public addLineItem(product: Product, variant: ProductVariant): void {
     this.cartService
       .updateCart(this.cartActionBuilder.addLineItem(product, variant).getActions())
-      .subscribe(() => {
-        this.notifyService.notify('Продукт добавлен в корзину', 'success');
+      .subscribe({
+        next: () => {
+          this.notifyService.notify('Продукт добавлен в корзину', 'success');
+        },
+        error: () => {},
       });
   }
 
   public removeLineItem(id: string): void {
     this.cartService
       .updateCart(this.cartActionBuilder.removeLineItem(id).getActions())
-      .subscribe(() => {
-        this.notifyService.notify('Продукт удален из корзины', 'success');
+      .subscribe({
+        next: () => {
+          this.notifyService.notify('Продукт удален из корзины', 'success');
+        },
+        error: () => {},
       });
   }
 
@@ -85,17 +91,25 @@ export class CartFacadeService {
 
   public addDiscountCode(code: string): void {
     this.cartActionBuilder.addDiscountCode(code);
-    this.cartService.updateCart(this.cartActionBuilder.getActions()).subscribe(() => {
-      this.notifyService.notify('Промокод успешно применен', 'success');
-      this.getCartDiscounts();
+    this.cartService.updateCart(this.cartActionBuilder.getActions()).subscribe({
+      next: () => {
+        this.notifyService.notify('Промокод успешно применен', 'success');
+        this.getCartDiscounts();
+      },
+      error: () => {
+        this.notifyService.notify('Промокод не найден', 'error');
+      },
     });
   }
 
   public removeDiscountCode(id: string): void {
     this.cartActionBuilder.removeDiscountCode(id);
-    this.cartService.updateCart(this.cartActionBuilder.getActions()).subscribe(() => {
-      this.notifyService.notify('Промокод успешно удален', 'success');
-      this.getCartDiscounts();
+    this.cartService.updateCart(this.cartActionBuilder.getActions()).subscribe({
+      next: () => {
+        this.notifyService.notify('Промокод успешно удален', 'success');
+        this.getCartDiscounts();
+      },
+      error: () => {},
     });
   }
 
@@ -104,6 +118,6 @@ export class CartFacadeService {
       .updateCart(
         this.cartActionBuilder.changeQuantity(lineItemId, quantity).getActions()
       )
-      .subscribe();
+      .subscribe({ error: () => {} });
   }
 }

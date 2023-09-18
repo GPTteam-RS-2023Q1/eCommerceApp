@@ -12,6 +12,16 @@
   >
     Купить онлайн
   </button>
+  <tui-accordion-item class="container">
+    Промокоды
+    <ng-template tuiAccordionItemContent>
+      <div class="promo-container">
+        <p class="promo" (click)="copyPromo(promo)" *ngFor="let promo of promoCodes">
+          {{ promo }}
+        </p>
+      </div>
+    </ng-template>
+  </tui-accordion-item>
 </div>
 
 <tui-carousel [duration]="3000" [(index)]="startIndex">

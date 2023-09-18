@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { SharedModule } from '@app/shared/shared.module';
 import { BirthdayInputComponent } from './birthday-input.component';
 
 describe('BirthdayInputComponent', () => {
@@ -9,6 +10,7 @@ describe('BirthdayInputComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [BirthdayInputComponent],
+      imports: [SharedModule],
     });
     fixture = TestBed.createComponent(BirthdayInputComponent);
     component = fixture.componentInstance;

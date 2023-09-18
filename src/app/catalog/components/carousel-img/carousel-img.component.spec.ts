@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { CatalogModule } from '@app/catalog/catalog.module';
 import { CarouselImgComponent } from './carousel-img.component';
 
 describe('CarouselImgComponent', () => {
@@ -9,6 +10,7 @@ describe('CarouselImgComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [CarouselImgComponent],
+      imports: [CatalogModule],
     });
     fixture = TestBed.createComponent(CarouselImgComponent);
     component = fixture.componentInstance;
