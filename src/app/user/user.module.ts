@@ -1,8 +1,14 @@
+import { NgOptimizedImage } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '@app/shared/shared.module';
-import { TUI_VALIDATION_ERRORS } from '@taiga-ui/kit';
+import { TUI_VALIDATION_ERRORS, TuiInputNumberModule } from '@taiga-ui/kit';
 
+import { CardBasketComponent } from './components/card-basket/card-basket.component';
+import { DiscountInfoComponent } from './components/discount-info/discount-info.component';
+import { DiscountInputComponent } from './components/discount-input/discount-input.component';
+import { OrderInfoComponent } from './components/order-info/order-info.component';
+import { TotalPriceComponent } from './components/total-price/total-price.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { CustomerAddressComponent } from './pages/profile/components/customer-addresses/customer-address/customer-address.component';
 import { CustomerAddressesComponent } from './pages/profile/components/customer-addresses/customer-addresses.component';
@@ -13,11 +19,6 @@ import { UserInfoDialogComponent } from './pages/profile/components/dialogs/user
 import { TagInputComponent } from './pages/profile/components/tag-input/tag-input.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { UserRoutingModule } from './user-routing.module';
-import { OrderInfoComponent } from './components/order-info/order-info.component';
-import { DiscountInputComponent } from './components/discount-input/discount-input.component';
-import { TotalPriceComponent } from './components/total-price/total-price.component';
-import { CardBasketComponent } from './components/card-basket/card-basket.component';
-import { DiscountInfoComponent } from './components/discount-info/discount-info.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { DiscountInfoComponent } from './components/discount-info/discount-info.
     TotalPriceComponent,
     DiscountInfoComponent,
   ],
-  imports: [SharedModule, UserRoutingModule],
+  imports: [SharedModule, UserRoutingModule, NgOptimizedImage, TuiInputNumberModule],
   providers: [
     {
       provide: TUI_VALIDATION_ERRORS,

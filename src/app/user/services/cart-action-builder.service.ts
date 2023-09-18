@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { ProductProjection } from '@app/catalog/models/product-projection';
 import { Product } from '@app/shared/models/interfaces/product';
 import { ProductVariant } from '@app/shared/models/interfaces/product-variant';
 
@@ -8,6 +7,7 @@ import {
   AddDiscountCode,
   AddLineItem,
   CartAction,
+  ChangeLineItemQuantity,
   RemoveDiscountCode,
   RemoveLineItem,
 } from '../models/cart-update.actions';
@@ -20,13 +20,23 @@ export class CartActionBuilderService {
   private actions: CartAction[] = [];
 
   public addLineItem(
-    product: Product | ProductProjection,
+    product: Product,
     variant: ProductVariant
   ): CartActionBuilderService {
     const action: AddLineItem = {
       action: CartUpdateActions.addLineItem,
       productId: product.id,
       variantId: variant.id,
+      custom: {
+        type: {
+          key: 'lineitemtype',
+          typeId: 'type',
+        },
+        fields: {
+          description: product.masterData.current.metaDescription.ru,
+          'short-description': product.masterData.current.description?.ru || '',
+        },
+      },
     };
 
     if (variant.prices[0].channel) {
@@ -42,6 +52,18 @@ export class CartActionBuilderService {
     const action: RemoveLineItem = {
       action: CartUpdateActions.removeLineItem,
       lineItemId,
+    };
+
+    this.actions.push(action);
+
+    return this;
+  }
+
+  public changeQuantity(lineItemId: string, quantity: number): CartActionBuilderService {
+    const action: ChangeLineItemQuantity = {
+      action: CartUpdateActions.ChangeLineItemQuantity,
+      lineItemId,
+      quantity,
     };
 
     this.actions.push(action);

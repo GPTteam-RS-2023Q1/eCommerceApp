@@ -11,10 +11,31 @@ export interface AddLineItem extends CartAction {
   variantId: number;
   quantity?: number;
   distributionChannel?: ChannelResourceIdentifier;
+  custom: CustomFieldsDraft;
 }
 
 export interface RemoveLineItem extends CartAction {
   lineItemId: string;
+}
+
+export interface ChangeLineItemQuantity extends CartAction {
+  lineItemId: string;
+  quantity: number;
+}
+
+export interface CustomFieldsDraft {
+  type: TypeResourceIdentifier;
+  fields: CustomFields;
+}
+
+export interface TypeResourceIdentifier {
+  key: string;
+  typeId: 'type';
+}
+
+export interface CustomFields {
+  description: string;
+  'short-description': string;
 }
 export interface AddDiscountCode extends CartAction {
   code: string;

@@ -39,6 +39,22 @@
     align-items: center;
   }
 
+  .buttons {
+    position: relative;
+    display: flex;
+    gap: 30px;
+  }
+
+  .promos {
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    width: 100%;
+
+    background-color: #fff;
+  }
+
   @media (width <= 1024px) {
     .logo {
       width: 150px;

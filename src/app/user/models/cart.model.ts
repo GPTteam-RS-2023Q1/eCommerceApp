@@ -1,8 +1,11 @@
+import { LocalizedString, ProductType } from '@app/shared/models/interfaces/product';
 import {
   Price,
   ProductVariant,
   TypedMoney,
 } from '@app/shared/models/interfaces/product-variant';
+
+import { CustomFieldsDraft } from './cart-update.actions';
 
 export interface Cart {
   id: string;
@@ -30,4 +33,8 @@ export interface LineItem {
   variant: ProductVariant;
   quantity: number;
   price: Price;
+  totalPrice: TypedMoney;
+  custom: CustomFieldsDraft;
+  name: LocalizedString;
+  productType: ProductType;
 }
