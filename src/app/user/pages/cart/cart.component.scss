@@ -12,6 +12,9 @@
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
+
+    max-width: 1440px;
+    margin: 0 auto;
     padding: 30px;
   }
 }
