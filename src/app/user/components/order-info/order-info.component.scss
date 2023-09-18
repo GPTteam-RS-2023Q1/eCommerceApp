@@ -1,0 +1,38 @@
+.discount {
+  max-width: 400px;
+}
+
+.discount-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.layout-2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.layout-2-close {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.total-price {
+  margin-top: 10px;
+}
+
+.red {
+  color: red;
+}
+
+.test {
+  color: rgb(27 31 59 / 65%);
+}

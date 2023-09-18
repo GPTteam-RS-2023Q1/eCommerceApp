@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
 
   public isAuth!: Observable<boolean>;
 
-  public countCartItem!: Observable<number>;
+  public countCartItem!: Observable<number | undefined>;
 
   constructor(private router: Router, private store: Store) {
     this.getSize();

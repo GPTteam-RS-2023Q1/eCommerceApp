@@ -1,0 +1,12 @@
+<div *ngFor="let discount of cartDiscounts">
+  <div class="layout-2" *ngIf="discount.value.permyriad">
+    <span class="grey">{{ discount.name.ru }}</span>
+    <span class="red">{{ discount.value.permyriad / 10000 | percent }}</span>
+  </div>
+  <div class="layout-2" *ngIf="getCurrency(discount.value.money) as money">
+    <span class="grey">{{ discount.name.ru }}</span>
+    <span class="red">{{
+      (money.centAmount / 100).toFixed(2) | currency : money.currencyCode
+    }}</span>
+  </div>
+</div>
