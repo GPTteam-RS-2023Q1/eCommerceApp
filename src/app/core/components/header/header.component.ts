@@ -20,6 +20,8 @@ export class HeaderComponent implements OnInit {
 
   public countCartItem!: Observable<number | undefined>;
 
+  public expanded = false;
+
   constructor(private router: Router, private store: Store) {
     this.getSize();
   }
@@ -52,5 +54,10 @@ export class HeaderComponent implements OnInit {
 
   public toAbout(): void {
     this.router.navigate(['about']);
+  }
+
+  public toggle(): void {
+    console.log(1);
+    this.expanded = !this.expanded;
   }
 }

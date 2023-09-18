@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '@app/shared/shared.module';
+import { TuiExpandModule } from '@taiga-ui/core';
 import { TuiBadgedContentModule } from '@taiga-ui/kit';
 
 import { AuthMenuComponent } from './components/auth-menu/auth-menu.component';
@@ -22,7 +23,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     AboutComponent,
     NotificationsComponent,
   ],
-  imports: [CommonModule, SharedModule, TuiBadgedContentModule],
+  imports: [CommonModule, SharedModule, TuiBadgedContentModule, TuiExpandModule],
   exports: [HeaderComponent, FooterComponent, NotificationsComponent],
 })
 export class CoreModule {}
