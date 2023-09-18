@@ -1,11 +1,12 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { NonNullableFormBuilder } from '@angular/forms';
 
-import { map, Observable, take } from 'rxjs';
+import { combineLatest, EMPTY, Observable, of, startWith, switchMap } from 'rxjs';
 
-import { Product } from '@app/core/models/product';
-import { ProductVariant } from '@app/core/models/product-variant';
+import { ProductService } from '@app/catalog/services/product.service';
+import { Product, ProductType } from '@app/shared/models/interfaces/product';
+import { ProductVariant } from '@app/shared/models/interfaces/product-variant';
+import { CartFacadeService } from '@app/user/services/cart-facade.service';
 
 @Component({
   selector: 'ec-product',
@@ -14,42 +15,79 @@ import { ProductVariant } from '@app/core/models/product-variant';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductComponent implements OnInit {
-  public product$!: Observable<Product>;
+  @Input() public product!: Product;
 
-  public controlSize = new FormControl();
+  public productType!: Observable<ProductType>;
 
-  public items = ['John', 'Eric', 'Graham'];
+  public sizes!: string[];
 
-  constructor(private readonly route: ActivatedRoute) {}
+  public sizeForm = this.fb.group({
+    size: '',
+  });
+
+  public isVariantInCart!: Observable<boolean>;
+
+  constructor(
+    private productService: ProductService,
+    private cartFacade: CartFacadeService,
+    private fb: NonNullableFormBuilder
+  ) {}
 
   public ngOnInit(): void {
-    this.product$ = this.route.data.pipe(
-      take(1),
-      map((data) => {
-        return data['product'];
+    this.productType = this.productService.getProductTypeById(
+      this.product.productType.id
+    );
+    this.sizes = this.getSizes(this.product.masterData.current.variants);
+    this.sizeForm.patchValue({
+      size: this.sizes[0],
+    });
+    this.isVariantInCart = combineLatest([
+      this.sizeForm.valueChanges.pipe(startWith(this.sizeForm.value)),
+      this.cartFacade.cart$,
+    ]).pipe(
+      switchMap(([sizeForm, cart]) => {
+        const variant = this.getVariantBySize(sizeForm.size || '');
+        return variant
+          ? of(
+              !!cart?.lineItems.find(
+                (item) =>
+                  item.productId === this.product.id && item.variant.id === variant.id
+              )
+            )
+          : EMPTY;
       })
     );
   }
 
-  public getSize(variants: ProductVariant[]): string[] {
-    const size: string[] = variants.map(
+  public getSizes(variants: ProductVariant[]): string[] {
+    return variants.map(
       (v) => v.attributes.find((attribute) => attribute.name === 'size')?.value.label
     );
-    return size;
   }
 
-  public translate(str: string): string {
-    switch (str) {
-      case 'season':
-        return 'сезон';
-      case 'color':
-        return 'цвет';
-      case 'pattern':
-        return 'узор';
-      case 'brand':
-        return 'бренд';
-      default:
-        return '';
+  public getVariantBySize(size: string): ProductVariant | undefined {
+    return this.product.masterData.current.variants.find((variant) =>
+      variant.attributes.some((attr) => attr.value.label === size)
+    );
+  }
+
+  public removeLineItem(): void {
+    const variant = this.getVariantBySize(this.sizeForm.getRawValue().size);
+    if (variant) {
+      this.cartFacade
+        .getLineItemByProductandVariant(this.product, variant)
+        .subscribe((item) => {
+          if (item) {
+            this.cartFacade.removeLineItem(item.id);
+          }
+        });
+    }
+  }
+
+  public addLineItem(): void {
+    const variant = this.getVariantBySize(this.sizeForm.getRawValue().size);
+    if (variant) {
+      this.cartFacade.addLineItem(this.product, variant);
     }
   }
 }

@@ -3,8 +3,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { exhaustMap, map } from 'rxjs';
 
+import { ProductService } from '@app/catalog/services/product.service';
 import { BuildedParams } from '@app/catalog/services/query-builder.service';
-import { ProductService } from '@app/core/services/product.service';
 
 import { catalogActions } from '../actions/catalog.actions';
 
@@ -17,9 +17,7 @@ export class CatalogEffects {
         return this.productService
           .getProducts({ parameters: params })
           .pipe(
-            map((response) =>
-              catalogActions.getProductsSuccess({ products: response.results })
-            )
+            map((response) => catalogActions.getProductsSuccess({ products: response }))
           );
       })
     );

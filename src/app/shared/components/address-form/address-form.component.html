@@ -3,7 +3,7 @@
 
   <div class="form-row">
     <tui-combo-box class="b-form" formControlName="country">
-      Country
+      Страна
       <input tuiTextfield autocomplete="new-password" />
       <tui-data-list-wrapper
         *tuiDataList
@@ -13,9 +13,9 @@
     <tui-error formControlName="country" [error]="[] | tuiFieldError | async"></tui-error>
   </div>
 
-  <ec-input placeholder="City" formControlName="city"></ec-input>
+  <ec-input placeholder="Город" formControlName="city"></ec-input>
 
-  <ec-input placeholder="Street" formControlName="streetName"></ec-input>
+  <ec-input placeholder="Улица" formControlName="streetName"></ec-input>
 
   <div class="tui-form__row">
     <tui-input
@@ -23,7 +23,7 @@
       formControlName="postalCode"
       [maskito]="selectedCountry.mask"
       class="address-form-postal-code"
-      >Postal code<input
+      >Почтовый индекс<input
         tuiTextfield
         [placeholder]="selectedCountry.hint"
         autocomplete="new-password"

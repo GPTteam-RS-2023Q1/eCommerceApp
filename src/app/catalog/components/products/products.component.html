@@ -1,13 +1,30 @@
 <div class="products">
-  <ng-container *ngIf="(products$ | async)?.length; else notFound">
-    <ec-card
-      *ngFor="let product of products$ | async"
-      [product]="product"
-      (click)="navigateToProduct(product.id)"
-    ></ec-card>
+  <ng-container *ngIf="products$ | async as products">
+    <ng-container *ngIf="products.results?.length; else notFound">
+      <div class="products-wrapper">
+        <ec-card
+          (addToCart)="addToCart(product, $event)"
+          *ngFor="let product of products.results; trackBy: identify"
+          [product]="product"
+          (click)="navigateToProduct(product.id)"
+        ></ec-card>
+      </div>
+      <ec-pagination
+        class="pagination"
+        [length]="products.total | getPageCount"
+      ></ec-pagination>
+    </ng-container>
   </ng-container>
 
   <ng-template #notFound>
-    <h2>Продуктов по данному запросу нет в наличии</h2>
+    <tui-block-status>
+      <img
+        alt="not found"
+        src="../../../../assets/not-found.jpg"
+        tuiSlot="top"
+        class="image"
+      />
+      <h4>Продуктов по данному запросу нет в наличии</h4>
+    </tui-block-status>
   </ng-template>
 </div>

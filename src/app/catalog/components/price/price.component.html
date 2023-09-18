@@ -1,0 +1,11 @@
+<div [ngClass]="className" class="price" *ngIf="price">
+  <span class="value" [ngClass]="price.discounted ? 'standart' : ''"
+    >{{ baseValue | formatPrice | currency : 'USD' }}
+  </span>
+  <span *ngIf="price.discounted" class="discounted value">{{
+    discountedValue | formatPrice | currency : 'USD'
+  }}</span>
+  <span *ngIf="price.discounted" class="discount"
+    >-{{ getDiscountPrecentage(baseValue, discountedValue) }}%</span
+  >
+</div>

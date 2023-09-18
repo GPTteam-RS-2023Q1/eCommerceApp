@@ -17,6 +17,20 @@
     background-size: cover;
   }
 
+  .promo {
+    cursor: pointer;
+  }
+
+  .promo:hover {
+    text-decoration: underline;
+  }
+
+  .promo-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
   .pagination {
     padding: 20px 0;
   }
@@ -36,7 +50,6 @@
   }
 
   .btn-buy {
-    width: 200px;
     font-family: Montserrat, sans-serif !important;
     font-size: 22px;
   }

@@ -8,19 +8,22 @@
     [size]="size"
     [icon]="'s' ? 'tuiIconBookOpen' : 'tuiIconBookOpenLarge'"
   >
-    Catalog
+    Каталог
   </button>
-  <img class="logo" src="../../../../assets/logo.svg" alt="logo" (click)="toMain()" />
+  <img class="logo" src="../../../../assets/VogueGPT.svg" alt="logo" (click)="toMain()" />
   <div class="container-user">
+    <a tuiLink class="about" tuiLink (click)="toAbout()">О нас</a>
     <ec-auth-menu *ngIf="(isAuth | async) === false" [sizeInput]="size"></ec-auth-menu>
     <ec-user-menu *ngIf="isAuth | async" [sizeInput]="size"></ec-user-menu>
-    <button
-      tuiButton
-      type="button"
-      appearance="outline"
-      [size]="size"
-      [icon]="size === 's' ? 'tuiIconShoppingCart' : 'tuiIconShoppingCartLarge'"
-      (click)="toCart()"
-    ></button>
+    <tui-badged-content [contentTop]="countCartItem | async">
+      <button
+        tuiButton
+        type="button"
+        appearance="outline"
+        [size]="size"
+        [icon]="size === 's' ? 'tuiIconShoppingCart' : 'tuiIconShoppingCartLarge'"
+        (click)="toCart()"
+      ></button>
+    </tui-badged-content>
   </div>
 </header>

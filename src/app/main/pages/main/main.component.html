@@ -1,10 +1,3 @@
-<p class="link">
-  <span
-    >Click here to <a tuiLink routerLink="../../auth/sign-in">sign in </a>or
-    <a tuiLink routerLink="../../auth/sign-up">sign up</a></span
-  >
-</p>
-
 <div class="block-header">
   <div>
     <p class="header">last days</p>
@@ -17,8 +10,18 @@
     class="btn-buy"
     (click)="toCatalog()"
   >
-    buy online
+    Купить онлайн
   </button>
+  <tui-accordion-item class="container">
+    Промокоды
+    <ng-template tuiAccordionItemContent>
+      <div class="promo-container">
+        <p class="promo" (click)="copyPromo(promo)" *ngFor="let promo of promoCodes">
+          {{ promo }}
+        </p>
+      </div>
+    </ng-template>
+  </tui-accordion-item>
 </div>
 
 <tui-carousel [duration]="3000" [(index)]="startIndex">

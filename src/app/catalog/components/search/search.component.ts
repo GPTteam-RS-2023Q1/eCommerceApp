@@ -2,19 +2,11 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import {
-  distinctUntilChanged,
-  interval,
-  map,
-  Observable,
-  Subject,
-  switchMap,
-  throttle,
-} from 'rxjs';
+import { distinctUntilChanged, map, Observable, Subject, switchMap } from 'rxjs';
 
+import { ProductService } from '@app/catalog/services/product.service';
 import { QueryBuilderService } from '@app/catalog/services/query-builder.service';
 import { UrlBuilderService } from '@app/catalog/services/url-builder.service';
-import { ProductService } from '@app/core/services/product.service';
 
 type Fuzzy = {
   input: string;
@@ -47,7 +39,6 @@ export class SearchComponent implements OnInit {
   public ngOnInit(): void {
     this.response$ = this.request$$.pipe(
       distinctUntilChanged(),
-      throttle(() => interval(200)),
       switchMap(() => {
         const query = this.qb.fiterByText(this.search || '').getBuildedParams();
         return this.productSerivce.getProducts({ parameters: query, limit: 5 });

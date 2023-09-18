@@ -11,8 +11,8 @@ export const defaultCountryData: CountryData = {
 };
 
 export const COUNTRIES: Record<string, CountryData> = {
-  Poland: {
-    name: 'Poland',
+  Польша: {
+    name: 'Польша',
     tag: 'PL',
     regExp: /^\d{2}-\d{3}$/,
     hint: '12-345',
@@ -20,8 +20,8 @@ export const COUNTRIES: Record<string, CountryData> = {
       mask: [/\d/, /\d/, '-', /\d/, /\d/, /\d/],
     },
   },
-  USA: {
-    name: 'USA',
+  США: {
+    name: 'США',
     tag: 'US',
     regExp: /^\d{5}(-\d{4})?$/,
     hint: '12345-6789',
@@ -29,8 +29,8 @@ export const COUNTRIES: Record<string, CountryData> = {
       mask: [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
     },
   },
-  Canada: {
-    name: 'Canada',
+  Канада: {
+    name: 'Канада',
     tag: 'CA',
     regExp: /^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$/,
     hint: 'K1A 0B1',
@@ -38,8 +38,8 @@ export const COUNTRIES: Record<string, CountryData> = {
       mask: [/[A-Za-z]/, /\d/, /[A-Za-z]/, ' ', /\d/, /[A-Za-z]/, /\d/],
     },
   },
-  Belarus: {
-    name: 'Belarus',
+  Беларусь: {
+    name: 'Беларусь',
     tag: 'BY',
     regExp: /^\d{6}$/,
     hint: '220000',
@@ -47,8 +47,8 @@ export const COUNTRIES: Record<string, CountryData> = {
       mask: [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/],
     },
   },
-  Ukraine: {
-    name: 'Ukraine',
+  Украина: {
+    name: 'Украина',
     tag: 'UA',
     regExp: /^\d{5}$/,
     hint: '12345',

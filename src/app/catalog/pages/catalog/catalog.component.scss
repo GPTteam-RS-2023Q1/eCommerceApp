@@ -1,0 +1,64 @@
+:host {
+  .wrapper {
+    position: relative;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .left-column {
+    background-color: white;
+  }
+
+  .right-column {
+    flex-grow: 1;
+  }
+
+  .btm-menu {
+    display: none;
+  }
+
+  .wrapper-column {
+    position: relative;
+    display: flex;
+  }
+
+  @media (width < 650px) {
+    .wrapper {
+      flex-direction: column;
+    }
+
+    .btm-menu {
+      display: block;
+      width: 150px;
+    }
+
+    .left-column {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      transform: translateX(-100%);
+
+      width: 100%;
+      height: 100vh;
+      padding-top: 15px;
+
+      transition: transform 0.5s ease;
+    }
+
+    .left-column.open {
+      transform: none;
+    }
+
+    .wrapper-column {
+      padding-top: 20px;
+    }
+  }
+}
+
+::ng-deep {
+  tui-root._mobile tui-dialog {
+    margin: auto !important;
+  }
+}

@@ -6,7 +6,7 @@ export function birthdayValidator(
   control: AbstractControl<TuiDay>
 ): ValidationErrors | null {
   if (!control.value) {
-    return { other: 'enter valid date' };
+    return { other: 'Впишите корректную дату' };
   }
   const date = control.value.toLocalNativeDate();
   const minYear = 13;
@@ -14,5 +14,5 @@ export function birthdayValidator(
   return Math.abs(difference.getFullYear() - 1970) >= minYear &&
     date.getFullYear() <= new Date().getFullYear()
     ? null
-    : { other: 'minimum age 13' };
+    : { other: 'Минимальный возраст 13 лет' };
 }

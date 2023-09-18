@@ -8,6 +8,7 @@ export const authAction = createActionGroup({
   events: {
     'Sign Up Start': props<{ body: CustomerDraft }>(),
     'Login Customer': props<{ customer: Customer; email: string; password: string }>(),
+    'Anonymous Session Start': emptyProps(),
     'Login Start': props<{ email: string; password: string }>(),
     'Login Success': props<{
       accessToken: string;

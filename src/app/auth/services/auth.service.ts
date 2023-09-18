@@ -2,12 +2,13 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs';
+import { Observable, exhaustMap, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { Customer } from '@app/auth/models/customer.model';
 import { authAction } from '@app/ngrx/actions/auth.actions';
 
+import { selectCartId } from '@app/ngrx/selectors/cart.selector';
 import { LocalStorageAuthData } from '../models/authLocalStorage.model';
 import { CustomerDraft } from '../models/customer-draft.model';
 import { GetAccessTokenResponse, GetUSerTokens } from '../models/getTokens.model';
@@ -58,27 +59,73 @@ export class AuthService {
     );
   }
 
-  public login(email: string, password: string): Observable<SignInResult> {
-    return this.http.post<SignInResult>(
-      `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/login`,
-      { email, password },
+  public getAnonymousTokens(): Observable<GetUSerTokens> {
+    let httpParams = new HttpParams().set('grant_type', 'client_credentials');
+    httpParams = httpParams.append('scope', environment.CTP_SCOPES);
+
+    return this.http.post<GetUSerTokens>(
+      `${environment.CTP_AUTH_URL}/oauth/${environment.CTP_PROJECT_KEY}/anonymous/token`,
+      {},
       {
         headers: new HttpHeaders({
-          'Content-Type': 'application/json',
+          Authorization: `Basic ${window.btoa(
+            `${environment.CTP_CLIENT_ID}:${environment.CTP_CLIENT_SECRET}`
+          )}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
         }),
+        params: httpParams,
       }
     );
   }
 
+  public login(email: string, password: string): Observable<SignInResult> {
+    return this.store.select(selectCartId).pipe(
+      take(1),
+      exhaustMap((id) => {
+        return this.http.post<SignInResult>(
+          `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/login`,
+          {
+            email,
+            password,
+            anonymousCart: !id
+              ? undefined
+              : {
+                  id,
+                  typeId: 'cart',
+                },
+          },
+          {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+            }),
+          }
+        );
+      })
+    );
+  }
+
   public signUp(body: CustomerDraft): Observable<SignInResult> {
-    return this.http.post<SignInResult>(
-      `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/customers`,
-      body,
-      {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-        }),
-      }
+    return this.store.select(selectCartId).pipe(
+      take(1),
+      exhaustMap((id) => {
+        return this.http.post<SignInResult>(
+          `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/customers`,
+          {
+            ...body,
+            anonymousCart: !id
+              ? undefined
+              : {
+                  id,
+                  typeId: 'cart',
+                },
+          },
+          {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+            }),
+          }
+        );
+      })
     );
   }
 

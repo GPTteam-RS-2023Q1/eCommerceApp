@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoreModule } from '@app/core/core.module';
 import { provideMockStore } from '@ngrx/store/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
@@ -17,7 +18,7 @@ describe('HeaderComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CoreModule],
+      imports: [CoreModule, BrowserAnimationsModule],
       providers: [provideMockStore({ initialState })],
     });
     fixture = TestBed.createComponent(HeaderComponent);

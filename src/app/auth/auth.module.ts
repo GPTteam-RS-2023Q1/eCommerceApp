@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '@app/shared/shared.module';
+import { TUI_VALIDATION_ERRORS } from '@taiga-ui/kit';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthFailComponent } from './components/auth-fail/auth-fail.component';
@@ -18,5 +19,13 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
     AuthFailComponent,
   ],
   imports: [SharedModule, AuthRoutingModule],
+  providers: [
+    {
+      provide: TUI_VALIDATION_ERRORS,
+      useValue: {
+        required: 'Заполните поле',
+      },
+    },
+  ],
 })
 export class AuthModule {}

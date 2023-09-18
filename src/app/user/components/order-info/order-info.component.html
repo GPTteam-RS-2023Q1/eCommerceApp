@@ -1,0 +1,43 @@
+<div class="discount">
+  <tui-island size="l" textAlign="left">
+    <h4 class="tui-island__title">Ваш заказ</h4>
+    <div class="container">
+      <div class="layout-2">
+        <p class="tui-island__paragraph">Всего продуктов:</p>
+        <p class="tui-island__paragraph">{{ cart.totalLineItemQuantity }}</p>
+      </div>
+      <ec-discount-input></ec-discount-input>
+      <div class="discount-container" *ngIf="cart.discountCodes.length">
+        <div *ngFor="let discount of cartDiscounts | async">
+          <div class="layout-2-close">
+            <div>{{ discount.discountCode.code }}</div>
+            <button
+              tuiIconButton
+              appearance="flat"
+              size="s"
+              icon="tuiIconX"
+              type="button"
+              (click)="removeDiscountCode(discount.discountCode.id)"
+            ></button>
+          </div>
+          <ec-discount-info [cartDiscounts]="discount.cartDiscount"></ec-discount-info>
+        </div>
+      </div>
+      <div class="layout-2 total-price">
+        <b>Итого</b>
+        <p class="tui-island__paragraph">
+          <ec-total-price [totalPrice]="cart.totalPrice"></ec-total-price>
+        </p>
+      </div>
+    </div>
+    <button
+      tuiButton
+      type="button"
+      appearance="flat"
+      size="m"
+      class="tui-island__footer-button"
+    >
+      Перейти к оформлению
+    </button>
+  </tui-island>
+</div>
