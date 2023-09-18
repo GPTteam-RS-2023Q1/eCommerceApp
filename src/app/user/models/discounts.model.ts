@@ -16,11 +16,16 @@ export interface CartDiscount {
   version: string;
   value: CartDiscountValue;
   sortOdred: number;
-  name: { en: string };
+  name: { ru: string };
 }
 
 export interface CartDiscountValue {
   type: 'relative' | 'absolute';
-  money?: TypedMoney;
+  money?: TypedMoney[];
   permyriad?: number;
+}
+
+export interface DiscountInfo {
+  discountCode: DiscountCode;
+  cartDiscount: CartDiscount[];
 }

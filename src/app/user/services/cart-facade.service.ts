@@ -13,7 +13,7 @@ import { NotificationService } from '@app/shared/services/notofication.service';
 import { Cart, LineItem } from '../models/cart.model';
 import { CartActionBuilderService } from './cart-action-builder.service';
 import { CartService } from './cart.service';
-import { CartDiscount } from '../models/discounts.model';
+import { DiscountInfo } from '../models/discounts.model';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +21,7 @@ import { CartDiscount } from '../models/discounts.model';
 export class CartFacadeService {
   public cart$ = this.store.select(selectCart);
 
-  public cartDiscounts = new Subject<CartDiscount[]>();
+  public cartDiscounts = new Subject<DiscountInfo[]>();
 
   constructor(
     private store: Store,
@@ -90,6 +90,14 @@ export class CartFacadeService {
     this.cartActionBuilder.addDiscountCode(code);
     this.cartService.updateCart(this.cartActionBuilder.getActions()).subscribe(() => {
       this.notifyService.notify('Промокод успешно применен', 'success');
+      this.getCartDiscounts();
+    });
+  }
+
+  public removeDiscountCode(id: string): void {
+    this.cartActionBuilder.removeDiscountCode(id);
+    this.cartService.updateCart(this.cartActionBuilder.getActions()).subscribe(() => {
+      this.notifyService.notify('Промокод успешно удален', 'success');
       this.getCartDiscounts();
     });
   }

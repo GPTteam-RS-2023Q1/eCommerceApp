@@ -8,6 +8,7 @@ import {
   AddDiscountCode,
   AddLineItem,
   CartAction,
+  RemoveDiscountCode,
   RemoveLineItem,
 } from '../models/cart-update.actions';
 import { CartUpdateActions } from '../models/enums/cart-actions.enum';
@@ -52,6 +53,20 @@ export class CartActionBuilderService {
     const action: AddDiscountCode = {
       action: CartUpdateActions.addDiscountCode,
       code,
+    };
+
+    this.actions.push(action);
+
+    return this;
+  }
+
+  public removeDiscountCode(id: string): CartActionBuilderService {
+    const action: RemoveDiscountCode = {
+      action: CartUpdateActions.removeDiscountCode,
+      discountCode: {
+        id,
+        typeId: 'discount-code',
+      },
     };
 
     this.actions.push(action);

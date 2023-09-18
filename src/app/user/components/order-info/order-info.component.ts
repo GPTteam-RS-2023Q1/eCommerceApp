@@ -21,4 +21,8 @@ export class OrderInfoComponent implements OnInit {
   public ngOnInit(): void {
     this.cartServiceFacade.getCartDiscounts();
   }
+
+  public removeDiscountCode(id: string): void {
+    this.cartServiceFacade.removeDiscountCode(id);
+  }
 }

@@ -18,6 +18,11 @@ export const selectDiscounts = createSelector(
   (state) => state.cart?.discountCodes
 );
 
+export const selectCurrency = createSelector(
+  selectCartState,
+  (state) => state.cart?.totalPrice.currencyCode
+);
+
 export const selectPriceWithoutDiscount = createSelector(selectCartState, (state) =>
   state.cart?.lineItems.reduce((acc, item) => acc + item.price.value.centAmount / 100, 0)
 );

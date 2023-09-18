@@ -19,3 +19,10 @@ export interface RemoveLineItem extends CartAction {
 export interface AddDiscountCode extends CartAction {
   code: string;
 }
+
+export interface RemoveDiscountCode extends CartAction {
+  discountCode: {
+    id: string;
+    typeId: 'discount-code';
+  };
+}

@@ -12,7 +12,6 @@ import {
   tap,
   mergeMap,
   map,
-  mergeAll,
   toArray,
   from,
 } from 'rxjs';
@@ -24,7 +23,7 @@ import { selectCart } from '@app/ngrx/selectors/cart.selector';
 
 import { CartAction } from '../models/cart-update.actions';
 import { Cart, DiscountCodeInfo } from '../models/cart.model';
-import { CartDiscount, DiscountCode } from '../models/discounts.model';
+import { CartDiscount, DiscountCode, DiscountInfo } from '../models/discounts.model';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
@@ -84,24 +83,27 @@ export class CartService {
     );
   }
 
-  public getCartDiscounts(discounts: DiscountCodeInfo[]): Observable<CartDiscount[]> {
+  public getCartDiscounts(discounts: DiscountCodeInfo[]): Observable<DiscountInfo[]> {
     return from(discounts).pipe(
       mergeMap((discountCodeInfo) =>
-        this.http
-          .get<DiscountCode>(
-            `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/discount-codes/${discountCodeInfo.discountCode.id}`
-          )
-          .pipe(
-            map((discountCode) => discountCode.cartDiscounts),
-            mergeAll(),
-            mergeMap((cartDiscountRef) =>
-              this.http.get<CartDiscount>(
-                `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/cart-discounts/${cartDiscountRef.id}`
-              )
-            ),
-            catchError(() => of())
-          )
+        this.http.get<DiscountCode>(
+          `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/discount-codes/${discountCodeInfo.discountCode.id}`
+        )
       ),
+      mergeMap((discountCode) => {
+        return from(discountCode.cartDiscounts).pipe(
+          mergeMap((cartDiscountRef) =>
+            this.http.get<CartDiscount>(
+              `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/cart-discounts/${cartDiscountRef.id}`
+            )
+          ),
+          toArray(),
+          map((cartDiscount) => {
+            return { discountCode, cartDiscount };
+          }),
+          catchError(() => of())
+        );
+      }),
       catchError(() => of()),
       toArray()
     );
