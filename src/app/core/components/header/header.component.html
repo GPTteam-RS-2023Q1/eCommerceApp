@@ -1,30 +1,15 @@
 <header class="header">
-  <div class="buttons">
-    <button
-      class="catalog-btn"
-      (click)="toCatalog()"
-      tuiButton
-      type="button"
-      appearance="outline"
-      [size]="size"
-      [icon]="'s' ? 'tuiIconBookOpen' : 'tuiIconBookOpenLarge'"
-    >
-      Каталог
-    </button>
-    <button
-      class="promos-button"
-      (click)="toggle()"
-      tuiButton
-      [size]="size"
-      appearance="outline"
-    >
-      Промокоды
-      <tui-expand class="promos" [expanded]="expanded">
-        <h4>UTIALOX</h4>
-        <h4>VULKAN</h4>
-      </tui-expand>
-    </button>
-  </div>
+  <button
+    class="catalog-btn"
+    (click)="toCatalog()"
+    tuiButton
+    type="button"
+    appearance="outline"
+    [size]="size"
+    [icon]="'s' ? 'tuiIconBookOpen' : 'tuiIconBookOpenLarge'"
+  >
+    Каталог
+  </button>
   <img class="logo" src="../../../../assets/logo.svg" alt="logo" (click)="toMain()" />
   <div class="container-user">
     <a tuiLink class="about" tuiLink (click)="toAbout()">О нас</a>

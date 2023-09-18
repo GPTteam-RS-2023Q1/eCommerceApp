@@ -4,6 +4,7 @@
   .wrapper {
     max-width: 1440px;
     margin: 0 auto;
+    margin-top: 40px;
     padding: 0 30px;
   }
 
@@ -30,5 +31,29 @@
     flex: 1 0 auto;
     flex-direction: column;
     row-gap: 20px;
+  }
+
+  .clear {
+    overflow: hidden;
+    display: block;
+
+    margin-bottom: 20px;
+
+    font-size: 18px;
+    color: rgb(110 110 110);
+
+    transition: all 0.3s ease 0s;
+  }
+
+  .clear:hover {
+    color: var(--tui-link);
+  }
+
+  .status-text {
+    font: var(--tui-font-text-xl);
+  }
+
+  .status-link:hover {
+    text-decoration: underline;
   }
 }

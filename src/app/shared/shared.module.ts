@@ -34,6 +34,7 @@ import {
   TuiTagModule,
   TuiToggleModule,
 } from '@taiga-ui/kit';
+import { TuiBlockStatusModule } from '@taiga-ui/layout';
 
 import { AddressFormComponent } from './components/address-form/address-form.component';
 import { BirthdayInputComponent } from './components/birthday-input/birthday-input.component';
@@ -87,6 +88,7 @@ import { FormatPricePipe } from './pipes/format-price.pipe';
     TuiSelectModule,
     FormsModule,
     TuiLetModule,
+    TuiBlockStatusModule,
   ],
   exports: [
     CommonModule,
@@ -128,6 +130,7 @@ import { FormatPricePipe } from './pipes/format-price.pipe';
     FormsModule,
     FormatPricePipe,
     TuiLetModule,
+    TuiBlockStatusModule,
   ],
 })
 export class SharedModule {}
