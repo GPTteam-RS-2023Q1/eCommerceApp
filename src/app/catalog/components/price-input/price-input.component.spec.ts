@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { CatalogModule } from '@app/catalog/catalog.module';
 import { PriceInputComponent } from './price-input.component';
 
 describe('PriceInputComponent', () => {
@@ -9,6 +10,7 @@ describe('PriceInputComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PriceInputComponent],
+      imports: [CatalogModule],
     });
     fixture = TestBed.createComponent(PriceInputComponent);
     component = fixture.componentInstance;

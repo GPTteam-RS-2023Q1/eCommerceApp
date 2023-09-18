@@ -141,7 +141,7 @@ export class QueryBuilderService {
     return this;
   }
 
-  private getFuzzyLevel(text: string): number {
+  public getFuzzyLevel(text: string): number {
     const { length } = text;
     if (length <= 2) {
       return 0;

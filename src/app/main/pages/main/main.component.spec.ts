@@ -3,9 +3,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { CommonModule } from '@angular/common';
 import { MaimRoutingModule } from '@app/main/main-routing.module';
-import { TuiCarouselModule, TuiIslandModule, TuiPaginationModule } from '@taiga-ui/kit';
-import { TuiButtonModule } from '@taiga-ui/core';
-import { CatalogComponent } from '../catalog/catalog.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MainModule } from '@app/main/main.module';
 import { MainComponent } from './main.component';
 
 describe('MainComponent', () => {
@@ -14,14 +13,12 @@ describe('MainComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MainComponent, CatalogComponent],
+      declarations: [MainComponent],
       imports: [
         CommonModule,
         MaimRoutingModule,
-        TuiCarouselModule,
-        TuiIslandModule,
-        TuiPaginationModule,
-        TuiButtonModule,
+        MainModule,
+        BrowserAnimationsModule,
         RouterTestingModule,
       ],
     });
