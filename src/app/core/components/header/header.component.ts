@@ -57,7 +57,6 @@ export class HeaderComponent implements OnInit {
   }
 
   public toggle(): void {
-    console.log(1);
     this.expanded = !this.expanded;
   }
 }
