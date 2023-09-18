@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { provideMockStore } from '@ngrx/store/testing';
 import { DiscountInfoComponent } from './discount-info.component';
 
 describe('DiscountInfoComponent', () => {
@@ -9,6 +10,7 @@ describe('DiscountInfoComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [DiscountInfoComponent],
+      providers: [provideMockStore({})],
     });
     fixture = TestBed.createComponent(DiscountInfoComponent);
     component = fixture.componentInstance;

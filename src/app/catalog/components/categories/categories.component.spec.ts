@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
+import { provideMockStore } from '@ngrx/store/testing';
 import { CategoriesComponent } from './categories.component';
 
 describe('CategoriesComponent', () => {
@@ -9,6 +11,8 @@ describe('CategoriesComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [CategoriesComponent],
+      providers: [provideMockStore({})],
+      imports: [RouterTestingModule],
     });
     fixture = TestBed.createComponent(CategoriesComponent);
     component = fixture.componentInstance;
