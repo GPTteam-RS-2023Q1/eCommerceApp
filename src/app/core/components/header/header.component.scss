@@ -12,7 +12,7 @@
     max-width: 1440px;
     height: 100%;
     margin: 0 auto;
-    padding: 0 30px;
+    padding: 20px 30px;
   }
 
   .logo {
@@ -22,7 +22,7 @@
     left: 50%;
     transform: translateX(-50%);
 
-    filter: drop-shadow(4px 4px 0 #726c6c);
+    width: 200px;
   }
 
   .logo.animate {
@@ -37,22 +37,6 @@
     display: flex;
     gap: 30px;
     align-items: center;
-  }
-
-  .buttons {
-    position: relative;
-    display: flex;
-    gap: 30px;
-  }
-
-  .promos {
-    position: absolute;
-    top: 100%;
-    left: 0;
-
-    width: 100%;
-
-    background-color: #fff;
   }
 
   @media (width <= 1024px) {

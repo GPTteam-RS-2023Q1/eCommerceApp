@@ -115,6 +115,10 @@
     max-width: 150px;
   }
 
+  .trash {
+    overflow: hidden;
+  }
+
   @media (width < 460px) {
     .image-wrapper {
       width: 100px;

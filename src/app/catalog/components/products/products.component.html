@@ -17,6 +17,14 @@
   </ng-container>
 
   <ng-template #notFound>
-    <h2>Продуктов по данному запросу нет в наличии</h2>
+    <tui-block-status>
+      <img
+        alt="not found"
+        src="../../../../assets/not-found.jpg"
+        tuiSlot="top"
+        class="image"
+      />
+      <h4>Продуктов по данному запросу нет в наличии</h4>
+    </tui-block-status>
   </ng-template>
 </div>

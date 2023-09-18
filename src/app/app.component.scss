@@ -1,9 +1,9 @@
-.page {
-  min-height: calc(100vh - 230px);
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
-@media (width <= 768px) {
-  .page {
-    min-height: calc(100vh - 270px);
-  }
+.page {
+  flex: 1 0 auto;
 }

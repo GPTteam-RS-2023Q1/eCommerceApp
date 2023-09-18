@@ -120,4 +120,15 @@ export class CartFacadeService {
       )
       .subscribe({ error: () => {} });
   }
+
+  public clearCart(): void {
+    this.cart$.pipe(take(1)).subscribe((cart) => {
+      cart?.lineItems.forEach((lineItem) => {
+        this.cartActionBuilder.removeLineItem(lineItem.id);
+      });
+      this.cartService.updateCart(this.cartActionBuilder.getActions()).subscribe(() => {
+        this.notifyService.notify('Корзина очищена', 'success');
+      });
+    });
+  }
 }
