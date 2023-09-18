@@ -8,7 +8,7 @@ import { numbersValidator } from '@app/auth/validators/numbers-validator';
 import { specialCharactersValidator } from '@app/auth/validators/special-characters-validator';
 import { whiteSpaceValidator } from '@app/auth/validators/white-space-validator';
 import { authAction } from '@app/ngrx/actions/auth.actions';
-import { CustomerBuilderService } from '@app/user/pages/profile/services/customer-builder.service';
+import { CustomerBuilderService } from '@app/user/services/customer-builder.service';
 import { compareObjects } from '@app/utils/compareObjects';
 
 @Component({
