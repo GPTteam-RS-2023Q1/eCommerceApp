@@ -17,6 +17,20 @@
     background-size: cover;
   }
 
+  .promo {
+    cursor: pointer;
+  }
+
+  .promo:hover {
+    text-decoration: underline;
+  }
+
+  .promo-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
   .pagination {
     padding: 20px 0;
   }

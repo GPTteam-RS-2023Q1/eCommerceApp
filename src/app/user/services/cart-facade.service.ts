@@ -96,7 +96,9 @@ export class CartFacadeService {
         this.notifyService.notify('Промокод успешно применен', 'success');
         this.getCartDiscounts();
       },
-      error: () => {},
+      error: () => {
+        this.notifyService.notify('Промокод не найден', 'error');
+      },
     });
   }
 
@@ -107,9 +109,7 @@ export class CartFacadeService {
         this.notifyService.notify('Промокод успешно удален', 'success');
         this.getCartDiscounts();
       },
-      error: () => {
-        this.notifyService.notify('Промокод не найден', 'error');
-      },
+      error: () => {},
     });
   }
 
