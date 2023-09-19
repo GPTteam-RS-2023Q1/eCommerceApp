@@ -8,6 +8,12 @@
   }
 
   .link {
+    user-select: none;
+
+    display: block;
+
+    width: 100%;
+
     font: var(--tui-font-text-l);
     color: #616161;
     text-decoration: none;

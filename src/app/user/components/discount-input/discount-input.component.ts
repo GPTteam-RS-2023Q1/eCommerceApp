@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
+
 import { CartFacadeService } from '@app/user/services/cart-facade.service';
 
 @Component({
@@ -24,6 +25,8 @@ export class DiscountInputComponent implements OnInit {
 
   public onSubmit(): void {
     this.cartFacadeService.addDiscountCode(this.form.value.promoInput);
-    this.form.value.promoInput = '';
+    this.form.setValue({
+      promoInput: '',
+    });
   }
 }

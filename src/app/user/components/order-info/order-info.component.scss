@@ -2,6 +2,16 @@
   min-width: 400px;
 }
 
+.island {
+  border-radius: var(--tui-radius-m);
+}
+
+.tui-island__footer-button {
+  border-radius: 0;
+  border-bottom-right-radius: var(--tui-radius-m);
+  border-bottom-left-radius: var(--tui-radius-m);
+}
+
 @media (width < 450px) {
   .discount {
     min-width: 250px;
