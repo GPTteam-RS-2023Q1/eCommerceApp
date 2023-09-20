@@ -119,6 +119,14 @@
     overflow: hidden;
   }
 
+  @media (width < 650px) {
+    .block {
+      flex-direction: column;
+      gap: 10px;
+      padding-bottom: 10px;
+    }
+  }
+
   @media (width < 460px) {
     .image-wrapper {
       width: 100px;
@@ -126,6 +134,16 @@
 
     .block {
       flex-direction: column;
+    }
+
+    .description {
+      font-size: 0.8rem;
+    }
+
+    ::ng-deep {
+      .trash .t-content {
+        font-size: 0.6rem;
+      }
     }
   }
 
