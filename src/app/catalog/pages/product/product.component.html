@@ -1,29 +1,39 @@
 <ng-container *ngIf="product.masterData.current as data">
   <div class="wrapper">
     <div class="container-data">
-      <ec-carousel-img [imgs]="data.masterVariant.images"></ec-carousel-img>
+      <ec-carousel-img
+        class="slider"
+        [imgs]="data.masterVariant.images"
+      ></ec-carousel-img>
     </div>
+
     <div class="description-wrapper">
-      <p class="brand">{{ data.name.ru }}</p>
-      <p class="name">{{ data.metaDescription.ru }}</p>
+      <h2 class="brand">{{ data.name.ru }}</h2>
+      <h2 class="name">{{ data.metaDescription.ru }}</h2>
       <ec-price
         [price]="data.masterVariant.prices[0]"
-        class="price-container"
+        class="price"
         className="product-price"
       ></ec-price>
       <p class="description">{{ data.description?.ru || '' }}</p>
+
       <div class="attributes">
         <ng-container *ngFor="let param of data.masterVariant.attributes">
           <div *ngIf="param.name !== 'size'" class="container-params">
             <p class="key">
               <span>{{ param.name | translateAttribute : (productType | async) }}:</span>
             </p>
-            <span class="value">{{ param.value }}</span>
+            <p class="value">{{ param.value }}</p>
           </div>
         </ng-container>
       </div>
+
       <form [formGroup]="sizeForm" class="form">
-        <tui-select tuiTextfieldSize="m" formControlName="size">
+        <tui-select
+          [tuiDropdownMaxHeight]="250"
+          tuiTextfieldSize="m"
+          formControlName="size"
+        >
           Размер
           <tui-data-list-wrapper *tuiDataList [items]="sizes"></tui-data-list-wrapper>
         </tui-select>
