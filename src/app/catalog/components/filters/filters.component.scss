@@ -1,0 +1,21 @@
+:host {
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 40px;
+  }
+
+  .search {
+    width: 400px;
+  }
+
+  @media (width < 768px) {
+    .search {
+      width: 100%;
+    }
+  }
+}

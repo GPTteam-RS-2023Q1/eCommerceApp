@@ -1,0 +1,17 @@
+:host {
+  .filters {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+    row-gap: 30px;
+    column-gap: 20px;
+
+    max-width: 530px;
+    margin-bottom: 40px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+}

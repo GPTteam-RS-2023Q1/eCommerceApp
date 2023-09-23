@@ -1,0 +1,107 @@
+@import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap';
+
+:host {
+  position: relative;
+  display: block;
+  padding-top: 10px;
+
+  .banner-container {
+    display: flex;
+    width: 100vw;
+  }
+
+  .banner {
+    width: 50%;
+    height: 800px;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .promo {
+    cursor: pointer;
+  }
+
+  .promo:hover {
+    text-decoration: underline;
+  }
+
+  .promo-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pagination {
+    padding: 20px 0;
+  }
+
+  .block-header {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+
+    padding-top: 40px;
+  }
+
+  .btn-buy {
+    font-family: Montserrat, sans-serif !important;
+    font-size: 22px;
+  }
+
+  .header {
+    font: initial;
+    font-family: Montserrat, sans-serif;
+    font-size: 72px;
+    line-height: 72px;
+    color: #ed1b24;
+    text-align: center;
+  }
+
+  .link {
+    padding-bottom: 20px;
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  ::ng-deep {
+    .t-item {
+      padding: 0 !important;
+    }
+
+    .tui-island_size_m {
+      padding: 0;
+    }
+
+    .tui-island:not(.tui-island_hoverable)::before {
+      border: none;
+    }
+  }
+
+  @media (width <= 768px) {
+    .banner {
+      width: 100%;
+    }
+
+    .banner:last-child {
+      display: none;
+    }
+
+    .header {
+      font-size: 46px;
+    }
+
+    .btn-buy {
+      width: 200px;
+      height: 2rem;
+      font-family: Montserrat, sans-serif !important;
+      font-size: 16px;
+    }
+  }
+}

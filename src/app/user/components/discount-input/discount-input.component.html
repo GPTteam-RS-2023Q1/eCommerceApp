@@ -1,0 +1,14 @@
+<form [formGroup]="form" (submit)="onSubmit()">
+  <tui-input formControlName="promoInput" tuiTextfieldSize="m"
+    >Промкод<input tuiTextfield
+  /></tui-input>
+  <button
+    tuiButton
+    type="submit"
+    appearance="flat"
+    size="s"
+    [disabled]="!form.value.promoInput"
+  >
+    Применить
+  </button>
+</form>

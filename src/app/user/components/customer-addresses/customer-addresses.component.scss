@@ -1,0 +1,19 @@
+h2 {
+  margin-bottom: 15px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.addresses-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  max-width: 800px;
+  min-height: 250px;
+  margin: 0 auto;
+}
+
+.address {
+  flex-basis: 50%;
+}

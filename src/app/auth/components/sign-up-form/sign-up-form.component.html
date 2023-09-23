@@ -1,0 +1,51 @@
+<form class="sign-up-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h1 class="header">Регистрация</h1>
+
+  <ec-auth-fail [parentForm]="form"></ec-auth-fail>
+
+  <div class="base-information-wrapper">
+    <ec-email-input
+      formControlName="email"
+      placeholder="Электронная почта"
+    ></ec-email-input>
+
+    <ec-password-input formControlName="password"></ec-password-input>
+
+    <ec-input formControlName="firstName" placeholder="Имя"></ec-input>
+
+    <ec-input formControlName="lastName" placeholder="Фамилия"></ec-input>
+
+    <ec-birthday-input formControlName="dateOfBirth"></ec-birthday-input>
+  </div>
+
+  <tui-toggle id="matchForms" formControlName="matchForms" size="l"></tui-toggle>
+  <label for="matchForms">Синхронизировать формы адресов</label>
+
+  <div class="address-wrapper">
+    <div class="address-form-wrapper">
+      <ec-address-form
+        formControlName="shippingAddress"
+        legend="Адрес доставки"
+      ></ec-address-form>
+
+      <tui-checkbox-labeled formControlName="defaultShippingAddress" class="default-label"
+        >Сделать адрес доставки адресом по умолчанию</tui-checkbox-labeled
+      >
+    </div>
+
+    <div class="address-form-wrapper">
+      <ec-address-form
+        formControlName="billingAddress"
+        legend="Расчетный адрес"
+      ></ec-address-form>
+
+      <tui-checkbox-labeled formControlName="defaultBillingAddress" class="default-label"
+        >Сделать расчетный адрес адресом по умолчанию</tui-checkbox-labeled
+      >
+    </div>
+  </div>
+
+  <div class="tui-form__buttons">
+    <button href="#" tuiButton type="submit" [disabled]="!form.valid">Подтвердить</button>
+  </div>
+</form>

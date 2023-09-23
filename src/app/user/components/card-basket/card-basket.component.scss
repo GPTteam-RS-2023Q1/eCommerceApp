@@ -1,0 +1,156 @@
+@import '../../../../variables';
+@import '../../../../templates';
+
+:host {
+  position: relative;
+
+  display: flex;
+  gap: 5px;
+
+  box-shadow: 0 3px 3px rgb(0 0 0 / 10%);
+
+  transition: all 0.3s ease 0s;
+
+  .rectangle {
+    flex: 1 1 auto;
+    opacity: 0.4;
+    background-color: rgb(94 94 94);
+  }
+
+  .rectangle.active {
+    opacity: 1;
+  }
+
+  .image-wrapper {
+    position: relative;
+    aspect-ratio: 600/866;
+    width: 150px;
+  }
+
+  .image-wrapper:hover {
+    .image-counter {
+      opacity: 1;
+    }
+  }
+
+  .image-counter {
+    position: absolute;
+    z-index: 100;
+    top: 2px;
+    left: 0;
+
+    display: flex;
+    gap: 3px;
+
+    width: 100%;
+    height: 2px;
+
+    opacity: 0;
+
+    transition: all 0.2s ease 0s;
+  }
+
+  .image {
+    position: absolute;
+    aspect-ratio: 600/866;
+    width: 100%;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 100%;
+    padding: 10px;
+  }
+
+  .naming {
+    margin-bottom: 10px;
+  }
+
+  .description,
+  .attribute {
+    @extend %h4;
+  }
+
+  .name {
+    cursor: pointer;
+    font: var(--tui-font-text-m-2);
+  }
+
+  .name:hover {
+    text-decoration: underline;
+  }
+
+  .block {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .value {
+    font: var(--tui-font-text-m);
+    font-weight: bold;
+  }
+
+  .value.standart {
+    margin-right: 5px;
+    font: var(--tui-font-text-s);
+    text-decoration: line-through;
+  }
+
+  .discounted {
+    color: $red;
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .quantity {
+    max-width: 150px;
+  }
+
+  .trash {
+    overflow: hidden;
+  }
+
+  @media (width < 650px) {
+    .block {
+      flex-direction: column;
+      gap: 10px;
+      padding-bottom: 10px;
+    }
+  }
+
+  @media (width < 460px) {
+    .image-wrapper {
+      width: 100px;
+    }
+
+    .block {
+      flex-direction: column;
+    }
+
+    .description {
+      font-size: 0.8rem;
+    }
+
+    ::ng-deep {
+      .trash .t-content {
+        font-size: 0.6rem;
+      }
+    }
+  }
+
+  @media (width < 530px) {
+    .controls {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+}

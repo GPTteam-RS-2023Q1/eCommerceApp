@@ -1,0 +1,15 @@
+.auth-option {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-start;
+}
+
+.auth-option:hover span {
+  text-decoration: underline;
+}
+
+@media (width <= 1024px) {
+  .auth-option {
+    gap: 5px;
+  }
+}

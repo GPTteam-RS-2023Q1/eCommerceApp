@@ -1,0 +1,10 @@
+<div class="wrapper">
+  <tui-svg
+    [ngClass]="(context.$implicit.expanded$ | async) ? 'expanded' : ''"
+    class="icon"
+    (click)="onClick()"
+    *ngIf="isExpandable"
+    src="tuiIconChevronRightLarge"
+  ></tui-svg>
+  <ng-container [ngTemplateOutlet]="context.template"></ng-container>
+</div>

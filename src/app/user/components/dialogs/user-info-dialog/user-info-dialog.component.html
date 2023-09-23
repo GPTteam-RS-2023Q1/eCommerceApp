@@ -1,0 +1,35 @@
+<form [formGroup]="form" (ngSubmit)="ok()">
+  <h3 *ngIf="!error">Информация о пользователе</h3>
+  <ec-form-fail-notification
+    *ngIf="error"
+    [error]="error"
+    [parentForm]="form"
+    (errorHandle)="onErrorHandle()"
+  ></ec-form-fail-notification>
+  <div class="base-information-wrapper">
+    <ec-email-input formControlName="email"></ec-email-input>
+    <ec-input formControlName="firstName" placeholder="Имя"></ec-input>
+    <ec-input formControlName="lastName" placeholder="Фамилия"></ec-input>
+    <ec-birthday-input formControlName="dateOfBirth"></ec-birthday-input>
+  </div>
+  <div class="btn-container">
+    <button
+      tuiButton
+      size="m"
+      type="submit"
+      [disabled]="!form.valid || form.pristine"
+      [showLoader]="isLoading"
+    >
+      Изменить
+    </button>
+    <button
+      tuiButton
+      size="m"
+      type="button"
+      appearance="secondary-destructive"
+      (click)="cancel()"
+    >
+      Закрыть
+    </button>
+  </div>
+</form>

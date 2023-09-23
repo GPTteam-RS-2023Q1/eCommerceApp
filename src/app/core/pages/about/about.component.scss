@@ -1,0 +1,125 @@
+:host {
+  font-family: Montserrat, sans-serif;
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 10px 30px;
+  }
+
+  .rs-img {
+    width: 150px;
+  }
+
+  .about-team {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding: 20px;
+
+    font-size: 18px;
+
+    border-radius: 10px;
+    box-shadow: 0 3px 3px rgb(0 0 0 / 10%);
+  }
+
+  .description {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .description span {
+    padding-left: 30px;
+    font-weight: bold;
+  }
+
+  .description-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .image {
+    aspect-ratio: 3/4;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .name {
+    font-weight: bold;
+    color: #000;
+  }
+
+  .age {
+    align-self: center;
+    font-weight: 300;
+    opacity: 0.5;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    align-self: center;
+  }
+
+  .github {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+
+    text-decoration: none;
+
+    transition: all 0.2s ease 0s;
+
+    img {
+      width: 30px;
+    }
+  }
+
+  .github:hover {
+    transform: scale(1.02);
+  }
+
+  .paragraph {
+    font-size: 16px;
+  }
+
+  .member-description {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding: 20px;
+  }
+
+  .about-member {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .member-card {
+    overflow: hidden;
+
+    max-width: 350px;
+
+    font-size: 18px;
+
+    border-radius: 10px;
+    box-shadow: 0 3px 3px rgb(0 0 0 / 10%);
+  }
+
+  @media (width <= 580px) {
+    .about-team {
+      flex-direction: column;
+    }
+  }
+}

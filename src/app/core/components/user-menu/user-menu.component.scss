@@ -1,0 +1,19 @@
+.exit {
+  color: rgb(214 108 108);
+}
+
+.auth-option:hover span {
+  text-decoration: underline;
+}
+
+.auth-option {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-start;
+}
+
+@media (width <= 1024px) {
+  .auth-option {
+    gap: 5px;
+  }
+}

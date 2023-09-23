@@ -1,0 +1,67 @@
+@import '../../../../variables';
+
+:host {
+  .price {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+
+  .card,
+  .product-price {
+    .value {
+      font: var(--tui-font-text-m);
+      font-weight: bold;
+    }
+
+    .value.standart {
+      font: var(--tui-font-text-s);
+      text-decoration: line-through;
+    }
+
+    .discounted {
+      color: $red;
+    }
+  }
+
+  .card {
+    .discount {
+      position: absolute;
+      top: -16px;
+      left: 0;
+
+      padding: 0 5px;
+
+      font: var(--tui-font-text-xs);
+      font-size: 12px;
+      color: $full-white;
+      letter-spacing: 0.05rem;
+
+      background-color: $red;
+    }
+  }
+
+  .product-price {
+    margin-bottom: 20px;
+
+    .value {
+      font: var(--tui-font-text-xl);
+      font-weight: bold;
+    }
+
+    .value.standart {
+      font: var(--tui-font-text-m);
+    }
+
+    .discount {
+      padding: 0 5px;
+
+      font: var(--tui-font-text-xs);
+      font-size: 12px;
+      color: $full-white;
+      letter-spacing: 0.05rem;
+
+      background-color: $red;
+    }
+  }
+}

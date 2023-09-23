@@ -1,0 +1,44 @@
+<ng-container *tuiLet="cart$ | async as cart">
+  <div *ngIf="cart && cart.lineItems?.length; else empty" class="wrapper">
+    <div class="container">
+      <div class="cards">
+        <ec-card-basket
+          *ngFor="let cardItem of cart.lineItems; trackBy: identify"
+          [lineItem]="cardItem"
+          (navigate)="navigateToProduct($event)"
+          (detele)="cartFacade.removeLineItem($event)"
+        ></ec-card-basket>
+      </div>
+      <div class="sidebar">
+        <div class="controls">
+          <a
+            class="clear"
+            (click)="cartFacade.clearCart()"
+            icon="tuiIconTrash2Large"
+            iconAlign="left"
+            tuiLink
+          >
+            Очистить корзину
+          </a>
+          <ec-order-info class="order" [cart]="cart"></ec-order-info>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #empty>
+    <tui-block-status>
+      <img
+        alt="not found"
+        src="../../../../assets/not-found.jpg"
+        tuiSlot="top"
+        class="image"
+      />
+      <h4>Корзина пуста</h4>
+      <h5 class="status-text">
+        Перейдите в
+        <a class="status-link" tuiLink routerLink="/store/catalog/clothes">каталог</a>,
+        чтобы добавить товары
+      </h5>
+    </tui-block-status>
+  </ng-template>
+</ng-container>

@@ -1,0 +1,25 @@
+<tui-hosted-dropdown tuiDropdownLimitWidth="min" [content]="dropdown" [(open)]="open">
+  <button
+    tuiButton
+    type="button"
+    appearance="outline"
+    size="m"
+    icon="tuiIconSlidersLarge"
+    [iconRight]="open ? 'tuiIconChevronUp' : 'tuiIconChevronDown'"
+    [pseudoActive]="open || null"
+  ></button>
+</tui-hosted-dropdown>
+<ng-template #dropdown let-close="close">
+  <tui-data-list>
+    <tui-opt-group>
+      <button
+        *ngFor="let item of items"
+        tuiOption
+        (click)="selectMode(item.sort)"
+        class="auth-option"
+      >
+        <span>{{ item.text }}</span>
+      </button>
+    </tui-opt-group>
+  </tui-data-list>
+</ng-template>

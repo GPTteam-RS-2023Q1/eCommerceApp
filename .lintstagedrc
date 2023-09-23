@@ -1,0 +1,5 @@
+{
+  "*.{js,ts}": "eslint --fix",
+  "*.scss": "npx stylelint --fix",
+  "*": "prettier --list-different --write"
+}

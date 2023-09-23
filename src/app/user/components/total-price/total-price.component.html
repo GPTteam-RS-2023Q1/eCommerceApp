@@ -1,0 +1,8 @@
+<div class="price-container" *ngIf="totalPrice">
+  <span *ngIf="(cartFacade.cartDiscounts | async)?.length" class="full-price">{{
+    fullPrice | async | currency : totalPrice.currencyCode
+  }}</span>
+  <span [ngClass]="{ red: (cartFacade.cartDiscounts | async)?.length }">{{
+    (totalPrice.centAmount / 100).toFixed(2) | currency : totalPrice.currencyCode
+  }}</span>
+</div>

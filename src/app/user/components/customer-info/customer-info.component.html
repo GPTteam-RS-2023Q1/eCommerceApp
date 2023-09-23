@@ -1,0 +1,39 @@
+<div class="customer-card">
+  <tui-island size="l" textAlign="center">
+    <div class="tui-island__content">
+      <figure class="tui-island__figure">
+        <tui-avatar [text]="customer.firstName" class="tui-space_top-1"></tui-avatar>
+      </figure>
+      <div>
+        <h3 class="tui-island__title">
+          {{ customer.firstName }} {{ customer.lastName }}
+        </h3>
+        <p class="tui-island__paragraph">Имя: {{ customer.firstName }}</p>
+        <p class="tui-island__paragraph">Фамилия: {{ customer.lastName }}</p>
+        <p class="tui-island__paragraph">
+          Дата рождения: {{ customer.dateOfBirth | date }}
+        </p>
+        <button
+          tuiButton
+          type="button"
+          appearance="flat"
+          size="m"
+          class="tui-island__footer-button"
+          (click)="edit()"
+        >
+          Редактировать
+        </button>
+        <button
+          tuiButton
+          type="button"
+          appearance="flat"
+          size="m"
+          class="tui-island__footer-button red"
+          (click)="changePassword()"
+        >
+          Изменить пароль
+        </button>
+      </div>
+    </div>
+  </tui-island>
+</div>

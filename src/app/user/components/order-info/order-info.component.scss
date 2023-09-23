@@ -1,0 +1,54 @@
+.discount {
+  min-width: 400px;
+}
+
+.island {
+  border-radius: var(--tui-radius-m);
+}
+
+.tui-island__footer-button {
+  border-radius: 0;
+  border-bottom-right-radius: var(--tui-radius-m);
+  border-bottom-left-radius: var(--tui-radius-m);
+}
+
+@media (width < 450px) {
+  .discount {
+    min-width: 250px;
+  }
+}
+
+.discount-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.layout-2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.layout-2-close {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.total-price {
+  margin-top: 10px;
+}
+
+.red {
+  color: red;
+}
+
+.test {
+  color: rgb(27 31 59 / 65%);
+}
