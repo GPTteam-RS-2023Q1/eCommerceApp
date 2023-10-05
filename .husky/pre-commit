@@ -8,6 +8,10 @@ NC='\033[0m'
 PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 
+BRANCH_REGEXP='EC-[0-9]+'
+FILES_PATTERN='\.(ts)(\..+)?$'
+FORBIDDEN='console\.[clear|dir|log|info|warn|error]'
+
 
 run_linter () {
   echo -e "${PURPLE}Linting the src folder ==> ${NC}${CYAN}Ext: .js, .ts, .scss${NC}"
@@ -19,9 +23,15 @@ run_linter () {
 }
 
 check_branch () {
-  if test "$(git branch --show-current)" == "master" || test "$(git branch --show-current)" == "main" || test "$(git branch --show-current)" == "develop"
+  if test "$(git branch --show-current)" == "[master|main|develop]"
   then
     printf "You are on ${LRED}$(git branch --show-current)${NC}.\n"
+    exit 1
+  fi
+
+  if test "$(get branch --show-current)" == "$BRANCH_REGEXP"
+  then
+    printf "${LRED}The branch name should includes (EC-[0-9]+) at the end of the name.\n${PURPLE}"
     exit 1
   fi
 }
@@ -29,8 +39,6 @@ check_branch () {
 no_console () {
   echo -e "\n${YELLOW}Executing pre-commit hook...${YELLOW}\n"
 
-FILES_PATTERN='\.(js)(\..+)?$'
-FORBIDDEN='console\.[clear|dir|log|info|warn|error]'
 
 #check for console. references in your code
 

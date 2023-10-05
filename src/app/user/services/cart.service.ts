@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -6,14 +6,14 @@ import { Store } from '@ngrx/store';
 import {
   catchError,
   exhaustMap,
+  from,
+  map,
+  mergeMap,
   Observable,
   of,
   take,
   tap,
-  mergeMap,
-  map,
   toArray,
-  from,
 } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -24,6 +24,7 @@ import { selectCart } from '@app/ngrx/selectors/cart.selector';
 import { CartAction } from '../models/cart-update.actions';
 import { Cart, DiscountCodeInfo } from '../models/cart.model';
 import { CartDiscount, DiscountCode, DiscountInfo } from '../models/discounts.model';
+import { LineItemTypeDraft } from '../models/line-item-type.model';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
@@ -106,6 +107,44 @@ export class CartService {
       }),
       catchError(() => of()),
       toArray()
+    );
+  }
+
+  public createLineItemType(): any {
+    const params = new HttpParams().append('Content-Type', 'application/json');
+    const body: LineItemTypeDraft = {
+      key: 'lineitemtype',
+      name: {
+        en: 'lineitemtype',
+        ru: 'lineitemtype',
+      },
+      resourceTypeIds: ['line-item'],
+      fieldDefinitions: [
+        {
+          type: { name: 'String' },
+          name: 'description',
+          label: {
+            en: 'description',
+            ru: 'description',
+          },
+          required: false,
+        },
+        {
+          type: { name: 'String' },
+          name: 'short-description',
+          label: {
+            en: 'short-description',
+            ru: 'short-description',
+          },
+          required: false,
+        },
+      ],
+    };
+
+    return this.http.post<any>(
+      `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/types`,
+      body,
+      { params }
     );
   }
 }

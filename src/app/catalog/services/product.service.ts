@@ -42,4 +42,21 @@ export class ProductService {
       `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}/product-types/${id}`
     );
   }
+
+  /* public index(): Observable<any> {
+    const params = new HttpParams().append('Content-Type', 'application/json');
+    return this.http.post<any>(
+      `${environment.CTP_API_URL}/${environment.CTP_PROJECT_KEY}`,
+      {
+        version: 4,
+        actions: [
+          {
+            action: 'changeProductSearchIndexingEnabled',
+            enabled: true,
+          },
+        ],
+      },
+      { params }
+    );
+  } */
 }
